@@ -1,0 +1,78 @@
+.header-menu {
+  height: calc(100vh - 84px);
+  border-top: 1px solid #5360cd;
+  z-index: 5;
+  background-color: #fff;
+  color: #313037;
+  &__link {
+    border-bottom: 1px solid #e8e8e8;
+  }
+  &__link,
+  &__log-out {
+    font: normal 600 16px/24px "Inter";
+    cursor: pointer;
+    display: block;
+    padding: 30px 0;
+    text-align: center;
+  }
+  &__log-out {
+    transition: 0.3s;
+    background-color: #e8e8e8;
+  }
+  &__theme-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #e8e8e8;
+    & > [class*="header-menu__theme-icon"] {
+      padding: 30px 0;
+      width: 50%;
+      &:first-of-type {
+        border-right: 1px solid #e8e8e8;
+      }
+      svg {
+        path {
+          transition: 0.3s;
+          fill: #dadada;
+        }
+      }
+    }
+    & > [class*="light"] {
+      svg {
+        path {
+          fill: #000000;
+        }
+      }
+    }
+    & > [class*="dark"] {
+      svg {
+        path {
+          fill: #000000;
+        }
+      }
+    }
+  }
+  &__lunks {
+    flex: 1 0 auto;
+  }
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: 0.3s;
+    border-right: 1px solid #e8e8e8;
+  }
+  &__theme {
+    .icon-button {
+      width: 100%;
+    }
+  }
+}
+.dark {
+  background-color: #313037;
+  color: #fff;
+  .header-menu__log-out {
+    background-color: #3a3a3a;
+  }
+}

@@ -1,0 +1,15 @@
+.footer {
+  max-width: 1120px;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 90px;
+  border-top: 1px solid #dadada;
+  margin-top: 72px;
+  & > span {
+    font: normal 400 16px/24px "Inter";
+    color: #8d8e97;
+  }
+}

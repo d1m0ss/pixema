@@ -1,0 +1,22 @@
+$typogrphy-types: (
+  H1: normal 700 56px/80px "Inter",
+  H2: normal 700 32px/44px "Inter",
+  H3: normal 600 18px/28px "Inter",
+  subline: normal 600 16px/24px "Inter",
+  primary: normal 400 18px/32px "Inter",
+  secondary: normal 600 16px/24px "Inter",
+);
+
+.typogrphy {
+  color: #313037;
+  
+  @each $type, $font in $typogrphy-types {
+    &__#{$type} {font: $font;}
+  }
+}
+
+.link{
+  &:hover{
+    color: #2231aa;
+  }
+}

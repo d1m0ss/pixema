@@ -1,0 +1,29 @@
+.page-template {
+  @mixin standart {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 100%;
+    background-color: #f3f3f3;
+    transition: 0.3s;
+  }
+  &-light {
+    @include standart();
+    color: #313037;
+  }
+  &-dark {
+    @include standart();
+    color: #fff;
+    background-color: #313037;
+    & button div {
+      color: #fff;
+      background-color: transparent;
+    }
+    svg {
+      path {
+        fill: #fff;
+        // stroke: #fff;
+      }
+    }
+  }
+}
