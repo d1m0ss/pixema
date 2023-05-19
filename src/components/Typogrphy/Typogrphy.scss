@@ -1,22 +1,28 @@
+@import "../../index.scss";
+
 $typogrphy-types: (
-  H1: normal 700 56px/80px "Inter",
-  H2: normal 700 32px/44px "Inter",
-  H3: normal 600 18px/28px "Inter",
-  subline: normal 600 16px/24px "Inter",
-  primary: normal 400 18px/32px "Inter",
-  secondary: normal 600 16px/24px "Inter",
+  H1: $H1Decktop,
+  H2: $H2Decktop,
+  H3: $H3Decktop,
+  S1-1: $S1-1Decktop,
+  S1-2: $S1-2Decktop,
+  S1-3: $S1-3Decktop,
+  S1-4: $S1-4Decktop,
+  body: $BodyDecktop,
 );
 
 .typogrphy {
   color: #313037;
-  
+
   @each $type, $font in $typogrphy-types {
-    &__#{$type} {font: $font;}
+    &__#{$type} {
+      font: $font;
+    }
   }
 }
 
-.link{
-  &:hover{
+.link {
+  &:hover {
     color: #2231aa;
   }
 }

@@ -1,0 +1,12 @@
+@import "../../../index.scss";
+
+.tabs {
+  &__tab {
+    padding: 14px 88px;
+    cursor: pointer;
+  }
+  .active {
+    color: $white;
+    background-color: $graphite;
+  }
+}
