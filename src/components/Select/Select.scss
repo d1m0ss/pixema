@@ -1,0 +1,37 @@
+@import "../../index.scss";
+
+.select {
+  & button {
+    font: $S1-4Decktop;
+  }
+  &__top {
+    position: relative;
+    width: 100%;
+    padding: 16px 20px;
+    background-color: $graphite;
+    color: $white;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    &:hover {
+      color: $primary;
+    }
+    & > svg {
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      right: 23px;
+    }
+  }
+  &__choises {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    background-color: $dark;
+    row-gap: 1px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+}

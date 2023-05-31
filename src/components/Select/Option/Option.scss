@@ -1,0 +1,12 @@
+@import "../../../index.scss";
+.select__item {
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  background-color: $graphite;
+  color: $white;
+  &:hover {
+    color: $primary;
+  }
+}

@@ -8,7 +8,7 @@ interface ITab {
 }
 
 export const Tab: FC<ITab> = ({ key, title, isActive }) => {
-  const handleActive = (e: MouseEvent) => {
+  const handleActive = (e: any) => {
     if (e.target && e.target.parentNode) {
       e.target.parentNode.childNodes.forEach((tab: any) => {
         tab.classList.remove("active");

@@ -17,7 +17,8 @@ code {
 
 #root,
 html,
-body {
+body,
+.app {
   height: 100%;
 }
 
@@ -29,7 +30,7 @@ a {
 // colors
 
 $primary: #7b61ff;
-$primar2: #917cff;
+$primary2: #917cff;
 $secondary: #80858b;
 $black: #000000;
 $dark: #242426;

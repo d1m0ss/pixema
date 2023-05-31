@@ -1,7 +1,5 @@
 import { FC, useState } from "react";
 import { IconButton } from "../IconButton/IconButton";
-import Search from "../../assets/icon/Search.svg";
-import Cancel from "../../assets/icon/Cancel.svg";
 import { useAppContext } from "../AppContext/AppContext";
 import { BurgerBtn } from "./BurgerMenu/BurgerMenu";
 import "./Header.scss";
@@ -44,14 +42,12 @@ export const Header: FC<IHeader> = () => {
             onChange={(e) => handleChangeSearch(e.target.value)}
           />
           <IconButton onClick={handleToggleClick}>
-            <img className="header__cancel" src={Cancel} alt="cancel" />
           </IconButton>
         </div>
       )}
       <div className="header__box">
         <div className="header__serch">
           <IconButton onClick={handleToggleClick}>
-            <img src={Search} alt="search" />
           </IconButton>
         </div>
       </div>
