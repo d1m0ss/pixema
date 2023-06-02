@@ -20,19 +20,8 @@ export const App = () => {
           {"text1"}
           {"text2"}
         </Tabs>
-        <Select placeholder="Choose">
-          <Option text="Audi" />
-          <Option text="BMW" />
-          <Option text="Citroen" />
-          <Option text="Ford" />
-          <Option text="Honda" />
-          <Option text="Jaguar" />
-          <Option text="Land Rover" />
-          <Option text="Mercedes" />
-          <Option text="Mini" />
-          <Option text="Nissan" />
-          <Option text="Toyota" />
-          <Option text="Volvo" />
+        <Select placeholder="Choose" isMulty>
+          {['Audi','BMW','Citroen','Ford','Honda','Jaguar','Land Rover','Mercedes','Mini','Nissan','Toyota','Volvo']}
         </Select>
       </PageTemlate>
     </div>
