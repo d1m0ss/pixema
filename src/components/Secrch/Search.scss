@@ -1,0 +1,42 @@
+@import "../../index.scss";
+
+.input {
+  &__wrapper {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 28px;
+    row-gap: 8px;
+    .label {
+      display: block;
+      font: $S1-3Decktop;
+    }
+    .input {
+      width: 100%;
+      border: 2px solid transparent;
+      background: $graphite;
+      padding: 16px 20px;
+      outline: none;
+      border-radius: 10px;
+      color: $white;
+      font: $S1-4Decktop;
+      &:focus {
+        border-color: $primary;
+      }
+      &:disabled {
+        cursor: not-allowed;
+        background-color: $secondary;
+        &::placeholder {
+          color: $light;
+        }
+      }
+      &::placeholder {
+        font: $S1-4Decktop;
+        color: $secondary;
+      }
+      &.error {
+        border-color: $error;
+      }
+    }
+  }
+}

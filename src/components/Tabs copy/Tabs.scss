@@ -1,0 +1,15 @@
+@import "../../index.scss";
+
+.tabs {
+  width: max-content;
+  font: $S1-4Decktop;
+  color: $secondary;
+  border-radius: 10px;
+  background-color: $dark;
+  border: 2px solid $graphite;
+  overflow: hidden;
+  &__list {
+    display: flex;
+    list-style-type: none;
+  }
+}

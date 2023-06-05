@@ -2,12 +2,15 @@ import { FC } from "react";
 import "./Input.scss";
 
 interface IInput {
-  value: string;
+  value?: string;
   title: string;
   placeholder?: string;
   isDisabled?: boolean;
   errorMessage?: string;
-  handleChange: (newValue: string) => void;
+  nameClass?: string;
+  handleChange?: (newValue: string) => void;
+  handleClick?: () => void;
+  handleBlur?: () => void;
 }
 
 export const Input: FC<IInput> = ({
@@ -16,9 +19,11 @@ export const Input: FC<IInput> = ({
   placeholder,
   errorMessage,
   isDisabled = false,
-  handleChange,
+  nameClass,
+  handleChange = () => {},
+  handleClick,
+  handleBlur,
 }) => {
-  
   return (
     <div className="input__wrapper">
       <label htmlFor={`input-${title}`} className="label">
@@ -30,8 +35,10 @@ export const Input: FC<IInput> = ({
         disabled={isDisabled}
         value={value}
         id={`input-${title}`}
-        className={`input ${errorMessage && "error"}`}
+        className={nameClass ? nameClass : `input ${errorMessage && "error"}`}
         onChange={(e) => handleChange(e.target.value)}
+        onClick={handleClick}
+        onBlur={handleBlur}
       />
       {errorMessage && <div className="error-mesage">{errorMessage}</div>}
     </div>

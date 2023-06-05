@@ -1,0 +1,44 @@
+@import "../../index.scss";
+
+@mixin active($color, $bgColor) {
+  border: 1px solid $bgColor;
+  background: $bgColor;
+  color: $color;
+  cursor: pointer;
+}
+
+@mixin disabled($color: $secondary2, $bgColor: $secondary) {
+  @include active($color, $bgColor);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+$typeColors-mix: (
+  primary: ($white, $primary, $primary2,),
+  secondary: ($white, $graphite , $secondary2,),
+);
+
+.button {
+  font: $S1-3Decktop;
+  padding: 15px 0px;
+  max-width: 200px;
+  width: 100%;
+  border-radius: 10px;
+
+  @each $type, $colors in $typeColors-mix {
+    &--#{$type} {
+      @include active(nth($colors, 1), nth($colors, 2));
+      
+      &:hover {
+        @include active(nth($colors, 1), nth($colors, 3));
+        @if (#{&} == ".button--secondary:hover") {
+          @include active(nth($colors, 3), nth($colors, 2));
+        }
+      }
+      
+      &.disabled {
+        @include disabled();
+      }
+    }
+  }
+}
