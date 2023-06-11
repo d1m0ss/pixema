@@ -1,60 +1,52 @@
-import { useState } from "react";
 import "./App.scss";
-import { Input } from "./components/Input/Input";
-import { PageTemlate } from "./components/PageTemlate/PageTemlate";
-import { Tabs } from "./components/Tabs/Tabs";
-import { Select } from "./components/Select/Select";
-import { Button } from "./components/Button/Button";
-import { Search } from "./components/Secrch/Search";
+
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import { Selects } from "./components/Selects/Selects";
+import { useEffect, useState } from "react";
+import { Input } from "./components/Input/Input";
+import { ColorTabs } from "./components/Tabs/Tabs";
+import { Buttons } from "./components/Buttons/Buttons";
+import Search from "./components/Search/Search";
+import { CustomizedSwitches } from "./components/Switch/Switch";
+import { ActionAreaCard } from "./components/Card/Card";
+import { VariantButtonGroup } from "./components/Buttons/ButtonsGroup/ButtonsGroup";
+import { UserInfo } from "./components/UserInfo/UserInfo";
+import { PageTemlate } from "./components/PageTemlate/PageTemlate";
 
 export const App = () => {
-  const [name, setName] = useState<string>("");
-  const handleChangeName = (newName: string) => {
-    setName(newName);
+  const [select, setSelect] = useState<string[]>([]);
+  const handleMultiSelect = (text: string) => {
+    setSelect((prev) => [...prev, text]);
   };
+  useEffect(() => {
+    console.log(select);
+    return () => {};
+  }, [select]);
   return (
     <div className="app">
       <Provider store={store}>
+        {/* <Selects
+          isMulti
+          title="Filter"
+          onSelect={(text) => handleMultiSelect(text)}
+        />
+        <Selects title="Filter" />
+        <UserInfo />
+        <Input />
+        <ColorTabs />
+        <Buttons />
+        <VariantButtonGroup />
+        <Search />
+        <CustomizedSwitches />
+        <ActionAreaCard /> */}
         <PageTemlate>
-          <Input
-            title="Name"
-            value={name}
-            handleChange={handleChangeName}
-            placeholder="Placeholder"
-            errorMessage="Error text"
-          />
-          <Input
-            title="Name"
-            value={name}
-            handleChange={handleChangeName}
-            placeholder="Placeholder"
-            isDisabled
-          />
-          <Tabs>
-            {"text1"}
-            {"text2"}
-          </Tabs>
-          <Select isMulty>
-            {[
-              "Audi",
-              "BMW",
-              "Citroen",
-              "Ford",
-              "Honda",
-              "Jaguar",
-              "Land Rover",
-              "Mercedes",
-              "Mini",
-              "Nissan",
-              "Toyota",
-              "Volvo",
-            ]}
-          </Select>
-          <Button content="Primary" onClick={() => {}} type="primary" />
-          <Button content="Secondary" onClick={() => {}} type="secondary" />
-          <Search />
+        <ActionAreaCard />
+        <ActionAreaCard />
+        <ActionAreaCard />
+        <ActionAreaCard />
+        <ActionAreaCard />
+        <ActionAreaCard />
         </PageTemlate>
       </Provider>
     </div>

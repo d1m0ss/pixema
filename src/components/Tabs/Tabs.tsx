@@ -1,19 +1,26 @@
-import { FC } from "react";
-import { Tab } from "./Tab/Tab";
-import "./Tabs.scss";
+import * as React from "react";
+import { Tabs, Tab, Box } from "@mui/material";
 
-interface ITabs {
-  children: string[];
-}
+export const ColorTabs = () => {
+  const [value, setValue] = React.useState("one");
 
-export const Tabs: FC<ITabs> = ({ children }) => {
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
+
   return (
-    <section className="tabs">
-      <ul className="tabs__list" >
-        {children.map((tab, i) => (
-          <Tab key={i} title={tab} isActive={!!(i - 1)} />
-        ))}
-      </ul>
-    </section>
+    <Box sx={{ width: "100%" }}>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        textColor="primary"
+        indicatorColor="primary"
+        aria-label="primary tabs example"
+      >
+        <Tab value="one" label="Item One" />
+        <Tab value="two" label="Item Two" />
+        <Tab value="three" label="Item Three" />
+      </Tabs>
+    </Box>
   );
 };

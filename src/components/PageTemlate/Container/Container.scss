@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-grow: 1;
+  &__logo-wrapper {
+    height: 72px;
+    display: flex;
+    align-items: center;
+  }
+  &__aside {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+    margin-right: 146px;
+  }
+  &__content {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  &__buttons-group {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    row-gap: 28px;
+  }
+}
