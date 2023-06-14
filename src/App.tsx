@@ -49,6 +49,12 @@ export const App = () => {
           <ActionAreaCard />
           <ActionAreaCard />
           <ActionAreaCard />
+          <ActionAreaCard />
+          <ActionAreaCard />
+          <ActionAreaCard />
+          <ActionAreaCard />
+          <ActionAreaCard />
+          <ActionAreaCard />
         </PageTemlate>
       </Provider>
     </div>

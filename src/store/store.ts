@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { multiSelect } from "./multiSelect/reducer";
-
+// import { moviesReducer } from "./movies/reducer";
 
 export const store = configureStore({
-  reducer: multiSelect,
+  reducer: {
+    //  movies: moviesReducer
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
+export type appDispatch = typeof store.dispatch;
