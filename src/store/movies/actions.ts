@@ -30,10 +30,11 @@ const fetchDatatErrorAction = (): IFetchDataErrorAction => ({
 });
 
 export const fetchMovies =
-  () => async (dispatch: ThunkDispatch<RootState, unknown, ActionTypes>) => {
+  (params: string) =>
+  async (dispatch: ThunkDispatch<RootState, unknown, ActionTypes>) => {
     try {
       dispatch(fetchDatatRequestAction());
-      const data = (await axios.get(`${urls.GET_URL}&i=tt7126948`)).data;
+      const data = (await axios.get(`${urls.GET_URL}${params}`)).data;
       dispatch(fetchDatatSuccessAction(data));
     } catch (error) {
       dispatch(fetchDatatErrorAction());
