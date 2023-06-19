@@ -1,3 +1,9 @@
+import {
+  FETCH_DATA_ERROR,
+  FETCH_DATA_REQUEST,
+  FETCH_DATA_SUCCESS,
+} from "./actionTypes";
+
 export interface IMovie {
   Title: string;
   Year: string;
@@ -31,18 +37,31 @@ export interface IRating {
   Value: string;
 }
 
-export interface IAddSelect {
-  type: string;
-  text: string;
+export interface IMoviesState {
+  loading: boolean;
+  movies: IMovie | null;
+  error: string | null;
 }
 
-export interface IRemoveSelect {
-  type: string;
-  text: string;
+export interface IFetchDataRequestAction {
+  type: typeof FETCH_DATA_REQUEST;
 }
 
-export interface ISelectState {
-  text: string;
+export interface IFetchDataSuccessAction {
+  type: typeof FETCH_DATA_SUCCESS;
+  payload: {
+    data: IMovie;
+  };
 }
 
-export type seletTypes = IAddSelect | IRemoveSelect;
+export interface IFetchDataErrorAction {
+  type: typeof FETCH_DATA_ERROR;
+  payload: {
+    error: string;
+  };
+}
+
+export type ActionTypes =
+  | IFetchDataRequestAction
+  | IFetchDataSuccessAction
+  | IFetchDataErrorAction;

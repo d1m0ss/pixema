@@ -1,16 +1,41 @@
-import {  } from "./actionTypes";
-import { IAddSelect, IRemoveSelect  } from "./interfaces";
+import { ThunkDispatch } from "redux-thunk";
+import {
+  FETCH_DATA_ERROR,
+  FETCH_DATA_REQUEST,
+  FETCH_DATA_SUCCESS,
+} from "./actionTypes";
+import {
+  ActionTypes,
+  IFetchDataErrorAction,
+  IFetchDataRequestAction,
+  IFetchDataSuccessAction,
+  IMovie,
+} from "./interfaces";
+import { RootState } from "../store";
+import axios from "axios";
+import { urls } from "../../api/urls";
 
-// const addSelect = (text: string): IAddSelect => {
-//   return {
-//     type: SELECT_ADD,
-//     text,
-//   };
-// };
+const fetchDatatRequestAction = (): IFetchDataRequestAction => ({
+  type: FETCH_DATA_REQUEST,
+});
 
-// const removeSelect = (text: string): IRemoveSelect => {
-//   return {
-//     type: SELECT_DELITE,
-//     text,
-//   };
-// };
+const fetchDatatSuccessAction = (data: IMovie): IFetchDataSuccessAction => ({
+  type: FETCH_DATA_SUCCESS,
+  payload: { data },
+});
+
+const fetchDatatErrorAction = (): IFetchDataErrorAction => ({
+  type: FETCH_DATA_ERROR,
+  payload: { error: "Unknown server error" },
+});
+
+export const fetchMovies =
+  () => async (dispatch: ThunkDispatch<RootState, unknown, ActionTypes>) => {
+    try {
+      dispatch(fetchDatatRequestAction());
+      const data = (await axios.get(`${urls.GET_URL}&i=tt7126948`)).data;
+      dispatch(fetchDatatSuccessAction(data));
+    } catch (error) {
+      dispatch(fetchDatatErrorAction());
+    }
+  };
