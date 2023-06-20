@@ -7,7 +7,7 @@ import { IMoviesState, ActionTypes } from "./interfaces";
 
 const initialState: IMoviesState = {
   loading: false,
-  movies: null,
+  movies: [],
   error: null,
 };
 
@@ -19,7 +19,11 @@ export const moviesReducer = (
     case FETCH_DATA_REQUEST:
       return { ...state, loading: true, error: null };
     case FETCH_DATA_SUCCESS:
-      return { ...state, loading: false, movies: action.payload.data };
+      return {
+        ...state,
+        loading: false,
+        movies: [...state.movies, action.payload.data],
+      };
     case FETCH_DATA_ERROR:
       return { ...state, loading: false, error: action.payload.error };
     default:

@@ -39,7 +39,7 @@ export interface IRating {
 
 export interface IMoviesState {
   loading: boolean;
-  movies: IMovie | null;
+  movies: IMovie[];
   error: string | null;
 }
 

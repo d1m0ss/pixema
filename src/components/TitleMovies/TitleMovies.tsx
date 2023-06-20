@@ -6,26 +6,18 @@ import { titleMovies } from "../../mock";
 import { ActionAreaCard } from "../Card/Card";
 
 export const TitleMovies = () => {
-  const dispatch = useAppDispatch();
   const { movies } = useAppSelector((state) => state.movies);
-  interface IMovik {
-    title: string;
-    image: string;
-    genre: string;
-  }
-  const [movie, setMovie] = useState<IMovik[] | null>(null);
-  useEffect(() => {
-    setMovie(
-      titleMovies.map((item) => {
-        // dispatch(fetchMovies(`&i=${}`));
-        return {
-          title: movies?.Title,
-          image: movies?.Poster,
-          genre: movies?.Genre,
-        }
-      })
-    );
-  }, []);
 
-  return;
+  return (
+    <>
+      {movies.map((item, i) => (
+        <ActionAreaCard
+          key={i}
+          title={item.Title}
+          image={item.Poster}
+          genre={item.Genre}
+          />
+      ))}
+    </>
+  );
 };

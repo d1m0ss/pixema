@@ -13,10 +13,11 @@ import { useEffect, useState } from "react";
 // import { VariantButtonGroup } from "./components/Buttons/ButtonsGroup/ButtonsGroup";
 import { ActionAreaCard } from "./components/Card/Card";
 import { PageTemlate } from "./components/PageTemlate/PageTemlate";
-import { getTitleMovies } from "./api/getTitleMovies";
 import { titleMovies } from "./mock";
 import { IMovie } from "./store/movies/interfaces";
 import { TitleMovies } from "./components/TitleMovies/TitleMovies";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
+import { fetchMovies } from "./store/movies/actions";
 
 export const App = () => {
   const [select, setSelect] = useState<string[]>([]);
@@ -24,17 +25,16 @@ export const App = () => {
   // const handleMultiSelect = (text: string) => {
   //   setSelect((prev) => [...prev, text]);
   // };
-
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    // setTitleMovie(getTitleMovies(titleMovies));
-    console.log(titleMovie);
-
-    return () => {};
+    titleMovies.forEach((item) => {
+      dispatch(fetchMovies(`&i=${item}`));
+    });
   }, []);
+
   return (
     <div className="app">
-      <Provider store={store}>
-        {/* <Selects
+      {/* <Selects
           isMulti
           title="Filter"
           onSelect={(text) => handleMultiSelect(text)}
@@ -48,8 +48,8 @@ export const App = () => {
         <Search />
         <CustomizedSwitches />
         <ActionAreaCard /> */}
-        <PageTemlate>
-          {/* <ActionAreaCard />
+      <PageTemlate>
+        {/* <ActionAreaCard />
           <ActionAreaCard />
           <ActionAreaCard />
           <ActionAreaCard />
@@ -61,9 +61,8 @@ export const App = () => {
           <ActionAreaCard />
           <ActionAreaCard />
           <ActionAreaCard /> */}
-          <TitleMovies/>
-        </PageTemlate>
-      </Provider>
+        <TitleMovies />
+      </PageTemlate>
     </div>
   );
 };
