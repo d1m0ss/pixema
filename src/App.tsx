@@ -17,7 +17,7 @@ import { titleMovies } from "./mock";
 import { IMovie } from "./store/movies/interfaces";
 import { TitleMovies } from "./components/TitleMovies/TitleMovies";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
-import { fetchMovies } from "./store/movies/actions";
+import { fetchMovie } from "./store/movies/actions";
 
 export const App = () => {
   const [select, setSelect] = useState<string[]>([]);
@@ -27,8 +27,8 @@ export const App = () => {
   // };
   const dispatch = useAppDispatch();
   useEffect(() => {
-    titleMovies.forEach((item) => {
-      dispatch(fetchMovies(`&i=${item}`));
+    titleMovies.forEach((movieID) => {
+      // dispatch(fetchMovie(`&i=${movieID}`));
     });
   }, []);
 

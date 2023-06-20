@@ -1,6 +1,8 @@
 import {
   FETCH_DATA_ERROR,
+  FETCH_DATA_REFRESH,
   FETCH_DATA_REQUEST,
+  FETCH_DATA_SEARCH_SUCCESS,
   FETCH_DATA_SUCCESS,
 } from "./actionTypes";
 
@@ -32,6 +34,20 @@ export interface IMovie {
   Response: string;
 }
 
+export interface ISearch {
+  Title: string;
+  Year: string;
+  imdbID: string;
+  Type: string;
+  Poster: string;
+}
+
+export interface ISearchMovie {
+  Response: string;
+  Search: ISearch[];
+  totalResults: string;
+}
+
 export interface IRating {
   Source: string;
   Value: string;
@@ -39,7 +55,7 @@ export interface IRating {
 
 export interface IMoviesState {
   loading: boolean;
-  movies: IMovie[];
+  movies: IMovie[] | IMovie | ISearchMovie | null;
   error: string | null;
 }
 
@@ -54,6 +70,10 @@ export interface IFetchDataSuccessAction {
   };
 }
 
+export interface IFetchDataRefreshAction {
+  type: typeof FETCH_DATA_REFRESH;
+}
+
 export interface IFetchDataErrorAction {
   type: typeof FETCH_DATA_ERROR;
   payload: {
@@ -64,4 +84,5 @@ export interface IFetchDataErrorAction {
 export type ActionTypes =
   | IFetchDataRequestAction
   | IFetchDataSuccessAction
+  | IFetchDataRefreshAction
   | IFetchDataErrorAction;

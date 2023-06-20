@@ -1,12 +1,15 @@
 import { ThunkDispatch } from "redux-thunk";
 import {
   FETCH_DATA_ERROR,
+  FETCH_DATA_REFRESH,
   FETCH_DATA_REQUEST,
+  FETCH_DATA_SEARCH_SUCCESS,
   FETCH_DATA_SUCCESS,
 } from "./actionTypes";
 import {
   ActionTypes,
   IFetchDataErrorAction,
+  IFetchDataRefreshAction,
   IFetchDataRequestAction,
   IFetchDataSuccessAction,
   IMovie,
@@ -24,17 +27,23 @@ const fetchDatatSuccessAction = (data: IMovie): IFetchDataSuccessAction => ({
   payload: { data },
 });
 
+export const fetchDatatRefreshAction = (): IFetchDataRefreshAction => ({
+  type: FETCH_DATA_REFRESH,
+});
+
 const fetchDatatErrorAction = (): IFetchDataErrorAction => ({
   type: FETCH_DATA_ERROR,
   payload: { error: "Unknown server error" },
 });
 
-export const fetchMovies =
+export const fetchMovie =
   (params: string) =>
   async (dispatch: ThunkDispatch<RootState, unknown, ActionTypes>) => {
     try {
       dispatch(fetchDatatRequestAction());
       const data = (await axios.get(`${urls.GET_URL}${params}`)).data;
+      console.log(data);
+      
       dispatch(fetchDatatSuccessAction(data));
     } catch (error) {
       dispatch(fetchDatatErrorAction());
