@@ -31,9 +31,9 @@ export const fetchDatatRefreshAction = (): IFetchDataRefreshAction => ({
   type: FETCH_DATA_REFRESH,
 });
 
-const fetchDatatErrorAction = (): IFetchDataErrorAction => ({
+const fetchDatatErrorAction = (error: string): IFetchDataErrorAction => ({
   type: FETCH_DATA_ERROR,
-  payload: { error: "Unknown server error" },
+  payload: { error },
 });
 
 export const fetchMovie =
@@ -43,9 +43,10 @@ export const fetchMovie =
       dispatch(fetchDatatRequestAction());
       const data = (await axios.get(`${urls.GET_URL}${params}`)).data;
       console.log(data);
-      
-      dispatch(fetchDatatSuccessAction(data));
-    } catch (error) {
-      dispatch(fetchDatatErrorAction());
+      "Error" in data
+        ? dispatch(fetchDatatErrorAction(data.Error))
+        : dispatch(fetchDatatSuccessAction(data));
+    } catch {
+      dispatch(fetchDatatErrorAction("Some server error"));
     }
   };

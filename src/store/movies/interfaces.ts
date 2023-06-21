@@ -53,9 +53,11 @@ export interface IRating {
   Value: string;
 }
 
+export type SearchMovieType = IMovie[] | IMovie | ISearchMovie | null;
+
 export interface IMoviesState {
   loading: boolean;
-  movies: IMovie[] | IMovie | ISearchMovie | null;
+  movies: SearchMovieType;
   error: string | null;
 }
 

@@ -24,16 +24,22 @@ export const moviesReducer = (
       return {
         ...state,
         loading: false,
-        movies: action.payload.data.hasOwnProperty("Search")
-          ? action.payload.data
-          : Array.isArray(state.movies)
-          ? [...state.movies, action.payload.data]
-          : [action.payload.data],
+        movies:
+          "Search" in action.payload.data
+            ? action.payload.data
+            : Array.isArray(state.movies)
+            ? [...state.movies, action.payload.data]
+            : [action.payload.data],
       };
     case FETCH_DATA_REFRESH:
       return state;
     case FETCH_DATA_ERROR:
-      return { ...state, loading: false, error: action.payload.error };
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+        movies: null,
+      };
     default:
       return state;
   }

@@ -2,21 +2,18 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import SortIcon from "@mui/icons-material/Sort";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchMovie } from "../../store/movies/actions";
+import { setSearchValue } from "../../store/search/actions";
 
-export default function InputWithIcon() {
-  const dispatch = useAppDispatch();
-  let timeout: any = null;
-  const onChangeLog = (e: string) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      console.log(e);
-      dispatch(fetchMovie(`&s=${e}&t=movie`));
-    }, 800);
-  };
+interface ISearchField {
+  onChangeValue?: (value: string) => void;
+}
+
+export const SearchField: React.FC<ISearchField> = ({
+  onChangeValue = () => {},
+}) => {
   return (
     <Box sx={{ "& > :not(style)": { m: 1, width: "100%" } }}>
       <TextField
@@ -24,7 +21,7 @@ export default function InputWithIcon() {
         label="Search"
         variant="outlined"
         onChange={(e) => {
-          onChangeLog(e.target.value);
+          onChangeValue(e.target.value);
         }}
         // style={{ background: "#323537" }}
         sx={{
@@ -45,4 +42,4 @@ export default function InputWithIcon() {
       />
     </Box>
   );
-}
+};
