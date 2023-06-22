@@ -28,7 +28,7 @@ export const App = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     titleMovies.forEach((movieID) => {
-      // dispatch(fetchMovie(`&i=${movieID}`));
+      dispatch(fetchMovie(`&i=${movieID}`));
     });
   }, []);
 

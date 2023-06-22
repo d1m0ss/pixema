@@ -1,6 +1,5 @@
 import { ThunkDispatch } from "redux-thunk";
 import {
-  FETCH_ADDITIONAL_DATA_SUCCESS,
   FETCH_DATA_ERROR,
   FETCH_DATA_REFRESH,
   FETCH_DATA_REQUEST,
@@ -14,25 +13,17 @@ import {
   IFetchDataSuccessAction,
   IMovie,
   ISearchMovie,
-  IfetchAdditionalDatatSuccessAction,
 } from "./interfaces";
 import { RootState } from "../store";
 import axios from "axios";
 import { urls } from "../../api/urls";
 
-const fetchDatatRequestAction = (): IFetchDataRequestAction => ({
+export const fetchDatatRequestAction = (): IFetchDataRequestAction => ({
   type: FETCH_DATA_REQUEST,
 });
 
 const fetchDatatSuccessAction = (data: any): IFetchDataSuccessAction => ({
   type: FETCH_DATA_SUCCESS,
-  payload: { data },
-});
-
-export const fetchAdditionalDatatSuccessAction = (
-  data: ISearchMovie
-): IfetchAdditionalDatatSuccessAction => ({
-  type: FETCH_ADDITIONAL_DATA_SUCCESS,
   payload: { data },
 });
 
@@ -51,7 +42,8 @@ export const fetchMovie =
     try {
       dispatch(fetchDatatRequestAction());
       const data = (await axios.get(`${urls.GET_URL}${params}`)).data;
-      console.log(data);
+      "Error" in data && console.log(data);
+
       "Error" in data
         ? dispatch(fetchDatatErrorAction(data.Error))
         : dispatch(fetchDatatSuccessAction(data));

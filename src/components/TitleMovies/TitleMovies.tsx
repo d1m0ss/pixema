@@ -1,67 +1,86 @@
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import "./TitleMovies.scss";
 import { ActionAreaCard } from "../Card/Card";
-import { ISearchMovie } from "../../store/movies/interfaces";
-import { useState } from "react";
-import { fetchMovie } from "../../store/movies/actions";
+import { useEffect, useState } from "react";
+import {
+  fetchDatatRefreshAction,
+  fetchDatatRequestAction,
+  fetchMovie,
+} from "../../store/movies/actions";
 
 export const TitleMovies = () => {
-  const { movies, loading, error } = useAppSelector((state) => state.movies);
+  const { titleMovies, searchedMovies, loading, error } = useAppSelector(
+    (state) => state.movies
+  );
   const { searchValue } = useAppSelector((state) => state.search);
   const [pagesCount, setPagesCount] = useState(1);
   const dispatch = useAppDispatch();
 
-  const searchedMovieResult = (prop: keyof ISearchMovie) => {
-    return (
-      movies !== null &&
-      !Array.isArray(movies) &&
-      "Search" in movies &&
-      movies[prop]
-    );
+  const handleClick = () => {
+    if (!error) {
+      const nextPage = pagesCount + 1;
+      dispatch(fetchMovie(`&s=${searchValue}&page=${nextPage}`));
+      setPagesCount((prev) => prev + 1);
+    }
   };
 
-  const handleClick = () => {
-    const nextPage = pagesCount + 1;
-    dispatch(fetchMovie(`&s=${searchValue}&page=${nextPage}`));
-    setPagesCount((prev) => prev + 1);
-  };
+  useEffect(() => {
+    setPagesCount(1);
+    dispatch(fetchDatatRefreshAction());
+    dispatch(fetchDatatRequestAction());
+    return () => {};
+  }, [searchValue]);
+
   return (
     <>
-      {loading ? (
+      {loading && !searchedMovies ? (
         <h1>Loading...</h1>
-      ) : movies !== null && !Array.isArray(movies) && "Search" in movies ? (
-        movies.Search.map((item, i) => (
-          <ActionAreaCard
-            key={i}
-            title={item.Title}
-            image={
-              item.Poster !== "N/A"
-                ? item.Poster
-                : "https://www.csaff.org/wp-content/uploads/csaff-no-poster.jpg"
-            }
-            genre={item.Year}
-          />
-        ))
+      ) : !searchValue ? (
+        Array.isArray(titleMovies) &&
+        titleMovies.map(
+          (item, i) =>
+            "Title" in item && (
+              <ActionAreaCard
+                key={i}
+                title={item.Title}
+                image={item.Poster}
+                genre={item.Genre}
+              />
+            )
+        )
       ) : (
-        Array.isArray(movies) &&
-        movies.map((item, i) => (
-          <ActionAreaCard
-            key={i}
-            title={item.Title}
-            image={item.Poster}
-            genre={item.Genre}
-          />
-        ))
+        Array.isArray(searchedMovies) &&
+        searchedMovies.map(({ Search }) =>
+          Search.map(({ Title, Poster, Year }, i) => (
+            <ActionAreaCard
+              key={i}
+              title={Title}
+              image={
+                Poster !== "N/A"
+                  ? Poster
+                  : "https://www.csaff.org/wp-content/uploads/csaff-no-poster.jpg"
+              }
+              genre={Year}
+            />
+          ))
+        )
       )}
-      {!loading && +searchedMovieResult("totalResults") > 10 && (
-        <ActionAreaCard
-          isClickable
-          onHandleClick={handleClick}
-          title={`To nex 10 movies. Page: ${pagesCount} from ${Math.ceil(
-            +searchedMovieResult("totalResults") / 10
-          )}`}
-          genre={`Total results ${searchedMovieResult("totalResults")}`}
-        />
+      {loading && searchedMovies ? (
+        <h1>Loading...</h1>
+      ) : (
+        !loading &&
+        searchedMovies &&
+        +searchedMovies[0].totalResults > 10 &&
+        pagesCount <= +searchedMovies[0].totalResults / 10 && (
+          <ActionAreaCard
+            isClickable
+            onHandleClick={handleClick}
+            title={`To nex 10 movies. Page: ${pagesCount} from ${Math.ceil(
+              +searchedMovies[0].totalResults / 10
+            )}`}
+            genre={`Total results ${+searchedMovies[0].totalResults}`}
+          />
+        )
       )}
       {!!error && error}
     </>

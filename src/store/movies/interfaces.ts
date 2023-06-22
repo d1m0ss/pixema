@@ -1,5 +1,4 @@
 import {
-  FETCH_ADDITIONAL_DATA_SUCCESS,
   FETCH_DATA_ERROR,
   FETCH_DATA_REFRESH,
   FETCH_DATA_REQUEST,
@@ -53,11 +52,10 @@ export interface IRating {
   Value: string;
 }
 
-export type SearchMovieType = IMovie[] | IMovie | ISearchMovie | null;
-
 export interface IMoviesState {
   loading: boolean;
-  movies: SearchMovieType;
+  titleMovies: IMovie[] | null;
+  searchedMovies: ISearchMovie[] | null;
   error: string | null;
 }
 
@@ -68,14 +66,7 @@ export interface IFetchDataRequestAction {
 export interface IFetchDataSuccessAction {
   type: typeof FETCH_DATA_SUCCESS;
   payload: {
-    data: IMovie;
-  };
-}
-
-export interface IfetchAdditionalDatatSuccessAction {
-  type: typeof FETCH_ADDITIONAL_DATA_SUCCESS;
-  payload: {
-    data: ISearchMovie;
+    data: IMovie | ISearchMovie;
   };
 }
 
@@ -93,6 +84,5 @@ export interface IFetchDataErrorAction {
 export type ActionTypes =
   | IFetchDataRequestAction
   | IFetchDataSuccessAction
-  | IfetchAdditionalDatatSuccessAction
   | IFetchDataRefreshAction
   | IFetchDataErrorAction;

@@ -1,5 +1,4 @@
 import {
-  FETCH_ADDITIONAL_DATA_SUCCESS,
   FETCH_DATA_ERROR,
   FETCH_DATA_REFRESH,
   FETCH_DATA_REQUEST,
@@ -9,7 +8,8 @@ import { IMoviesState, ActionTypes } from "./interfaces";
 
 const initialState: IMoviesState = {
   loading: false,
-  movies: null,
+  searchedMovies: null,
+  titleMovies: null,
   error: null,
 };
 
@@ -24,29 +24,23 @@ export const moviesReducer = (
       return {
         ...state,
         loading: false,
-        movies:
-          "Search" in action.payload.data
-            ? action.payload.data
-            : Array.isArray(state.movies)
-            ? [...state.movies, action.payload.data]
-            : [action.payload.data],
-      };
-    case FETCH_ADDITIONAL_DATA_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        movies:
-            [...state.movies, action.payload.data]
+        titleMovies:
+          Array.isArray(state.titleMovies) && "Title" in action.payload.data
+            ? [...state.titleMovies, action.payload.data]
+            : "Title" in action.payload.data
+            ? [action.payload.data]
+            : state.titleMovies,
+        searchedMovies:
+          Array.isArray(state.searchedMovies) && "Search" in action.payload.data
+            ? [...state.searchedMovies, action.payload.data]
+            : "Search" in action.payload.data
+            ? [action.payload.data]
+            : state.searchedMovies,
       };
     case FETCH_DATA_REFRESH:
-      return state;
+      return { ...state, loading: false, searchedMovies: null };
     case FETCH_DATA_ERROR:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload.error,
-        movies: null,
-      };
+      return { ...state, loading: false };
     default:
       return state;
   }
