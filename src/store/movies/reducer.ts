@@ -1,8 +1,8 @@
 import {
+  FETCH_ADDITIONAL_DATA_SUCCESS,
   FETCH_DATA_ERROR,
   FETCH_DATA_REFRESH,
   FETCH_DATA_REQUEST,
-  FETCH_DATA_SEARCH_SUCCESS,
   FETCH_DATA_SUCCESS,
 } from "./actionTypes";
 import { IMoviesState, ActionTypes } from "./interfaces";
@@ -30,6 +30,13 @@ export const moviesReducer = (
             : Array.isArray(state.movies)
             ? [...state.movies, action.payload.data]
             : [action.payload.data],
+      };
+    case FETCH_ADDITIONAL_DATA_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        movies:
+            [...state.movies, action.payload.data]
       };
     case FETCH_DATA_REFRESH:
       return state;

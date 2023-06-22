@@ -1,8 +1,8 @@
 import {
+  FETCH_ADDITIONAL_DATA_SUCCESS,
   FETCH_DATA_ERROR,
   FETCH_DATA_REFRESH,
   FETCH_DATA_REQUEST,
-  FETCH_DATA_SEARCH_SUCCESS,
   FETCH_DATA_SUCCESS,
 } from "./actionTypes";
 
@@ -72,6 +72,13 @@ export interface IFetchDataSuccessAction {
   };
 }
 
+export interface IfetchAdditionalDatatSuccessAction {
+  type: typeof FETCH_ADDITIONAL_DATA_SUCCESS;
+  payload: {
+    data: ISearchMovie;
+  };
+}
+
 export interface IFetchDataRefreshAction {
   type: typeof FETCH_DATA_REFRESH;
 }
@@ -86,5 +93,6 @@ export interface IFetchDataErrorAction {
 export type ActionTypes =
   | IFetchDataRequestAction
   | IFetchDataSuccessAction
+  | IfetchAdditionalDatatSuccessAction
   | IFetchDataRefreshAction
   | IFetchDataErrorAction;
