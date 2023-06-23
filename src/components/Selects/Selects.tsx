@@ -22,7 +22,6 @@ export const Selects: FC<ISelects> = ({
       id="checkboxes-tags-demo"
       onChange={(event: any) => {
         const selectText = event.target.innerText;
-        console.log(selectText);
         onSelect(selectText);
       }}
       options={top100Films}
@@ -30,13 +29,16 @@ export const Selects: FC<ISelects> = ({
       getOptionLabel={(option) => option.title}
       renderOption={(props, option, { selected }) => (
         <>
-          <li {...props}>
-            <Checkbox style={{ marginRight: 8 }} checked={selected} />
-            {option.title}
-          </li>
+          <li {...props}>{option.title}</li>
         </>
       )}
-      style={{ width: 500 }}
+      sx={{
+        "& > :not(style)": { width: "100%" },
+        background: "#323537",
+        borderRadius: 2,
+        label: { color: "white" },
+        input: { color: "white" },
+      }}
       renderInput={(params) => (
         <TextField {...params} label={title} placeholder={placeholder} />
       )}
@@ -49,7 +51,7 @@ export const Selects: FC<ISelects> = ({
       onChange={(s: any) => {
         console.log(s.target.innerText);
       }}
-      style={{ width: "300px", marginTop: "20px" }}
+      style={{ width: "100%" }}
       options={top100Films.map((option) => option.title)}
       renderInput={(params) => (
         <TextField

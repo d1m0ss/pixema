@@ -40,7 +40,7 @@ export const moviesReducer = (
     case FETCH_DATA_REFRESH:
       return { ...state, loading: false, searchedMovies: null };
     case FETCH_DATA_ERROR:
-      return { ...state, loading: false };
+      return { ...state, error: action.payload.error, loading: false };
     default:
       return state;
   }

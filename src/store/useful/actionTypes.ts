@@ -1,2 +1,3 @@
 export const SET_SEARCH_VALUE = "SET_SEARCH_VALUE";
+export const SET_MODAL_STATE = "SET_MODAL_STATE";
 

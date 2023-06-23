@@ -12,7 +12,7 @@ export const TitleMovies = () => {
   const { titleMovies, searchedMovies, loading, error } = useAppSelector(
     (state) => state.movies
   );
-  const { searchValue } = useAppSelector((state) => state.search);
+  const { searchValue } = useAppSelector((state) => state.usefuls);
   const [pagesCount, setPagesCount] = useState(1);
   const dispatch = useAppDispatch();
 

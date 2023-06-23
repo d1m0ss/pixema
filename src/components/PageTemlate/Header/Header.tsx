@@ -1,6 +1,6 @@
 import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { setSearchValue } from "../../../store/search/actions";
+import { setSearchValue } from "../../../store/useful/actions";
 import {
   fetchDatatRefreshAction,
   fetchMovie,
@@ -11,7 +11,7 @@ import "./Header.scss";
 
 export const Header: FC = () => {
   const dispatch = useAppDispatch();
-  const { searchValue } = useAppSelector((state) => state.search);
+  const { searchValue } = useAppSelector((state) => state.usefuls);
 
   let timeout: any = null;
   const hendleSearchChange = (value: string) => {

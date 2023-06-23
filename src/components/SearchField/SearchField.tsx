@@ -5,7 +5,8 @@ import TextField from "@mui/material/TextField";
 import SortIcon from "@mui/icons-material/Sort";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchMovie } from "../../store/movies/actions";
-import { setSearchValue } from "../../store/search/actions";
+import { setModalState, setSearchValue } from "../../store/useful/actions";
+import IconButton from "@mui/material/IconButton";
 
 interface ISearchField {
   onChangeValue?: (value: string) => void;
@@ -14,6 +15,10 @@ interface ISearchField {
 export const SearchField: React.FC<ISearchField> = ({
   onChangeValue = () => {},
 }) => {
+  const dispatch = useAppDispatch();
+  const handleNodalChange = () => {
+    dispatch(setModalState());
+  };
   return (
     <Box sx={{ "& > :not(style)": { m: 1, width: "100%" } }}>
       <TextField
@@ -33,9 +38,11 @@ export const SearchField: React.FC<ISearchField> = ({
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <SortIcon
-                style={{ rotate: "180deg", transform: "scale(1, -1)" }}
-              />
+              <IconButton onClick={handleNodalChange}>
+                <SortIcon
+                  style={{ rotate: "180deg", transform: "scale(1, -1)" }}
+                />
+              </IconButton>
             </InputAdornment>
           ),
         }}

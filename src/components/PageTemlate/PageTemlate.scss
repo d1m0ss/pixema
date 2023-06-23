@@ -1,5 +1,6 @@
 @import "../../index.scss";
 .page-template {
+  position: relative;
   background-color: $black;
   color: $white;
   display: flex;

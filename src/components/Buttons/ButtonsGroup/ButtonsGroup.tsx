@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Box from "@mui/material/Box";
 
-export const VariantButtonGroup = () => {
+export const SButtonGroup = () => {
   return (
     <Box
       sx={{

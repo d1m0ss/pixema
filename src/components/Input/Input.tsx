@@ -2,17 +2,23 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
-export const Input = () => {
+interface IInput {
+  title: string;
+}
+
+export const Input: React.FC<IInput> = ({ title }) => {
   return (
     <Box
-      component="form"
+      component="div"
       sx={{
-        "& > :not(style)": { mt: 3, width: "25ch" },
+        "& > :not(style)": { width: "100%" },
+        background: "#323537",
+        borderRadius: 2,
+        label: { color: "white" },
+        input: { color: "white" },
       }}
-      noValidate
-      autoComplete="off"
     >
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+      <TextField id="outlined-basic" label={title} variant="outlined" />
     </Box>
   );
 };

@@ -1,10 +1,10 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { moviesReducer } from "./movies/reducer";
-import { searchReducer } from "./search/reducer";
+import { searchReducer } from "./useful/reducer";
 
 const rootReducer = combineReducers({
   movies: moviesReducer,
-  search: searchReducer,
+  usefuls: searchReducer,
 });
 export const store = configureStore({
   reducer: rootReducer,
