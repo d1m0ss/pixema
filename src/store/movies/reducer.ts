@@ -10,6 +10,7 @@ const initialState: IMoviesState = {
   loading: false,
   searchedMovies: null,
   titleMovies: null,
+  singleMovie: null,
   error: null,
 };
 
@@ -24,6 +25,10 @@ export const moviesReducer = (
       return {
         ...state,
         loading: false,
+        singleMovie:
+          "Title" in action.payload.data
+            ? action.payload.data
+            : state.singleMovie,
         titleMovies:
           Array.isArray(state.titleMovies) && "Title" in action.payload.data
             ? [...state.titleMovies, action.payload.data]

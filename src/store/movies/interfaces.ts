@@ -56,6 +56,7 @@ export interface IMoviesState {
   loading: boolean;
   titleMovies: IMovie[] | null;
   searchedMovies: ISearchMovie[] | null;
+  singleMovie: IMovie | null;
   error: string | null;
 }
 
@@ -67,6 +68,7 @@ export interface IFetchDataSuccessAction {
   type: typeof FETCH_DATA_SUCCESS;
   payload: {
     data: IMovie | ISearchMovie;
+    isSingle: boolean;
   };
 }
 

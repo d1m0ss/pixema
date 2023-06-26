@@ -28,8 +28,6 @@ export const TitleMovies = () => {
 
   useEffect(() => {
     setPagesCount(1);
-    dispatch(fetchDatatRefreshAction());
-    dispatch(fetchDatatRequestAction());
     return () => {};
   }, [searchValue]);
 

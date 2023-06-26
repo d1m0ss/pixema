@@ -20,10 +20,8 @@ export const ActionAreaCard: FC<IActionAreaCard> = ({
   genre,
   isClickable = false,
   onHandleClick,
-  typographyClick
+  typographyClick,
 }) => {
-
-
   return (
     <Card
       sx={{ maxWidth: "266px", backgroundColor: "transparent", color: "white" }}
@@ -32,7 +30,15 @@ export const ActionAreaCard: FC<IActionAreaCard> = ({
     >
       <CardMedia component="img" height="357px" image={image} alt="poster" />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div" onClick={typographyClick}>
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          onClick={typographyClick}
+          sx={{ cursor: "pointer",
+        '&:hover': {color:'#917cff'}
+        }}
+        >
           {title}
         </Typography>
         <Typography

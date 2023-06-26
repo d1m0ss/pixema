@@ -12,13 +12,13 @@ interface IMoviePage {}
 
 export const MoviePage: FC<IMoviePage> = () => {
   const dispatch = useAppDispatch();
-  const { titleMovies, loading } = useAppSelector((state) => state.movies);
+  const { titleMovies,singleMovie, loading } = useAppSelector((state) => state.movies);
   const { movieId } = useParams();
   useEffect(() => {
-    dispatch(fetchDatatRefreshAction());
+    // dispatch(fetchDatatRefreshAction());
     dispatch(fetchMovie(`&i=${movieId}`));
   }, []);
-  const movie = titleMovies ? titleMovies[0] : null;
+  const movie = singleMovie ? singleMovie : null;
   titleMovies !== null && console.log(titleMovies[0]);
 
   return (

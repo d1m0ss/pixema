@@ -8,16 +8,20 @@ import {
 import { SearchField } from "../../SearchField/SearchField";
 import { UserInfo } from "../../UserInfo/UserInfo";
 import "./Header.scss";
+import { useNavigate } from "react-router-dom";
 
 export const Header: FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate()
   const { searchValue } = useAppSelector((state) => state.usefuls);
 
   let timeout: any = null;
   const hendleSearchChange = (value: string) => {
     clearTimeout(timeout);
+    dispatch(fetchDatatRefreshAction());
     if (value) {
       timeout = setTimeout(() => {
+        navigate('')
         dispatch(setSearchValue(value));
         dispatch(fetchMovie(`&s=${value}`));
       }, 800);
