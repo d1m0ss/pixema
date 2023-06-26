@@ -18,6 +18,7 @@ import { IMovie } from "./store/movies/interfaces";
 import { TitleMovies } from "./components/TitleMovies/TitleMovies";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { fetchMovie } from "./store/movies/actions";
+import { Router } from "./routes/Router";
 
 export const App = () => {
   const [select, setSelect] = useState<string[]>([]);
@@ -28,40 +29,15 @@ export const App = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     titleMovies.forEach((movieID) => {
-      dispatch(fetchMovie(`&i=${movieID}`));
+      // dispatch(fetchMovie(`&i=${movieID}`));
     });
   }, []);
 
   return (
     <div className="app">
-      {/* <Selects
-          isMulti
-          title="Filter"
-          onSelect={(text) => handleMultiSelect(text)}
-        />
-        <Selects title="Filter" />
-        <UserInfo />
-        <Input />
-        <ColorTabs />
-        <Buttons />
-        <VariantButtonGroup />
-        <Search />
-        <CustomizedSwitches />
-        <ActionAreaCard /> */}
       <PageTemlate>
-        {/* <ActionAreaCard />
-          <ActionAreaCard />
-          <ActionAreaCard />
-          <ActionAreaCard />
-          <ActionAreaCard />
-          <ActionAreaCard />
-          <ActionAreaCard />
-          <ActionAreaCard />
-          <ActionAreaCard />
-          <ActionAreaCard />
-          <ActionAreaCard />
-          <ActionAreaCard /> */}
-        <TitleMovies />
+        <Router/>
+        {/* <TitleMovies /> */}
       </PageTemlate>
     </div>
   );

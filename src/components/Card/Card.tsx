@@ -11,6 +11,7 @@ interface IActionAreaCard {
   genre?: string;
   isClickable?: boolean;
   onHandleClick?: () => void;
+  typographyClick?: () => void;
 }
 
 export const ActionAreaCard: FC<IActionAreaCard> = ({
@@ -19,7 +20,10 @@ export const ActionAreaCard: FC<IActionAreaCard> = ({
   genre,
   isClickable = false,
   onHandleClick,
+  typographyClick
 }) => {
+
+
   return (
     <Card
       sx={{ maxWidth: "266px", backgroundColor: "transparent", color: "white" }}
@@ -28,7 +32,7 @@ export const ActionAreaCard: FC<IActionAreaCard> = ({
     >
       <CardMedia component="img" height="357px" image={image} alt="poster" />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h5" component="div" onClick={typographyClick}>
           {title}
         </Typography>
         <Typography

@@ -1,0 +1,42 @@
+@import "../../index.scss";
+
+.movie {
+  font-family: "Exo 2";
+  width: 100%;
+  display: flex;
+  column-gap: 42px;
+  &__poster-wrapper {
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  &__genre {
+    font: $S1-4Decktop;
+  }
+  &__title {
+    font: $H1Decktop;
+  }
+  &__info {
+    margin-top: 24px;
+    margin-bottom: 40px;
+    display: flex;
+    column-gap: 20px;
+  }
+  &__description {
+    font: $S1-4Decktop;
+    margin-bottom: 40px;
+  }
+  &__score {
+  }
+  &__footer-details {
+  }
+  &__header-title {
+  }
+  &__imdb-score {
+  }
+  &__info-part {
+  }
+  &__posre-part {
+  }
+  &__runtime {
+  }
+}

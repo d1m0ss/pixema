@@ -7,6 +7,7 @@ import {
   fetchDatatRequestAction,
   fetchMovie,
 } from "../../store/movies/actions";
+import { useNavigate } from "react-router-dom";
 
 export const TitleMovies = () => {
   const { titleMovies, searchedMovies, loading, error } = useAppSelector(
@@ -15,6 +16,7 @@ export const TitleMovies = () => {
   const { searchValue } = useAppSelector((state) => state.usefuls);
   const [pagesCount, setPagesCount] = useState(1);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleClick = () => {
     if (!error) {
@@ -45,13 +47,14 @@ export const TitleMovies = () => {
                 title={item.Title}
                 image={item.Poster}
                 genre={item.Genre}
+                typographyClick={() => navigate(`/${item.imdbID}`)}
               />
             )
         )
       ) : (
         Array.isArray(searchedMovies) &&
         searchedMovies.map(({ Search }) =>
-          Search.map(({ Title, Poster, Year }, i) => (
+          Search.map(({ Title, Poster, Year, imdbID }, i) => (
             <ActionAreaCard
               key={i}
               title={Title}
@@ -61,6 +64,7 @@ export const TitleMovies = () => {
                   : "https://www.csaff.org/wp-content/uploads/csaff-no-poster.jpg"
               }
               genre={Year}
+              typographyClick={() => navigate(`/${imdbID}`)}
             />
           ))
         )
