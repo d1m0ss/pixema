@@ -3,7 +3,13 @@ import {
   FETCH_DATA_REFRESH,
   FETCH_DATA_REQUEST,
   FETCH_DATA_SUCCESS,
+  FETCH_DATA_SUCCESS_SEARCH,
+  FETCH_DATA_SUCCESS_SINGLE,
+  FETCH_DATA_SUCCESS_TITLE,
+  FETCH_DATA_SUCCESS_TREND,
 } from "./actionTypes";
+
+export type MovieType = "Title" | "Trend" | "Search" | "Single" | null;
 
 export interface IMovie {
   Title: string;
@@ -54,12 +60,12 @@ export interface IRating {
 
 export interface IMoviesState {
   loading: boolean;
-  titleMovies: IMovie[] | null;
   searchedMovies: ISearchMovie[] | null;
   singleMovie: IMovie | null;
+  titleMovies: IMovie[] | null;
+  trendMovies: IMovie[] | null;
   error: string | null;
 }
-
 export interface IFetchDataRequestAction {
   type: typeof FETCH_DATA_REQUEST;
 }
@@ -68,7 +74,34 @@ export interface IFetchDataSuccessAction {
   type: typeof FETCH_DATA_SUCCESS;
   payload: {
     data: IMovie | ISearchMovie;
-    isSingle: boolean;
+  };
+}
+
+export interface IFetchDataSuccessTitleAction {
+  type: typeof FETCH_DATA_SUCCESS_TITLE;
+  payload: {
+    data: IMovie;
+  };
+}
+
+export interface IFetchDataSuccessSingleAction {
+  type: typeof FETCH_DATA_SUCCESS_SINGLE;
+  payload: {
+    data: IMovie;
+  };
+}
+
+export interface IFetchDataSuccessTrendAction {
+  type: typeof FETCH_DATA_SUCCESS_TREND;
+  payload: {
+    data: IMovie;
+  };
+}
+
+export interface IFetchDataSuccessSearchAction {
+  type: typeof FETCH_DATA_SUCCESS_SEARCH;
+  payload: {
+    data: ISearchMovie;
   };
 }
 
@@ -87,4 +120,8 @@ export type ActionTypes =
   | IFetchDataRequestAction
   | IFetchDataSuccessAction
   | IFetchDataRefreshAction
-  | IFetchDataErrorAction;
+  | IFetchDataErrorAction
+  | IFetchDataSuccessTitleAction
+  | IFetchDataSuccessSingleAction
+  | IFetchDataSuccessTrendAction
+  | IFetchDataSuccessSearchAction;

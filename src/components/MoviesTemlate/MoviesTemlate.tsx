@@ -1,41 +1,49 @@
+import { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import "./TitleMovies.scss";
-import { ActionAreaCard } from "../Card/Card";
-import { useEffect, useState } from "react";
+
 import {
-  fetchDatatRefreshAction,
   fetchDatatRequestAction,
   fetchMovie,
 } from "../../store/movies/actions";
+import { increasPagesCount } from "../../store/useful/actions";
+import { IMovie, ISearchMovie } from "../../store/movies/interfaces";
+
+import { ActionAreaCard } from "../Card/Card";
 import { useNavigate } from "react-router-dom";
 
-export const TitleMovies = () => {
-  const { titleMovies, searchedMovies, loading, error } = useAppSelector(
-    (state) => state.movies
-  );
-  const { searchValue } = useAppSelector((state) => state.usefuls);
-  const [pagesCount, setPagesCount] = useState(1);
+import "./MoviesTemlate.scss";
+
+interface IMoviesTemlate {
+  titleMovies?: IMovie[] | null;
+  searchedMovies?: ISearchMovie[] | null;
+}
+
+export const MoviesTemlate: FC<IMoviesTemlate> = ({
+  searchedMovies,
+  titleMovies,
+}) => {
+  const { searchValue, pagesCount } = useAppSelector((state) => state.usefuls);
+  const { loading, error } = useAppSelector((state) => state.movies);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleClick = () => {
+    dispatch(fetchDatatRequestAction());
     if (!error) {
       const nextPage = pagesCount + 1;
-      dispatch(fetchMovie(`&s=${searchValue}&page=${nextPage}`));
-      setPagesCount((prev) => prev + 1);
+      dispatch(fetchMovie(`&s=${searchValue}&page=${nextPage}`, "Search"));
+      dispatch(increasPagesCount());
     }
   };
 
-  useEffect(() => {
-    setPagesCount(1);
-    return () => {};
-  }, [searchValue]);
+  const textClick = (id: string) => {
+    navigate(`/${id}`);
+  };
 
   return (
     <>
-      {loading && !searchedMovies ? (
-        <h1>Loading...</h1>
-      ) : !searchValue ? (
+      {titleMovies &&
         Array.isArray(titleMovies) &&
         titleMovies.map(
           (item, i) =>
@@ -45,11 +53,11 @@ export const TitleMovies = () => {
                 title={item.Title}
                 image={item.Poster}
                 genre={item.Genre}
-                typographyClick={() => navigate(`/${item.imdbID}`)}
+                typographyClick={() => textClick(item.imdbID)}
               />
             )
-        )
-      ) : (
+        )}
+      {searchedMovies &&
         Array.isArray(searchedMovies) &&
         searchedMovies.map(({ Search }) =>
           Search.map(({ Title, Poster, Year, imdbID }, i) => (
@@ -62,13 +70,16 @@ export const TitleMovies = () => {
                   : "https://www.csaff.org/wp-content/uploads/csaff-no-poster.jpg"
               }
               genre={Year}
-              typographyClick={() => navigate(`/${imdbID}`)}
+              typographyClick={() => textClick(imdbID)}
             />
           ))
-        )
-      )}
+        )}
       {loading && searchedMovies ? (
-        <h1>Loading...</h1>
+        <ActionAreaCard
+          image="https://avatars.mds.yandex.net/i?id=e86de76d33e7d7ac4af69f79985ce648_l-3979482-images-thumbs&n=13"
+          title={`Loading...`}
+          genre={`Please Wait`}
+        />
       ) : (
         !loading &&
         searchedMovies &&
@@ -77,6 +88,7 @@ export const TitleMovies = () => {
           <ActionAreaCard
             isClickable
             onHandleClick={handleClick}
+            image="https://t4.ftcdn.net/jpg/04/31/62/85/360_F_431628534_Q6y86rAXcFiv7Ol5Tsul25aa8Nnt6gsN.jpg"
             title={`To nex 10 movies. Page: ${pagesCount} from ${Math.ceil(
               +searchedMovies[0].totalResults / 10
             )}`}
@@ -88,3 +100,6 @@ export const TitleMovies = () => {
     </>
   );
 };
+function fetchDatatErrorRefreshAction(): any {
+  throw new Error("Function not implemented.");
+}

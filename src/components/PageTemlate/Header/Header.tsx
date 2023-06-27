@@ -1,6 +1,9 @@
 import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { setSearchValue } from "../../../store/useful/actions";
+import {
+  refreshPagesCount,
+  setSearchValue,
+} from "../../../store/useful/actions";
 import {
   fetchDatatRefreshAction,
   fetchMovie,
@@ -12,29 +15,39 @@ import { useNavigate } from "react-router-dom";
 
 export const Header: FC = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate()
-  const { searchValue } = useAppSelector((state) => state.usefuls);
+  const navigate = useNavigate();
 
   let timeout: any = null;
+
   const hendleSearchChange = (value: string) => {
     clearTimeout(timeout);
     dispatch(fetchDatatRefreshAction());
     if (value) {
       timeout = setTimeout(() => {
-        navigate('')
+        navigate("/search");
         dispatch(setSearchValue(value));
-        dispatch(fetchMovie(`&s=${value}`));
+        dispatch(fetchMovie(`&s=${value}`, "Search"));
+        dispatch(refreshPagesCount());
       }, 800);
     } else {
+      navigate("");
       dispatch(setSearchValue(""));
       dispatch(fetchDatatRefreshAction());
+      dispatch(refreshPagesCount());
     }
+  };
+
+  const handleClick = (value: string) => {
+    value && navigate("/search");
   };
 
   return (
     <section className="header">
       <div className="header__search-wrapper">
-        <SearchField onChangeValue={hendleSearchChange} />
+        <SearchField
+          onChangeValue={hendleSearchChange}
+          onInputClick={handleClick}
+        />
       </div>
       <div className="header__ui-wrapper">
         <UserInfo />

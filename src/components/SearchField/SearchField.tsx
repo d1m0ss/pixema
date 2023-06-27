@@ -10,10 +10,12 @@ import IconButton from "@mui/material/IconButton";
 
 interface ISearchField {
   onChangeValue?: (value: string) => void;
+  onInputClick?: (value: any) => void;
 }
 
 export const SearchField: React.FC<ISearchField> = ({
   onChangeValue = () => {},
+  onInputClick = () => {},
 }) => {
   const dispatch = useAppDispatch();
   const handleNodalChange = () => {
@@ -28,6 +30,7 @@ export const SearchField: React.FC<ISearchField> = ({
         onChange={(e) => {
           onChangeValue(e.target.value);
         }}
+        onClick={(e:any) => onInputClick(e.target.value)}
         // style={{ background: "#323537" }}
         sx={{
           background: "#323537",

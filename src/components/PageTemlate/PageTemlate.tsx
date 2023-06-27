@@ -1,10 +1,10 @@
 import { FC, ReactNode, useEffect } from "react";
 import { Header } from "./Header/Header";
 import { Container } from "./Container/Container";
-import "./PageTemlate.scss";
 import { Aside } from "./Aside/Aside";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Filter } from "./Filter/Filter";
+import "./PageTemlate.scss";
 
 interface IPageTemlate {
   children?: ReactNode;

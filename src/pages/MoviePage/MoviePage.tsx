@@ -12,19 +12,21 @@ interface IMoviePage {}
 
 export const MoviePage: FC<IMoviePage> = () => {
   const dispatch = useAppDispatch();
-  const { titleMovies,singleMovie, loading } = useAppSelector((state) => state.movies);
+  const { singleMovie, loading, error } = useAppSelector(
+    (state) => state.movies
+  );
   const { movieId } = useParams();
+
   useEffect(() => {
-    // dispatch(fetchDatatRefreshAction());
-    dispatch(fetchMovie(`&i=${movieId}`));
+    dispatch(fetchMovie(`&i=${movieId}`, "Single"));
   }, []);
-  const movie = singleMovie ? singleMovie : null;
-  titleMovies !== null && console.log(titleMovies[0]);
+  const movie = singleMovie && singleMovie;
 
   return (
     <section className="movie">
-      {loading && <h1>Loading...</h1>}
-      {!loading && movie !== null && (
+      {loading && <h2>Loading...</h2>}
+      {error && <h2>{error}</h2>}
+      {!loading && movie && (
         <>
           <article className="movie__posre-part">
             <div className="movie__poster-wrapper">
@@ -34,7 +36,9 @@ export const MoviePage: FC<IMoviePage> = () => {
           </article>
           <article className="movie__info-part">
             <header className="movie__header-title">
-              <span className="movie__genre">{movie.Genre.split(',').join(' ● ')}</span>
+              <span className="movie__genre">
+                {movie.Genre.split(",").join(" ● ")}
+              </span>
               <h1 className="movie__title">{movie.Title}</h1>
               <div className="movie__info">
                 <span className="movie__score">{+movie.Metascore / 10}</span>

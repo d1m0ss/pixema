@@ -8,11 +8,13 @@ import { Button } from "@mui/material";
 import { PixemaLogo } from "../../../assets/icon/icons";
 import { useAppDispatch } from "../../../store/hooks";
 import { setModalState } from "../../../store/useful/actions";
+import { useNavigate } from "react-router-dom";
 
 interface IAside {}
 
 export const Aside: FC<IAside> = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const handleModalChange = () => {
     dispatch(setModalState());
   };
@@ -35,6 +37,7 @@ export const Aside: FC<IAside> = () => {
           startIcon={<HomeIcon />}
           style={linksStyle}
           sx={{ ...linksStyle, color: "#80858B" }}
+          onClick={() => navigate("")}
         >
           Home
         </Button>
@@ -43,6 +46,7 @@ export const Aside: FC<IAside> = () => {
           startIcon={<WhatshotIcon />}
           style={linksStyle}
           sx={{ ...linksStyle, color: "#80858B" }}
+          onClick={() => navigate("/trends")}
         >
           Trends
         </Button>
@@ -51,6 +55,7 @@ export const Aside: FC<IAside> = () => {
           startIcon={<BookmarkIcon />}
           style={linksStyle}
           sx={{ ...linksStyle, color: "#80858B" }}
+          onClick={() => navigate("/favorites")}
         >
           Favorites
         </Button>
