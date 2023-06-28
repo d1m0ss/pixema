@@ -21,9 +21,9 @@ export const Header: FC = () => {
 
   const hendleSearchChange = (value: string) => {
     clearTimeout(timeout);
-    dispatch(fetchDatatRefreshAction());
     if (value) {
       timeout = setTimeout(() => {
+        dispatch(fetchDatatRefreshAction());
         navigate("/search");
         dispatch(setSearchValue(value));
         dispatch(fetchMovie(`&s=${value}`, "Search"));

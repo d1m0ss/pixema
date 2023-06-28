@@ -69,7 +69,11 @@ export const moviesReducer = (
         ...state,
         loading: false,
         favoriteMovie: Array.isArray(state.favoriteMovie)
-          ? [...state.favoriteMovie, action.payload.data]
+          ? state.favoriteMovie.find(
+              (item) => item.imdbID === action.payload.data.imdbID
+            )
+            ? state.favoriteMovie
+            : [...state.favoriteMovie, action.payload.data]
           : [action.payload.data],
       };
     case FETCH_DATA_REFRESH:

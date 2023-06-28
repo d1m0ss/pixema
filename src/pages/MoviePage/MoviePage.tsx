@@ -28,24 +28,27 @@ export const MoviePage: FC<IMoviePage> = () => {
 
   const movie = singleMovie;
 
-  const [isBookmark, setIsBookmark] = useState(
-    movie && favoriteMoviesIds.includes(movie.imdbID) ? true : false
-  );
+  const [isBookmark, setIsBookmark] = useState(false);
 
-  const handleBookmarkToggle = () => {    
-    movie &&
-      (!favoriteMoviesIds.includes(movie.imdbID)
-        ? dispatch(setFavoriteMoviesId(movie.imdbID))
-        : dispatch(removeFavoriteMoviesId(movie.imdbID)));
-    movie && !favoriteMoviesIds.includes(movie.imdbID)
-      ? setIsBookmark(true)
-      : setIsBookmark(false);
-    isBookmark &&
-      movie &&
+  const handleBookmarkToggle = () => {
+    if (movie && !favoriteMoviesIds.includes(movie.imdbID)) {
+      dispatch(setFavoriteMoviesId(movie.imdbID));
+      setIsBookmark(true);
+    } else {
+      movie && dispatch(removeFavoriteMoviesId(movie.imdbID));
+      setIsBookmark(false);
+    }
+
+    if (isBookmark && movie) {
       dispatch(fetchDatatRemoveFavoriteMovieAction(movie.imdbID));
+      setIsBookmark(false);
+    }
   };
 
   useEffect(() => {
+    movie && movieId && favoriteMoviesIds.includes(movieId)
+      ? setIsBookmark(true)
+      : setIsBookmark(false);
     dispatch(fetchMovie(`&i=${movieId}`, "Single"));
   }, []);
 
@@ -53,7 +56,7 @@ export const MoviePage: FC<IMoviePage> = () => {
     <section className="movie">
       {loading && !movie && <h2>Loading...</h2>}
       {error && <h2>{error}</h2>}
-      {(movie || !loading) && movie && (
+      {(!loading || movie) && movie && movie.imdbID === movieId && (
         <>
           <article className="movie__posre-part">
             <div className="movie__poster-wrapper">

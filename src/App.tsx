@@ -13,12 +13,13 @@ export const App = () => {
   const { favoriteMovie } = useAppSelector((state) => state.movies);
   useEffect(() => {
     titleMoviesMock.forEach((movieID) => {
-      // dispatch(fetchMovie(`&i=${movieID}`, "Title"));
+      dispatch(fetchMovie(`&i=${movieID}`, "Title"));
     });
     trendMoviesMock.forEach((movieID) => {
-      // dispatch(fetchMovie(`&i=${movieID}`, "Trend"));
+      dispatch(fetchMovie(`&i=${movieID}`, "Trend"));
     });
   }, []);
+
   useEffect(() => {
     favoriteMoviesIds &&
       favoriteMoviesIds.forEach((movieID) => {
