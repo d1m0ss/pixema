@@ -87,7 +87,12 @@ export const moviesReducer = (
           state.favoriteMovie &&
           state.favoriteMovie.filter(
             (movie) => movie.imdbID !== action.payload.id
-          ),
+          ).length === 0
+            ? null
+            : state.favoriteMovie &&
+              state.favoriteMovie.filter(
+                (movie) => movie.imdbID !== action.payload.id
+              ),
       };
     default:
       return state;

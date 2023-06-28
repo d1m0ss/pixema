@@ -32,7 +32,7 @@ export const MoviePage: FC<IMoviePage> = () => {
     movie && favoriteMoviesIds.includes(movie.imdbID) ? true : false
   );
 
-  const handleBookmarkToggle = () => {
+  const handleBookmarkToggle = () => {    
     movie &&
       (!favoriteMoviesIds.includes(movie.imdbID)
         ? dispatch(setFavoriteMoviesId(movie.imdbID))
@@ -40,7 +40,7 @@ export const MoviePage: FC<IMoviePage> = () => {
     movie && !favoriteMoviesIds.includes(movie.imdbID)
       ? setIsBookmark(true)
       : setIsBookmark(false);
-    !isBookmark &&
+    isBookmark &&
       movie &&
       dispatch(fetchDatatRemoveFavoriteMovieAction(movie.imdbID));
   };
