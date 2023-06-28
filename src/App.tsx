@@ -9,14 +9,22 @@ import { Router } from "./routes/Router";
 
 export const App = () => {
   const dispatch = useAppDispatch();
+  const { favoriteMoviesIds } = useAppSelector((state) => state.usefuls);
+  const { favoriteMovie } = useAppSelector((state) => state.movies);
   useEffect(() => {
     titleMoviesMock.forEach((movieID) => {
-      dispatch(fetchMovie(`&i=${movieID}`, "Title"));
+      // dispatch(fetchMovie(`&i=${movieID}`, "Title"));
     });
     trendMoviesMock.forEach((movieID) => {
-      dispatch(fetchMovie(`&i=${movieID}`, "Trend"));
+      // dispatch(fetchMovie(`&i=${movieID}`, "Trend"));
     });
   }, []);
+  useEffect(() => {
+    favoriteMoviesIds &&
+      favoriteMoviesIds.forEach((movieID) => {
+        dispatch(fetchMovie(`&i=${movieID}`, "Favorite"));
+      });
+  }, [favoriteMoviesIds]);
 
   return (
     <div className="app">

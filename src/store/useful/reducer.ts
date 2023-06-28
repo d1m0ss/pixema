@@ -3,6 +3,8 @@ import {
   SET_MODAL_STATE,
   INCREAS_PAGES_COUNT,
   REFRESH_PAGES_COUNT,
+  SET_FAVORITE_MOVIES_ID,
+  REMOVE_FAVORITE_MOVIES_ID,
 } from "./actionTypes";
 import { ActionTypes, ISearchState, ISetModalState } from "./interfaces";
 
@@ -10,6 +12,7 @@ const initialState: ISearchState = {
   searchValue: "",
   modalState: false,
   pagesCount: 1,
+  favoriteMoviesIds: [],
 };
 
 export const searchReducer = (
@@ -25,6 +28,20 @@ export const searchReducer = (
       return { ...state, pagesCount: state.pagesCount + 1 };
     case REFRESH_PAGES_COUNT:
       return { ...state, pagesCount: 1 };
+    case SET_FAVORITE_MOVIES_ID:
+      return {
+        ...state,
+        favoriteMoviesIds: state.favoriteMoviesIds.includes(action.payload.id)
+          ? state.favoriteMoviesIds
+          : [...state.favoriteMoviesIds, action.payload.id],
+      };
+    case REMOVE_FAVORITE_MOVIES_ID:
+      return {
+        ...state,
+        favoriteMoviesIds: state.favoriteMoviesIds.filter(
+          (id) => id !== action.payload.id
+        ),
+      };
     default:
       return state;
   }

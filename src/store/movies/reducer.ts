@@ -1,9 +1,10 @@
 import {
   FETCH_DATA_ERROR,
-  FETCH_DATA_ERROR_REFRESH,
   FETCH_DATA_REFRESH,
+  FETCH_DATA_REMOVE_FAVORITE_MOVIE,
   FETCH_DATA_REQUEST,
   FETCH_DATA_SUCCESS,
+  FETCH_DATA_SUCCESS_FAVORITE,
   FETCH_DATA_SUCCESS_SEARCH,
   FETCH_DATA_SUCCESS_SINGLE,
   FETCH_DATA_SUCCESS_TITLE,
@@ -14,6 +15,7 @@ import { IMoviesState, ActionTypes } from "./interfaces";
 const initialState: IMoviesState = {
   loading: false,
   searchedMovies: null,
+  favoriteMovie: null,
   singleMovie: null,
   titleMovies: null,
   trendMovies: null,
@@ -62,6 +64,14 @@ export const moviesReducer = (
           ? [...state.trendMovies, action.payload.data]
           : [action.payload.data],
       };
+    case FETCH_DATA_SUCCESS_FAVORITE:
+      return {
+        ...state,
+        loading: false,
+        favoriteMovie: Array.isArray(state.favoriteMovie)
+          ? [...state.favoriteMovie, action.payload.data]
+          : [action.payload.data],
+      };
     case FETCH_DATA_REFRESH:
       return {
         ...state,
@@ -70,6 +80,15 @@ export const moviesReducer = (
       };
     case FETCH_DATA_ERROR:
       return { ...state, error: action.payload.error, loading: false };
+    case FETCH_DATA_REMOVE_FAVORITE_MOVIE:
+      return {
+        ...state,
+        favoriteMovie:
+          state.favoriteMovie &&
+          state.favoriteMovie.filter(
+            (movie) => movie.imdbID !== action.payload.id
+          ),
+      };
     default:
       return state;
   }

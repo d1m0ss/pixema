@@ -3,12 +3,15 @@ import {
   SET_MODAL_STATE,
   INCREAS_PAGES_COUNT,
   REFRESH_PAGES_COUNT,
+  SET_FAVORITE_MOVIES_ID,
+  REMOVE_FAVORITE_MOVIES_ID,
 } from "./actionTypes";
 
 export interface ISearchState {
   searchValue: string;
   modalState: boolean;
   pagesCount: number;
+  favoriteMoviesIds: string[];
 }
 
 export interface ISetSearchValue {
@@ -30,8 +33,20 @@ export interface IRefreshPages {
   type: typeof REFRESH_PAGES_COUNT;
 }
 
+export interface ISetFavoriteMoviesId {
+  type: typeof SET_FAVORITE_MOVIES_ID;
+  payload: { id: string };
+}
+
+export interface IRemoveFavoriteMoviesId {
+  type: typeof REMOVE_FAVORITE_MOVIES_ID;
+  payload: { id: string };
+}
+
 export type ActionTypes =
   | ISetSearchValue
   | ISetModalState
   | IIncreasPages
-  | IRefreshPages;
+  | IRefreshPages
+  | ISetFavoriteMoviesId
+  | IRemoveFavoriteMoviesId;

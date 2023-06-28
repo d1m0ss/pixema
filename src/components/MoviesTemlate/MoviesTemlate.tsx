@@ -96,7 +96,6 @@ export const MoviesTemlate: FC<IMoviesTemlate> = ({
           />
         )
       )}
-      {!!error && error}
     </>
   );
 };

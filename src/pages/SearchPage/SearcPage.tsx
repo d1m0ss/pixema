@@ -4,12 +4,18 @@ import { useAppSelector } from "../../store/hooks";
 import "./SearchPage.scss";
 
 export const SearchPage: FC = () => {
-  const { searchedMovies, loading } = useAppSelector((state) => state.movies);
+  const { searchedMovies, loading, error } = useAppSelector(
+    (state) => state.movies
+  );
 
   return (
     <>
       {loading && !searchedMovies && <h2>Loading...</h2>}
-      {!loading && !searchedMovies && <h2>Search field is empty...</h2>}
+      {error && <h2>{error}</h2>}
+      {!error && !loading && !searchedMovies && (
+        <h2>Search field is empty...</h2>
+      )}
+      
       <MoviesTemlate searchedMovies={searchedMovies} />
     </>
   );

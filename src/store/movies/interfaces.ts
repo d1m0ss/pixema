@@ -1,15 +1,23 @@
 import {
   FETCH_DATA_ERROR,
   FETCH_DATA_REFRESH,
+  FETCH_DATA_REMOVE_FAVORITE_MOVIE,
   FETCH_DATA_REQUEST,
   FETCH_DATA_SUCCESS,
+  FETCH_DATA_SUCCESS_FAVORITE,
   FETCH_DATA_SUCCESS_SEARCH,
   FETCH_DATA_SUCCESS_SINGLE,
   FETCH_DATA_SUCCESS_TITLE,
   FETCH_DATA_SUCCESS_TREND,
 } from "./actionTypes";
 
-export type MovieType = "Title" | "Trend" | "Search" | "Single" | null;
+export type MovieType =
+  | "Title"
+  | "Trend"
+  | "Search"
+  | "Single"
+  | "Favorite"
+  | null;
 
 export interface IMovie {
   Title: string;
@@ -61,9 +69,10 @@ export interface IRating {
 export interface IMoviesState {
   loading: boolean;
   searchedMovies: ISearchMovie[] | null;
-  singleMovie: IMovie | null;
+  favoriteMovie: IMovie[] | null;
   titleMovies: IMovie[] | null;
   trendMovies: IMovie[] | null;
+  singleMovie: IMovie | null;
   error: string | null;
 }
 export interface IFetchDataRequestAction {
@@ -98,6 +107,13 @@ export interface IFetchDataSuccessTrendAction {
   };
 }
 
+export interface IFetchDataSuccessFavoriteAction {
+  type: typeof FETCH_DATA_SUCCESS_FAVORITE;
+  payload: {
+    data: IMovie;
+  };
+}
+
 export interface IFetchDataSuccessSearchAction {
   type: typeof FETCH_DATA_SUCCESS_SEARCH;
   payload: {
@@ -116,6 +132,13 @@ export interface IFetchDataErrorAction {
   };
 }
 
+export interface IFetchDataRemoveFavoriteMovieAction {
+  type: typeof FETCH_DATA_REMOVE_FAVORITE_MOVIE;
+  payload: {
+    id: string;
+  };
+}
+
 export type ActionTypes =
   | IFetchDataRequestAction
   | IFetchDataSuccessAction
@@ -124,4 +147,6 @@ export type ActionTypes =
   | IFetchDataSuccessTitleAction
   | IFetchDataSuccessSingleAction
   | IFetchDataSuccessTrendAction
-  | IFetchDataSuccessSearchAction;
+  | IFetchDataSuccessFavoriteAction
+  | IFetchDataSuccessSearchAction
+  | IFetchDataRemoveFavoriteMovieAction;

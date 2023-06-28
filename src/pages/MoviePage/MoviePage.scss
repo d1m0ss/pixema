@@ -25,6 +25,13 @@
     font: $S1-4Decktop;
     margin-bottom: 40px;
   }
+  &__buttons-wrapper {
+    width: 100%;
+    height: 56px;
+
+    border-radius: 10px;
+    overflow: hidden;
+  }
   &__score {
   }
   &__footer-details {

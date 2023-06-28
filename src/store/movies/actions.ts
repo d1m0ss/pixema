@@ -2,8 +2,10 @@ import { ThunkDispatch } from "redux-thunk";
 import {
   FETCH_DATA_ERROR,
   FETCH_DATA_REFRESH,
+  FETCH_DATA_REMOVE_FAVORITE_MOVIE,
   FETCH_DATA_REQUEST,
   FETCH_DATA_SUCCESS,
+  FETCH_DATA_SUCCESS_FAVORITE,
   FETCH_DATA_SUCCESS_SEARCH,
   FETCH_DATA_SUCCESS_SINGLE,
   FETCH_DATA_SUCCESS_TITLE,
@@ -13,8 +15,10 @@ import {
   ActionTypes,
   IFetchDataErrorAction,
   IFetchDataRefreshAction,
+  IFetchDataRemoveFavoriteMovieAction,
   IFetchDataRequestAction,
   IFetchDataSuccessAction,
+  IFetchDataSuccessFavoriteAction,
   IFetchDataSuccessSearchAction,
   IFetchDataSuccessSingleAction,
   IFetchDataSuccessTitleAction,
@@ -63,8 +67,22 @@ const fetchDatatSuccessTrendAction = (
   payload: { data },
 });
 
+const fetchDatatSuccessFavoriteAction = (
+  data: any
+): IFetchDataSuccessFavoriteAction => ({
+  type: FETCH_DATA_SUCCESS_FAVORITE,
+  payload: { data },
+});
+
 export const fetchDatatRefreshAction = (): IFetchDataRefreshAction => ({
   type: FETCH_DATA_REFRESH,
+});
+
+export const fetchDatatRemoveFavoriteMovieAction = (
+  id: string
+): IFetchDataRemoveFavoriteMovieAction => ({
+  type: FETCH_DATA_REMOVE_FAVORITE_MOVIE,
+  payload: { id },
 });
 
 const fetchDatatErrorAction = (error: string): IFetchDataErrorAction => ({
@@ -93,6 +111,9 @@ export const fetchMovie =
             break;
           case "Trend":
             dispatch(fetchDatatSuccessTrendAction(data));
+            break;
+          case "Favorite":
+            dispatch(fetchDatatSuccessFavoriteAction(data));
             break;
           default:
             break;
