@@ -13,11 +13,6 @@ export const Router: FC = () => (
     <Route path="/trends" element={<TrendsPage />} />
     <Route path="/favorites" element={<FavoritesPage />} />
     <Route path="/:movieId" element={<MoviePage />} />
-    {/* <Route path="/posts/search" element={<SearchPage />} /> */}
-    {/* <Route path="/posts/sign-in" element={<SignInPost />} /> */}
-    {/* <Route path="/posts/sign-up" element={<SignUpPage />} /> */}
-    {/* <Route path="/posts/registration-confirm" element={<RegistrationConfirmPage />} /> */}
-    {/* <Route path="/posts/success" element={<SuccessPage />} /> */}
     <Route path="*" element={<h1>Такой страницы не существует</h1>} />
   </Routes>
 );

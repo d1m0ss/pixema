@@ -74,6 +74,7 @@ export const MoviesTemlate: FC<IMoviesTemlate> = ({
             />
           ))
         )}
+
       {loading && searchedMovies ? (
         <ActionAreaCard
           image="https://avatars.mds.yandex.net/i?id=e86de76d33e7d7ac4af69f79985ce648_l-3979482-images-thumbs&n=13"

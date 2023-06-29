@@ -12,6 +12,7 @@ export const Input: React.FC<IInput> = ({ title }) => {
       component="div"
       sx={{
         "& > :not(style)": { width: "100%" },
+        marginTop:'8px',
         background: "#323537",
         borderRadius: 2,
         label: { color: "white" },

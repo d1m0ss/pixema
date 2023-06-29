@@ -5,6 +5,7 @@ import {
   REFRESH_PAGES_COUNT,
   SET_FAVORITE_MOVIES_ID,
   REMOVE_FAVORITE_MOVIES_ID,
+  SET_MODAL_SHARE_STATE,
 } from "./actionTypes";
 import {
   ISetSearchValue,
@@ -13,6 +14,7 @@ import {
   IIncreasPages,
   ISetFavoriteMoviesId,
   IRemoveFavoriteMoviesId,
+  ISetModalShareState,
 } from "./interfaces";
 
 export const setSearchValue = (value: string): ISetSearchValue => {
@@ -21,6 +23,10 @@ export const setSearchValue = (value: string): ISetSearchValue => {
 
 export const setModalState = (): ISetModalState => {
   return { type: SET_MODAL_STATE };
+};
+
+export const setModalShareState = (): ISetModalShareState => {
+  return { type: SET_MODAL_SHARE_STATE};
 };
 
 export const increasPagesCount = (): IIncreasPages => {

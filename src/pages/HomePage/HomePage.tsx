@@ -11,7 +11,7 @@ export const HomePage: FC = () => {
     <>
       {loading && !titleMovies && <h2>Loading...</h2>}
       {error && <h2>{error}</h2>}
-
+      {!titleMovies && <h2>Out of movies</h2>}
       <MoviesTemlate titleMovies={titleMovies} />
     </>
   );

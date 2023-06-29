@@ -5,12 +5,14 @@ import {
   REFRESH_PAGES_COUNT,
   SET_FAVORITE_MOVIES_ID,
   REMOVE_FAVORITE_MOVIES_ID,
+  SET_MODAL_SHARE_STATE,
 } from "./actionTypes";
 import { ActionTypes, ISearchState, ISetModalState } from "./interfaces";
 
 const initialState: ISearchState = {
   searchValue: "",
   modalState: false,
+  modalShareState: false,
   pagesCount: 1,
   favoriteMoviesIds: [],
 };
@@ -24,6 +26,8 @@ export const searchReducer = (
       return { ...state, searchValue: action.payload.value };
     case SET_MODAL_STATE:
       return { ...state, modalState: !state.modalState };
+    case SET_MODAL_SHARE_STATE:
+      return { ...state, modalShareState: !state.modalShareState };
     case INCREAS_PAGES_COUNT:
       return { ...state, pagesCount: state.pagesCount + 1 };
     case REFRESH_PAGES_COUNT:

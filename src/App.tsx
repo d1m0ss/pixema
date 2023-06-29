@@ -23,7 +23,7 @@ export const App = () => {
   useEffect(() => {
     favoriteMoviesIds &&
       favoriteMoviesIds.forEach((movieID) => {
-        // dispatch(fetchMovie(`&i=${movieID}`, "Favorite"));
+        dispatch(fetchMovie(`&i=${movieID}`, "Favorite"));
       });
   }, [favoriteMoviesIds]);
 

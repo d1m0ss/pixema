@@ -5,11 +5,13 @@ import {
   REFRESH_PAGES_COUNT,
   SET_FAVORITE_MOVIES_ID,
   REMOVE_FAVORITE_MOVIES_ID,
+  SET_MODAL_SHARE_STATE,
 } from "./actionTypes";
 
 export interface ISearchState {
   searchValue: string;
   modalState: boolean;
+  modalShareState: boolean;
   pagesCount: number;
   favoriteMoviesIds: string[];
 }
@@ -23,6 +25,10 @@ export interface ISetSearchValue {
 
 export interface ISetModalState {
   type: typeof SET_MODAL_STATE;
+}
+
+export interface ISetModalShareState {
+  type: typeof SET_MODAL_SHARE_STATE;
 }
 
 export interface IIncreasPages {
@@ -46,6 +52,7 @@ export interface IRemoveFavoriteMoviesId {
 export type ActionTypes =
   | ISetSearchValue
   | ISetModalState
+  | ISetModalShareState
   | IIncreasPages
   | IRefreshPages
   | ISetFavoriteMoviesId

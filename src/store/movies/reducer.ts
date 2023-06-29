@@ -80,7 +80,7 @@ export const moviesReducer = (
       return {
         ...state,
         loading: false,
-        searchedMovies: null,
+        singleMovie: null,
       };
     case FETCH_DATA_ERROR:
       return { ...state, error: action.payload.error, loading: false };
