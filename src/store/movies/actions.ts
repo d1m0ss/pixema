@@ -23,7 +23,6 @@ import {
   IFetchDataSuccessSingleAction,
   IFetchDataSuccessTitleAction,
   IFetchDataSuccessTrendAction,
-  IMovie,
   MovieType,
 } from "./interfaces";
 import { RootState } from "../store";
@@ -116,6 +115,7 @@ export const fetchMovie =
             dispatch(fetchDatatSuccessFavoriteAction(data));
             break;
           default:
+            dispatch(fetchDatatSuccessAction(data));
             break;
         }
       }
