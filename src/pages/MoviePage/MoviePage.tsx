@@ -53,6 +53,9 @@ export const MoviePage: FC<IMoviePage> = () => {
     movie && movieId && favoriteMoviesIds.includes(movieId)
       ? setIsBookmark(true)
       : setIsBookmark(false);
+  }, [singleMovie]);
+
+  useEffect(() => {
     dispatch(fetchMovie(`&i=${movieId}`, "Single"));
   }, []);
 

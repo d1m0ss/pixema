@@ -24,13 +24,13 @@ export const Header: FC = () => {
     if (value) {
       timeout = setTimeout(() => {
         dispatch(fetchDatatRefreshAction());
-        navigate("/search");
+        navigate("/pixema/search");
         dispatch(setSearchValue(value));
         dispatch(fetchMovie(`&s=${value}`, "Search"));
         dispatch(refreshPagesCount());
       }, 800);
     } else {
-      navigate("");
+      navigate("pixema");
       dispatch(setSearchValue(""));
       dispatch(fetchDatatRefreshAction());
       dispatch(refreshPagesCount());
@@ -38,7 +38,7 @@ export const Header: FC = () => {
   };
 
   const handleClick = (value: string) => {
-    value && navigate("/search");
+    value && navigate("search");
   };
 
   return (

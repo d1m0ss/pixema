@@ -24,20 +24,24 @@ export const ActionAreaCard: FC<IActionAreaCard> = ({
 }) => {
   return (
     <Card
-      sx={{ maxWidth: "266px", backgroundColor: "transparent", color: "white" }}
+      sx={{ width: "266px", backgroundColor: "transparent", color: "white" }}
       onClick={onHandleClick}
       className={isClickable ? "Clickable" : ""}
     >
-      <CardMedia component="img" height="357px" image={image} alt="poster" />
+      <CardMedia
+        component="img"
+        height="357px"
+        sx={{ borderRadius: "20px" }}
+        image={image}
+        alt="poster"
+      />
       <CardContent>
         <Typography
           gutterBottom
           variant="h5"
           component="div"
           onClick={typographyClick}
-          sx={{ cursor: "pointer",
-        '&:hover': {color:'#917cff'}
-        }}
+          sx={{ cursor: "pointer", "&:hover": { color: "#917cff" } }}
         >
           {title}
         </Typography>

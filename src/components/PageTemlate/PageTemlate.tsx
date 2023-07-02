@@ -5,6 +5,7 @@ import { Aside } from "./Aside/Aside";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Filter } from "./Filter/Filter";
 import "./PageTemlate.scss";
+import { Outlet } from "react-router-dom";
 
 interface IPageTemlate {
   children?: ReactNode;
@@ -12,12 +13,16 @@ interface IPageTemlate {
 
 export const PageTemlate: FC<IPageTemlate> = ({ children }) => {
   const { modalState } = useAppSelector((state) => state.usefuls);
+  
   return (
     <section className="page-template">
       <Aside />
       <article className="page-template__content">
         <Header />
-        <Container>{children}</Container>
+        <Container>
+          {children}
+          <Outlet />
+        </Container>
         {modalState && <Filter />}
       </article>
     </section>

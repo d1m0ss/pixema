@@ -66,7 +66,7 @@ const fetchDatatSuccessTrendAction = (
   payload: { data },
 });
 
-const fetchDatatSuccessFavoriteAction = (
+export const fetchDatatSuccessFavoriteAction = (
   data: any
 ): IFetchDataSuccessFavoriteAction => ({
   type: FETCH_DATA_SUCCESS_FAVORITE,

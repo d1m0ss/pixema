@@ -38,11 +38,11 @@ export const MoviesTemlate: FC<IMoviesTemlate> = ({
   };
 
   const textClick = (id: string) => {
-    navigate(`/${id}`);
+    navigate(`${id}`);
   };
 
   return (
-    <>
+    <article className="movies">
       {titleMovies &&
         Array.isArray(titleMovies) &&
         titleMovies.map(
@@ -97,7 +97,7 @@ export const MoviesTemlate: FC<IMoviesTemlate> = ({
           />
         )
       )}
-    </>
+    </article>
   );
 };
 function fetchDatatErrorRefreshAction(): any {

@@ -4,7 +4,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { PixemaLogo } from "../../../assets/icon/icons";
 import { useAppDispatch } from "../../../store/hooks";
 import { setModalState } from "../../../store/useful/actions";
@@ -29,7 +29,9 @@ export const Aside: FC<IAside> = () => {
   return (
     <aside className="container__aside">
       <article className="container__logo-wrapper">
-        <PixemaLogo />
+        <IconButton onClick={()=>navigate('/pixema')}>
+          <PixemaLogo />
+        </IconButton>
       </article>
       <article className="container__buttons-group">
         <Button
@@ -37,7 +39,9 @@ export const Aside: FC<IAside> = () => {
           startIcon={<HomeIcon />}
           style={linksStyle}
           sx={{ ...linksStyle, color: "#80858B" }}
-          onClick={() => navigate("")}
+          onClick={() => {
+            navigate("home");
+          }}
         >
           Home
         </Button>
@@ -46,7 +50,7 @@ export const Aside: FC<IAside> = () => {
           startIcon={<WhatshotIcon />}
           style={linksStyle}
           sx={{ ...linksStyle, color: "#80858B" }}
-          onClick={() => navigate("/trends")}
+          onClick={() => navigate("trends")}
         >
           Trends
         </Button>
@@ -55,7 +59,7 @@ export const Aside: FC<IAside> = () => {
           startIcon={<BookmarkIcon />}
           style={linksStyle}
           sx={{ ...linksStyle, color: "#80858B" }}
-          onClick={() => navigate("/favorites")}
+          onClick={() => navigate("favorites")}
         >
           Favorites
         </Button>
