@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import "./MoviePage.scss";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Table } from "./Table/Table";
 import ShareIcon from "@mui/icons-material/Share";
@@ -17,18 +17,24 @@ import {
   setModalShareState,
 } from "../../store/useful/actions";
 import { ModalShare } from "../../components/ModalShare/ModalShare";
+import { Score } from "../../components/Score/Score";
+import { IMDbLogo } from "../../assets/icon/icons";
+import { ActionAreaCard } from "../../components/Card/Card";
 
 interface IMoviePage {}
 
 export const MoviePage: FC<IMoviePage> = () => {
   const dispatch = useAppDispatch();
-  const { singleMovie, loading, error } = useAppSelector(
-    (state) => state.movies
-  );
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { singleMovie, loading, error, titleMovies, trendMovies } =
+    useAppSelector((state) => state.movies);
   const { favoriteMoviesIds, modalShareState } = useAppSelector(
     (state) => state.usefuls
   );
   const { movieId } = useParams();
+
+  console.log(location.pathname.includes('pixema'));
 
   const movie = singleMovie;
 
@@ -59,12 +65,18 @@ export const MoviePage: FC<IMoviePage> = () => {
     dispatch(fetchMovie(`&i=${movieId}`, "Single"));
   }, []);
 
+  const textClick = (id: string) => {
+    navigate(`/${id}`);
+  };
+
   return (
     <>
       <section className="movie">
-        {loading && !movie
-          ? <h2>Loading...</h2>
-          : movie && movieId !== movie.imdbID && <h2>Loading...</h2>}
+        {loading && !movie ? (
+          <h2>Loading...</h2>
+        ) : (
+          movie && movieId !== movie.imdbID && <h2>Loading...</h2>
+        )}
         {error && <h2>{error}</h2>}
         {(!loading || movie) && movie && movie.imdbID === movieId && (
           <>
@@ -120,8 +132,11 @@ export const MoviePage: FC<IMoviePage> = () => {
                 </span>
                 <h1 className="movie__title">{movie.Title}</h1>
                 <div className="movie__info">
-                  <span className="movie__score">{+movie.Metascore / 10}</span>
-                  <span className="movie__imdb-score">{movie.imdbRating}</span>
+                  <Score>{`${+movie.imdbRating}`}</Score>
+                  <span className="movie__imdb-score">
+                    <IMDbLogo />
+                    {movie.imdbRating}
+                  </span>
                   <span className="movie__runtime">{movie.Runtime}</span>
                 </div>
               </header>
@@ -137,6 +152,36 @@ export const MoviePage: FC<IMoviePage> = () => {
                   Writer={movie.Writer}
                   Year={movie.Year}
                 />
+                <section className="movie__rec">
+                  <header className="movie__rec-header">
+                    <h2 className="movie__rec-title">Recommendations</h2>
+                  </header>
+                  <article className="movie__rec-slider-wrp">
+                    <article className="movie__rec-slider-transporter">
+                      <article className="movie__rec-slider">
+                        {titleMovies &&
+                          trendMovies &&
+                          [...titleMovies, ...trendMovies].map(
+                            (
+                              { Title, Poster, Genre, imdbRating, imdbID },
+                              i
+                            ) => (
+                              <ActionAreaCard
+                                title={Title}
+                                genre={Genre}
+                                image={Poster}
+                                key={i}
+                                score={imdbRating}
+                                isClickable
+                                typographyClick={() => textClick(imdbID)}
+                                onHandleClick={() => textClick(imdbID)}
+                              />
+                            )
+                          )}
+                      </article>
+                    </article>
+                  </article>
+                </section>
               </footer>
             </article>
           </>

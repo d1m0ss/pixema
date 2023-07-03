@@ -3,14 +3,10 @@ import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
-import PersonAdd from "@mui/icons-material/PersonAdd";
-import Settings from "@mui/icons-material/Settings";
-import Logout from "@mui/icons-material/Logout";
 
 export const UserInfo = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -33,25 +29,44 @@ export const UserInfo = () => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 56, height: 56 }}>UN</Avatar>
+            <Avatar
+              sx={{
+                width: 56,
+                height: 56,
+                borderRadius: "10px",
+                backgroundColor: "#7B61FF",
+                font: 'normal 700 20px/24px "Exo 2"',
+                letterSpacing: "1px",
+              }}
+            >
+              UN
+            </Avatar>
           </IconButton>
         </Tooltip>
-        <Typography sx={{ mr: 1 }}>User</Typography>
-        <Typography sx={{ mr: 1 }}>Name</Typography>
+        <Typography sx={{ mr: 1, font: 'normal 600 16px/24px "Exo 2"' }}>
+          User
+        </Typography>
+        <Typography sx={{ mr: 1, font: 'normal 600 16px/24px "Exo 2"' }}>
+          Name
+        </Typography>
       </Box>
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
         open={open}
+        sx={{ ml: "115px" }}
         onClose={handleClose}
         onClick={handleClose}
         PaperProps={{
           elevation: 0,
           sx: {
+            width: "175px",
             overflow: "visible",
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             right: 0,
             mt: 1.5,
+            backgroundColor: "#242426",
+            color: "white",
             "& .MuiAvatar-root": {
               width: 32,
               height: 32,
@@ -63,43 +78,22 @@ export const UserInfo = () => {
               display: "block",
               position: "absolute",
               top: 0,
-              right: 126,
+              right: 145,
               width: 10,
               height: 10,
               bgcolor: "background.paper",
               transform: "translateY(-50%) rotate(45deg)",
               zIndex: 0,
+              backgroundColor: "#242426",
             },
           },
         }}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> My account
-        </MenuItem>
+        <MenuItem onClick={handleClose}>Edit profile</MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
+        <MenuItem onClick={handleClose}>Log Out</MenuItem>
       </Menu>
     </React.Fragment>
   );

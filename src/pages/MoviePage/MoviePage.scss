@@ -19,8 +19,10 @@
   &__info {
     margin-top: 24px;
     margin-bottom: 40px;
+    align-items: center;
     display: flex;
     column-gap: 20px;
+    font: $S1-3Decktop;
   }
   &__description {
     font: $S1-4Decktop;
@@ -33,18 +35,42 @@
     border-radius: 10px;
     overflow: hidden;
   }
-  &__score {
-  }
   &__footer-details {
   }
   &__header-title {
   }
   &__imdb-score {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background-color: $graphite;
+  }
+  &__runtime {
+    padding: 2px 8px;
+    border-radius: 6px;
+    background-color: $graphite;
   }
   &__info-part {
   }
   &__posre-part {
   }
-  &__runtime {
+  &__rec {
+    margin-top: 56px;
+    &-slider {
+      width: max-content;
+      display: flex;
+      column-gap: 40px;
+      &-wrp {
+        margin-top: 40px;
+        width: 918.4px;
+        overflow: hidden;
+        overflow-x: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+    }
   }
 }

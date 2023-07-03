@@ -1,22 +1,39 @@
 import { FC, ReactNode } from "react";
 import "./Forma.scss";
 import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface IForma {
   children?: ReactNode;
   name?: string;
-  type: "Sign In" | "Sign Up" | "Reset password" | "New password";
+  type:
+    | "Sign In"
+    | "Sign Up"
+    | "Reset password"
+    | "New password"
+    | "Registration Confirm";
+  isDisabled?: boolean;
+  text?: string;
+  handleSubmit?: () => void;
 }
 
-export const Forma: FC<IForma> = ({ children, name = "Forma", type }) => {
+export const Forma: FC<IForma> = ({
+  children,
+  name = "Forma",
+  type,
+  text,
+  isDisabled = false,
+  handleSubmit = () => {},
+}) => {
+  const navigate = useNavigate();
   return (
-    <form action="" method="post" className="forma">
+    <form className="forma">
       <fieldset className="forma__field">
         <legend className="forma__legend">{name}</legend>
         <article className="forma__body">
           {
             <>
+              {text && <span className="forma__text">{text}</span>}
               {children}
               {type === "Sign In" && (
                 <Button
@@ -26,14 +43,19 @@ export const Forma: FC<IForma> = ({ children, name = "Forma", type }) => {
                     textTransform: "capitalize",
                     color: "#80858B",
                   }}
+                  onClick={() => navigate("/authorisation/reset-password")}
                 >
                   Forgot password?
                 </Button>
               )}
               {
                 <Button
-                  type="submit"
-                  onClick={(e) => e.preventDefault()}
+                  disabled={isDisabled}
+                  type="reset"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleSubmit();
+                  }}
                   sx={{
                     "&:hover": {
                       color: "#7B61FF",
@@ -53,19 +75,21 @@ export const Forma: FC<IForma> = ({ children, name = "Forma", type }) => {
               {type === "Sign In" ? (
                 <span className="forma__check">
                   Don’t have an account?{" "}
-                  <Link to={"/authorisation/sign-up"} className="forma__link">
+                  <Link to={"/authentication/sign-up"} className="forma__link">
                     {" "}
                     Sign Up
                   </Link>
                 </span>
               ) : (
-                <span className="forma__check">
-                  Already have an account?{" "}
-                  <Link to={"/authorisation/sign-in"} className="forma__link">
-                    {" "}
-                    Sign In
-                  </Link>
-                </span>
+                type !== "Reset password" && (
+                  <span className="forma__check">
+                    Already have an account?{" "}
+                    <Link to={"/authorisation/sign-in"} className="forma__link">
+                      {" "}
+                      Sign In
+                    </Link>
+                  </span>
+                )
               )}
             </>
           }

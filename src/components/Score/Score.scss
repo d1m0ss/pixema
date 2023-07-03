@@ -1,0 +1,10 @@
+@import'../../index.scss';
+
+.score{
+    &__value{
+        background-color: green;
+        border-radius: 6px;
+        padding: 2px 8px;
+        font: $S1-3Decktop;
+    }
+}

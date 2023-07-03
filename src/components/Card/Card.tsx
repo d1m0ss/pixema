@@ -4,11 +4,13 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import "./Card.scss";
+import { Score } from "../Score/Score";
 
 interface IActionAreaCard {
   title?: string;
   image?: string;
   genre?: string;
+  score?: string;
   isClickable?: boolean;
   onHandleClick?: () => void;
   typographyClick?: () => void;
@@ -18,13 +20,19 @@ export const ActionAreaCard: FC<IActionAreaCard> = ({
   title,
   image,
   genre,
+  score,
   isClickable = false,
   onHandleClick,
   typographyClick,
 }) => {
   return (
     <Card
-      sx={{ width: "266px", backgroundColor: "transparent", color: "white" }}
+      sx={{
+        width: "266px",
+        backgroundColor: "transparent",
+        position: "relative",
+        color: "white",
+      }}
       onClick={onHandleClick}
       className={isClickable ? "Clickable" : ""}
     >
@@ -35,6 +43,11 @@ export const ActionAreaCard: FC<IActionAreaCard> = ({
         image={image}
         alt="poster"
       />
+      {score && (
+        <div className="card_score-wrapper">
+          <Score>{score}</Score>
+        </div>
+      )}
       <CardContent>
         <Typography
           gutterBottom

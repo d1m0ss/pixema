@@ -8,13 +8,14 @@ import { Button, IconButton } from "@mui/material";
 import { PixemaLogo } from "../../../assets/icon/icons";
 import { useAppDispatch } from "../../../store/hooks";
 import { setModalState } from "../../../store/useful/actions";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface IAside {}
 
 export const Aside: FC<IAside> = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const handleModalChange = () => {
     dispatch(setModalState());
   };
@@ -29,7 +30,7 @@ export const Aside: FC<IAside> = () => {
   return (
     <aside className="container__aside">
       <article className="container__logo-wrapper">
-        <IconButton onClick={()=>navigate('/pixema')}>
+        <IconButton onClick={() => navigate("/pixema")}>
           <PixemaLogo />
         </IconButton>
       </article>
@@ -40,7 +41,9 @@ export const Aside: FC<IAside> = () => {
           style={linksStyle}
           sx={{ ...linksStyle, color: "#80858B" }}
           onClick={() => {
-            navigate("home");
+            location.pathname.includes("pixema")
+              ? navigate("home")
+              : navigate("/pixema/home");
           }}
         >
           Home
@@ -50,7 +53,11 @@ export const Aside: FC<IAside> = () => {
           startIcon={<WhatshotIcon />}
           style={linksStyle}
           sx={{ ...linksStyle, color: "#80858B" }}
-          onClick={() => navigate("trends")}
+          onClick={() => {
+            location.pathname.includes("pixema")
+              ? navigate("trends")
+              : navigate("/pixema/trends");
+          }}
         >
           Trends
         </Button>
@@ -59,7 +66,11 @@ export const Aside: FC<IAside> = () => {
           startIcon={<BookmarkIcon />}
           style={linksStyle}
           sx={{ ...linksStyle, color: "#80858B" }}
-          onClick={() => navigate("favorites")}
+          onClick={() => {
+            location.pathname.includes("pixema")
+              ? navigate("favorites")
+              : navigate("/pixema/favorites");
+          }}
         >
           Favorites
         </Button>

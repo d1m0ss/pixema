@@ -11,7 +11,7 @@ export const TrendsPage: FC = () => {
     <>
       {loading && !trendMovies && <h2>Loading...</h2>}
       {error && <h2>{error}</h2>}
-      {!trendMovies && <h2>Out of trends movies</h2>}
+      {!trendMovies && !loading && <h2>Out of trends movies</h2>}
 
       <MoviesTemlate titleMovies={trendMovies} />
     </>

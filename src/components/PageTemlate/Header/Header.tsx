@@ -30,7 +30,7 @@ export const Header: FC = () => {
         dispatch(refreshPagesCount());
       }, 800);
     } else {
-      navigate("pixema");
+      navigate("/pixema");
       dispatch(setSearchValue(""));
       dispatch(fetchDatatRefreshAction());
       dispatch(refreshPagesCount());

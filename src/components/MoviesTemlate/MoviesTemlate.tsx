@@ -49,10 +49,19 @@ export const MoviesTemlate: FC<IMoviesTemlate> = ({
           (item, i) =>
             "Title" in item && (
               <ActionAreaCard
+                isClickable
+                onHandleClick={() => textClick(item.imdbID)}
                 key={i}
                 title={item.Title}
                 image={item.Poster}
                 genre={item.Genre}
+                score={
+                  item.imdbRating !== "N/A"
+                    ? item.imdbRating
+                    : item.Metascore !== "N/A"
+                    ? `${+item.Metascore / 10}`
+                    : "N/A"
+                }
                 typographyClick={() => textClick(item.imdbID)}
               />
             )
@@ -62,6 +71,8 @@ export const MoviesTemlate: FC<IMoviesTemlate> = ({
         searchedMovies.map(({ Search }) =>
           Search.map(({ Title, Poster, Year, imdbID }, i) => (
             <ActionAreaCard
+              isClickable
+              onHandleClick={() => textClick(imdbID)}
               key={i}
               title={Title}
               image={
@@ -100,6 +111,3 @@ export const MoviesTemlate: FC<IMoviesTemlate> = ({
     </article>
   );
 };
-function fetchDatatErrorRefreshAction(): any {
-  throw new Error("Function not implemented.");
-}
