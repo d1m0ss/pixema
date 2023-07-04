@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from "react";
-import "./SIgnUpPage.scss";
 import { Input } from "../../components/Input/Input";
 import { Forma } from "../../components/Forma/Forma";
 import { useNavigate } from "react-router-dom";
@@ -7,9 +6,16 @@ import { postNewUser } from "../../api/postNewUser";
 import { useAppDispatch } from "../../store/hooks";
 import { setEMAILValue } from "../../store/useful/actions";
 
-interface ISIgnUpPage {}
+import "./SIgnUpPage.scss";
 
-export const SIgnUpPage: FC<ISIgnUpPage> = () => {
+interface IError {
+  username: string;
+  email: string;
+  password: string;
+  confirmPass: string;
+}
+
+export const SIgnUpPage: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -17,22 +23,13 @@ export const SIgnUpPage: FC<ISIgnUpPage> = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
-
   const [isPasswordsSame, setIsPasswordsSame] = useState(false);
-
   const [errors, setErrors] = useState<IError>({
     username: "",
     email: "",
     password: "",
     confirmPass: "",
   });
-
-  interface IError {
-    username: string;
-    email: string;
-    password: string;
-    confirmPass: string;
-  }
 
   const isFormValid = (): boolean => {
     const newErrors: IError = {
@@ -42,9 +39,7 @@ export const SIgnUpPage: FC<ISIgnUpPage> = () => {
       confirmPass: "",
     };
 
-    if (!username) {
-      newErrors.username = "Name is required";
-    }
+    if (!username) newErrors.username = "Name is required";
 
     if (!email) {
       newErrors.email = "Email is required";
@@ -68,6 +63,7 @@ export const SIgnUpPage: FC<ISIgnUpPage> = () => {
 
     const isValid = Object.values(newErrors).every((error) => error === "");
     if (isValid) {
+      setErrors(newErrors);
       return true;
     } else {
       setErrors(newErrors);
@@ -75,65 +71,92 @@ export const SIgnUpPage: FC<ISIgnUpPage> = () => {
     }
   };
 
-  const handleSubmit = () => {
-    if (isFormValid()) {
-      postNewUser({ email, password, username })
-        .then(() => {
-          navigate("/authorisation/confirm");
-          dispatch(setEMAILValue(email));
-        })
-        .catch((error) =>
-          setErrors((prev) => ({ ...prev, ...error.response.data }))
-        );
-    }
+  const isFieldsEmpty = () => !username || !email || !password || !confirmPass;
+
+  const handle = {
+    ChangeName: (value: string) => {
+      setErrors((prev) => ({ ...prev, username: "" }));
+      setUserName(value);
+    },
+    ChangeEmail: (value: string) => {
+      setErrors((prev) => ({ ...prev, email: "" }));
+      setEmail(value);
+    },
+    ChangePassword: (value: string) => {
+      setErrors((prev) => ({ ...prev, password: "" }));
+      setPassword(value);
+    },
+    ChangeConfirmPass: (value: string) => {
+      setErrors((prev) => ({ ...prev, confirmPass: "" }));
+      setConfirmPass(value);
+    },
+    submit: () => {
+      if (isFormValid()) {
+        postNewUser({ email, password, username })
+          .then(() => {
+            navigate("/authorisation/confirm");
+            dispatch(setEMAILValue(email));
+          })
+          .catch((error) =>
+            setErrors((prev) => ({ ...prev, ...error.response.data }))
+          );
+      }
+    },
   };
+
+  console.log(errors);
+  console.log(!Object.values(errors).every((error) => !error));
 
   useEffect(() => {
     password === confirmPass && password
       ? setIsPasswordsSame(true)
       : setIsPasswordsSame(false);
-  }, [username, email, password, confirmPass]);
+  }, [password, confirmPass]);
 
   return (
     <Forma
       name="Sign Up"
       type="Sign Up"
-      handleSubmit={handleSubmit}
-      isDisabled={false}
+      handleSubmit={handle.submit}
+      isDisabled={
+        true &&
+        isFieldsEmpty() ||
+        !Object.values(errors).every((error) => !error)
+      }
     >
       <label htmlFor="name">
-        <h3>Name</h3>
         <Input
           title="Name"
           type="text"
-          handleChange={(e: any) => setUserName(e.target.value)}
+          value={username.trimStart()}
+          handleChange={(e: any) => handle.ChangeName(e.target.value)}
           errorMessage={errors.username}
         />
       </label>
       <label htmlFor="email">
-        <h3>Email</h3>
         <Input
           title="Email"
           type="email"
-          handleChange={(e: any) => setEmail(e.target.value)}
+          value={email.trim()}
+          handleChange={(e: any) => handle.ChangeEmail(e.target.value)}
           errorMessage={errors.email}
         />
       </label>
-      <label htmlFor="email">
-        <h3>Password</h3>
+      <label htmlFor="password">
         <Input
           title="Password"
           type="password"
-          handleChange={(e: any) => setPassword(e.target.value)}
+          value={password.trim()}
+          handleChange={(e: any) => handle.ChangePassword(e.target.value)}
           errorMessage={errors.password}
         />
       </label>
-      <label htmlFor="email">
-        <h3>Confirm password</h3>
+      <label htmlFor="password">
         <Input
           title="Confirm password"
           type="password"
-          handleChange={(e: any) => setConfirmPass(e.target.value)}
+          value={confirmPass.trim()}
+          handleChange={(e: any) => handle.ChangeConfirmPass(e.target.value)}
           errorMessage={errors.confirmPass}
         />
       </label>

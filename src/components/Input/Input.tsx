@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 interface IInput {
   title: string;
   type?: React.HTMLInputTypeAttribute;
+  value?: string;
   errorMessage?: string;
   handleChange?: (e: any) => void;
 }
@@ -12,6 +13,7 @@ interface IInput {
 export const Input: React.FC<IInput> = ({
   title,
   type = "text",
+  value,
   errorMessage,
   handleChange = () => {},
 }) => {
@@ -24,8 +26,15 @@ export const Input: React.FC<IInput> = ({
           marginTop: "8px",
           background: "#323537",
           borderRadius: 2,
-          label: { color: "white" },
+          outlineColor: "red",
+          label: { color: "#7b61ff" },
           input: { color: "white" },
+          "& label.Mui-focused ": {
+            color: "#7b61ff",
+          },
+          " & .MuiOutlinedInput-root": {
+            "&.Mui-focused fieldset": { borderColor: "#7b61ff" },
+          },
         }}
       >
         <TextField
@@ -35,6 +44,8 @@ export const Input: React.FC<IInput> = ({
           label={title}
           variant="outlined"
           type={type}
+          value={value && value}
+          color="primary"
         />
       </Box>
       {errorMessage && (

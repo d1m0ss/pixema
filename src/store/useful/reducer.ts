@@ -12,7 +12,7 @@ import { ActionTypes, ISearchState, ISetModalState } from "./interfaces";
 
 const initialState: ISearchState = {
   searchValue: "",
-  emailValue: "ы",
+  emailValue: "",
   modalState: false,
   modalShareState: false,
   pagesCount: 1,

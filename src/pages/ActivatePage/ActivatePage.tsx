@@ -1,12 +1,13 @@
 import { FC, useEffect, useState } from "react";
 import "./ActivatePage.scss";
 import { Forma } from "../../components/Forma/Forma";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { postActivate } from "../../api/postActivate";
 
 interface IActivatePage {}
 
 export const ActivatePage: FC<IActivatePage> = () => {
+  const navigate = useNavigate()
   const { uid, token } = useParams();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +27,7 @@ export const ActivatePage: FC<IActivatePage> = () => {
   return (
     <>
       {isActivate && (
-        <Forma name="Success" type="Reset password">
+        <Forma name="Success" type="Reset password" handleSubmit={()=>navigate('/authentication/sign-in')}>
           <h4>Email Confirmed</h4>
           <h4>Your registration is now completed</h4>
         </Forma>

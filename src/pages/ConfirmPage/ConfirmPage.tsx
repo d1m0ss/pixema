@@ -17,7 +17,7 @@ export const ConfirmPage: FC<IConfirmPage> = () => {
       type="Registration Confirm"
       handleSubmit={() => navigate("/authentication/sign-in")}
     >
-      <span style={{ textAlign: "center" }}>
+      <span>
         Please activate your account with <br />
         the activation link in the email <b>{emailValue}</b> <br /> please check your
         email

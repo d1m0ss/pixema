@@ -7,8 +7,13 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import { useNavigate } from "react-router-dom";
 
 export const UserInfo = () => {
+  const navigate = useNavigate();
+  const isLogged = !true;
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -17,6 +22,16 @@ export const UserInfo = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const signIn = () => {
+    setAnchorEl(null);
+    navigate("/authentication/sign-in");
+  };
+
+  const logOut = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -24,31 +39,50 @@ export const UserInfo = () => {
           <IconButton
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
+            sx={{
+              width: 56,
+              height: 56,
+              borderRadius: "10px",
+              backgroundColor: "#7B61FF",
+              ml: 2,
+              mr: 1,
+            }}
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar
-              sx={{
-                width: 56,
-                height: 56,
-                borderRadius: "10px",
-                backgroundColor: "#7B61FF",
-                font: 'normal 700 20px/24px "Exo 2"',
-                letterSpacing: "1px",
-              }}
-            >
-              UN
-            </Avatar>
+            {isLogged ? (
+              <Avatar
+                sx={{
+                  width: 56,
+                  height: 56,
+                  borderRadius: "10px",
+                  backgroundColor: "#7B61FF",
+                  font: 'normal 700 20px/24px "Exo 2"',
+                  letterSpacing: "1px",
+                }}
+              >
+                UN
+              </Avatar>
+            ) : (
+              <PersonOutlineIcon
+                sx={{
+                  color: "white",
+                }}
+              />
+            )}
           </IconButton>
         </Tooltip>
-        <Typography sx={{ mr: 1, font: 'normal 600 16px/24px "Exo 2"' }}>
-          User
-        </Typography>
-        <Typography sx={{ mr: 1, font: 'normal 600 16px/24px "Exo 2"' }}>
-          Name
-        </Typography>
+        {isLogged && (
+          <>
+            <Typography sx={{ mr: 1, font: 'normal 600 16px/24px "Exo 2"' }}>
+              User
+            </Typography>
+            <Typography sx={{ mr: 1, font: 'normal 600 16px/24px "Exo 2"' }}>
+              Name
+            </Typography>
+          </>
+        )}
       </Box>
       <Menu
         anchorEl={anchorEl}
@@ -91,9 +125,17 @@ export const UserInfo = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}>Edit profile</MenuItem>
-        <Divider />
-        <MenuItem onClick={handleClose}>Log Out</MenuItem>
+        {isLogged && (
+          <>
+            <MenuItem onClick={handleClose}>Edit profile</MenuItem>
+            <Divider />
+          </>
+        )}
+        {isLogged ? (
+          <MenuItem onClick={logOut}>Log Out</MenuItem>
+        ) : (
+          <MenuItem onClick={signIn}>Sign In</MenuItem>
+        )}
       </Menu>
     </React.Fragment>
   );

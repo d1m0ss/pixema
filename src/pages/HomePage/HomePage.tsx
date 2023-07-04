@@ -8,7 +8,7 @@ export const HomePage: FC = () => {
   const { titleMovies, loading, error } = useAppSelector(
     (state) => state.movies
   );
-  console.log(<Outlet />);
+  
   return (
     <>
       {loading && !titleMovies && <h2>Loading...</h2>}

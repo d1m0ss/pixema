@@ -11,10 +11,10 @@ export const FavoritesPage: FC = () => {
   return (
     <>
       {loading && !favoriteMovie && <h2>Loading...</h2>}
-      {error && <h2>{error}</h2>}
+      {error && !favoriteMovie && <h2>{error}</h2>}
       {!loading && !favoriteMovie && !error && (
         <section className="empty-fav">
-          <EmptyFav/>
+          <EmptyFav />
           <h3>Add some movies to favorites</h3>
         </section>
       )}

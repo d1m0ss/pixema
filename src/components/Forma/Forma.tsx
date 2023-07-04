@@ -75,7 +75,7 @@ export const Forma: FC<IForma> = ({
               {type === "Sign In" ? (
                 <span className="forma__check">
                   Don’t have an account?{" "}
-                  <Link to={"/authentication/sign-up"} className="forma__link">
+                  <Link to={"/authorisation/sign-up"} className="forma__link">
                     {" "}
                     Sign Up
                   </Link>
@@ -84,7 +84,7 @@ export const Forma: FC<IForma> = ({
                 type !== "Reset password" && (
                   <span className="forma__check">
                     Already have an account?{" "}
-                    <Link to={"/authorisation/sign-in"} className="forma__link">
+                    <Link to={"/authentication/sign-in"} className="forma__link">
                       {" "}
                       Sign In
                     </Link>

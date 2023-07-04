@@ -27,16 +27,25 @@ export const MoviePage: FC<IMoviePage> = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { singleMovie, loading, error, titleMovies, trendMovies } =
-    useAppSelector((state) => state.movies);
+  const {
+    singleMovie,
+    favoriteMovie,
+    loading,
+    error,
+    titleMovies,
+    trendMovies,
+  } = useAppSelector((state) => state.movies);
   const { favoriteMoviesIds, modalShareState } = useAppSelector(
     (state) => state.usefuls
   );
   const { movieId } = useParams();
 
-  console.log(location.pathname.includes('pixema'));
-
-  const movie = singleMovie;
+  const movie = singleMovie
+    ? singleMovie
+    : favoriteMovie &&
+      favoriteMovie.filter((movie) =>
+        favoriteMoviesIds.includes(movie.imdbID)
+      )[0];
 
   const [isBookmark, setIsBookmark] = useState(false);
 
@@ -56,10 +65,11 @@ export const MoviePage: FC<IMoviePage> = () => {
   };
 
   useEffect(() => {
-    movie && movieId && favoriteMoviesIds.includes(movieId)
-      ? setIsBookmark(true)
-      : setIsBookmark(false);
-  }, [singleMovie]);
+    movie &&
+      movieId &&
+      favoriteMoviesIds.includes(movieId) &&
+      setIsBookmark(true);
+  }, [favoriteMoviesIds]);
 
   useEffect(() => {
     dispatch(fetchMovie(`&i=${movieId}`, "Single"));
@@ -77,7 +87,7 @@ export const MoviePage: FC<IMoviePage> = () => {
         ) : (
           movie && movieId !== movie.imdbID && <h2>Loading...</h2>
         )}
-        {error && <h2>{error}</h2>}
+        {error && !movie && <h2>{error}</h2>}
         {(!loading || movie) && movie && movie.imdbID === movieId && (
           <>
             <article className="movie__posre-part">
@@ -152,36 +162,38 @@ export const MoviePage: FC<IMoviePage> = () => {
                   Writer={movie.Writer}
                   Year={movie.Year}
                 />
-                <section className="movie__rec">
-                  <header className="movie__rec-header">
-                    <h2 className="movie__rec-title">Recommendations</h2>
-                  </header>
-                  <article className="movie__rec-slider-wrp">
-                    <article className="movie__rec-slider-transporter">
-                      <article className="movie__rec-slider">
-                        {titleMovies &&
-                          trendMovies &&
-                          [...titleMovies, ...trendMovies].map(
-                            (
-                              { Title, Poster, Genre, imdbRating, imdbID },
-                              i
-                            ) => (
-                              <ActionAreaCard
-                                title={Title}
-                                genre={Genre}
-                                image={Poster}
-                                key={i}
-                                score={imdbRating}
-                                isClickable
-                                typographyClick={() => textClick(imdbID)}
-                                onHandleClick={() => textClick(imdbID)}
-                              />
-                            )
-                          )}
+                {titleMovies && trendMovies && (
+                  <section className="movie__rec">
+                    <header className="movie__rec-header">
+                      <h2 className="movie__rec-title">Recommendations</h2>
+                    </header>
+                    <article className="movie__rec-slider-wrp">
+                      <article className="movie__rec-slider-transporter">
+                        <article className="movie__rec-slider">
+                          {titleMovies &&
+                            trendMovies &&
+                            [...titleMovies, ...trendMovies].map(
+                              (
+                                { Title, Poster, Genre, imdbRating, imdbID },
+                                i
+                              ) => (
+                                <ActionAreaCard
+                                  title={Title}
+                                  genre={Genre}
+                                  image={Poster}
+                                  key={i}
+                                  score={imdbRating}
+                                  isClickable
+                                  typographyClick={() => textClick(imdbID)}
+                                  onHandleClick={() => textClick(imdbID)}
+                                />
+                              )
+                            )}
+                        </article>
                       </article>
                     </article>
-                  </article>
-                </section>
+                  </section>
+                )}
               </footer>
             </article>
           </>
