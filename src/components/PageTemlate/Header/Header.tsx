@@ -1,5 +1,5 @@
-import { FC, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { FC } from "react";
+import { useAppDispatch } from "../../../store/hooks";
 import {
   refreshPagesCount,
   setSearchValue,

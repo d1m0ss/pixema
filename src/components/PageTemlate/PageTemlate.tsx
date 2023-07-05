@@ -1,8 +1,8 @@
-import { FC, ReactNode, useEffect } from "react";
+import { FC, ReactNode } from "react";
 import { Header } from "./Header/Header";
 import { Container } from "./Container/Container";
 import { Aside } from "./Aside/Aside";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAppSelector } from "../../store/hooks";
 import { Filter } from "./Filter/Filter";
 import "./PageTemlate.scss";
 import { Outlet } from "react-router-dom";
@@ -13,7 +13,7 @@ interface IPageTemlate {
 
 export const PageTemlate: FC<IPageTemlate> = ({ children }) => {
   const { modalState } = useAppSelector((state) => state.usefuls);
-  
+
   return (
     <section className="page-template">
       <Aside />

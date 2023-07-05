@@ -8,7 +8,7 @@ import {
   SET_MODAL_SHARE_STATE,
   SET_EMAIL_VALUE,
 } from "./actionTypes";
-import { ActionTypes, ISearchState, ISetModalState } from "./interfaces";
+import { ActionTypes, ISearchState } from "./interfaces";
 
 const initialState: ISearchState = {
   searchValue: "",

@@ -1,7 +1,5 @@
 import { FC } from "react";
 import "./ConfirmPage.scss";
-import { Input } from "../../components/Input/Input";
-import { Button } from "@mui/material";
 import { Forma } from "../../components/Forma/Forma";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../store/hooks";

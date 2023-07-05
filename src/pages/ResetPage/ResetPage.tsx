@@ -1,7 +1,6 @@
 import { FC } from "react";
 import "./ResetPage.scss";
 import { Input } from "../../components/Input/Input";
-import { Button } from "@mui/material";
 import { Forma } from "../../components/Forma/Forma";
 
 interface IResetPage {}

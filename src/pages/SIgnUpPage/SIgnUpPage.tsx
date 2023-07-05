@@ -120,8 +120,7 @@ export const SIgnUpPage: FC = () => {
       handleSubmit={handle.submit}
       isDisabled={
         true &&
-        isFieldsEmpty() ||
-        !Object.values(errors).every((error) => !error)
+        (isFieldsEmpty() || !Object.values(errors).every((error) => !error))
       }
     >
       <label htmlFor="name">

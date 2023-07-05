@@ -4,6 +4,8 @@ import { Forma } from "../../components/Forma/Forma";
 import { postLogin } from "../../api/postLogin";
 import { useNavigate } from "react-router-dom";
 import "./SIgnInPage.scss";
+import { useAppDispatch } from "../../store/hooks";
+import { setLoggedAction } from "../../store/auth/actions";
 
 interface IErrors {
   email: string;
@@ -12,6 +14,7 @@ interface IErrors {
 }
 export const SIgnInPage: FC = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch()
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -65,10 +68,9 @@ export const SIgnInPage: FC = () => {
       if (isFormValid()) {
         postLogin({ email, password })
           .then((data) => {
-            console.log(data);
             localStorage.setItem("access_token", data.access);
             localStorage.setItem("refresh__token", data.refresh);
-
+            dispatch(setLoggedAction())
             navigate("/pixema/home");
           })
           .catch((error) =>

@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import "./MoviePage.scss";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Table } from "./Table/Table";
 import ShareIcon from "@mui/icons-material/Share";
@@ -26,7 +26,6 @@ interface IMoviePage {}
 export const MoviePage: FC<IMoviePage> = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const {
     singleMovie,
     favoriteMovie,
@@ -69,11 +68,11 @@ export const MoviePage: FC<IMoviePage> = () => {
       movieId &&
       favoriteMoviesIds.includes(movieId) &&
       setIsBookmark(true);
-  }, [favoriteMoviesIds]);
+  }, [favoriteMoviesIds, movie, movieId]);
 
   useEffect(() => {
     dispatch(fetchMovie(`&i=${movieId}`, "Single"));
-  }, []);
+  }, [movieId, dispatch]);
 
   const textClick = (id: string) => {
     navigate(`/${id}`);

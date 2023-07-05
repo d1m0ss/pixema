@@ -1,16 +1,13 @@
 import "./Filter.scss";
 
-import ButtonGroup from "@mui/material/ButtonGroup/ButtonGroup";
-import ShareIcon from "@mui/icons-material/Share";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
 import CountrySelect from "../../Selects/CountrySelect";
 
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useAppDispatch } from "../../../store/hooks";
 import { setModalState } from "../../../store/useful/actions";
 import { Input } from "../../Input/Input";
 import { Selects } from "../../Selects/Selects";
-import { Button, IconButton } from "@mui/material";
+import { Button } from "@mui/material";
 
 interface IFilter {}
 

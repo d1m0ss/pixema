@@ -7,7 +7,7 @@ import { postActivate } from "../../api/postActivate";
 interface IActivatePage {}
 
 export const ActivatePage: FC<IActivatePage> = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { uid, token } = useParams();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -15,19 +15,23 @@ export const ActivatePage: FC<IActivatePage> = () => {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    setIsError(false)
+    setIsError(false);
     if (uid && token) {
       postActivate({ uid, token })
         .then(() => setIsActivate(true))
         .catch(() => setIsError(true))
         .finally(() => setIsLoading(false));
     }
-  }, []);
+  }, [uid, token]);
 
   return (
     <>
       {isActivate && (
-        <Forma name="Success" type="Reset password" handleSubmit={()=>navigate('/authentication/sign-in')}>
+        <Forma
+          name="Success"
+          type="Reset password"
+          handleSubmit={() => navigate("/authentication/sign-in")}
+        >
           <h4>Email Confirmed</h4>
           <h4>Your registration is now completed</h4>
         </Forma>
