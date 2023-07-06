@@ -16,7 +16,8 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import { ActivatePage } from "../pages/ActivatePage/ActivatePage";
 
 export const Router: FC = () => {
-  const { emailValue } = useAppSelector((state) => state.usefuls);
+  const { email } = useAppSelector((state) => state.user);
+  const { authStatus } = useAppSelector((state) => state.auth);
 
   return (
     <Routes>
@@ -50,24 +51,34 @@ export const Router: FC = () => {
           <Route path=":movieId" element={<MoviePage />} />
         </Route>
 
-        <Route path="favorites" element={<Outlet />}>
-          <Route path="" element={<FavoritesPage />} />
-          <Route path=":movieId" element={<MoviePage />} />
+        <Route
+          element={<ProtectedRoute access={authStatus} to="/pixema/home" />}
+        >
+          <Route path="favorites" element={<Outlet />}>
+            <Route path="" element={<FavoritesPage />} />
+            <Route path=":movieId" element={<MoviePage />} />
+          </Route>
         </Route>
       </Route>
 
-      <Route path="authorisation" element={<AuthsTemplate />}>
-        <Route path="sign-up" element={<SIgnUpPage />} />
-        <Route path="activate/:uid/:token" element={<ActivatePage />} />
-        <Route element={<ProtectedRoute access={!!emailValue} to="/pixema" />}>
-          <Route path="confirm" element={<ConfirmPage />} />
+      <Route
+        element={<ProtectedRoute access={!authStatus} to="/pixema/home" />}
+      >
+        <Route path="authorisation" element={<AuthsTemplate />}>
+          <Route path="sign-up" element={<SIgnUpPage />} />
+          <Route path="activate/:uid/:token" element={<ActivatePage />} />
+          <Route
+            element={<ProtectedRoute access={!!email} to="/pixema/home" />}
+          >
+            <Route path="confirm" element={<ConfirmPage />} />
+          </Route>
         </Route>
-      </Route>
 
-      <Route path="authentication" element={<AuthsTemplate />}>
-        <Route path="activate/:uid/:token" element={<ActivatePage />} />
-        <Route path="sign-in" element={<SIgnInPage />} />
-        <Route path="reset-password" element={<ResetPage />} />
+        <Route path="authentication" element={<AuthsTemplate />}>
+          <Route path="activate/:uid/:token" element={<ActivatePage />} />
+          <Route path="sign-in" element={<SIgnInPage />} />
+          <Route path="reset-password" element={<ResetPage />} />
+        </Route>
       </Route>
 
       <Route

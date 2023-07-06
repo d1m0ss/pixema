@@ -6,13 +6,11 @@ import {
   SET_FAVORITE_MOVIES_ID,
   REMOVE_FAVORITE_MOVIES_ID,
   SET_MODAL_SHARE_STATE,
-  SET_EMAIL_VALUE,
 } from "./actionTypes";
 import { ActionTypes, ISearchState } from "./interfaces";
 
 const initialState: ISearchState = {
   searchValue: "",
-  emailValue: "",
   modalState: false,
   modalShareState: false,
   pagesCount: 1,
@@ -26,8 +24,6 @@ export const searchReducer = (
   switch (action.type) {
     case SET_SEARCH_VALUE:
       return { ...state, searchValue: action.payload.value };
-    case SET_EMAIL_VALUE:
-      return { ...state, emailValue: action.payload.value };
     case SET_MODAL_STATE:
       return { ...state, modalState: !state.modalState };
     case SET_MODAL_SHARE_STATE:

@@ -75,6 +75,7 @@ export interface IMoviesState {
   singleMovie: IMovie | null;
   error: string | null;
 }
+
 export interface IFetchDataRequestAction {
   type: typeof FETCH_DATA_REQUEST;
 }

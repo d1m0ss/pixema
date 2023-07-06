@@ -6,7 +6,7 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Button, IconButton } from "@mui/material";
 import { PixemaLogo } from "../../../assets/icon/icons";
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setModalState } from "../../../store/useful/actions";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -15,10 +15,13 @@ interface IAside {}
 export const Aside: FC<IAside> = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { authStatus } = useAppSelector((state) => state.auth);
   const location = useLocation();
   const handleModalChange = () => {
     dispatch(setModalState());
   };
+
+  const isLogged = authStatus;
 
   const linksStyle = {
     // color: "#80858B",
@@ -61,28 +64,32 @@ export const Aside: FC<IAside> = () => {
         >
           Trends
         </Button>
-        <Button
-          variant="contained"
-          startIcon={<BookmarkIcon />}
-          style={linksStyle}
-          sx={{ ...linksStyle, color: "#80858B" }}
-          onClick={() => {
-            location.pathname.includes("pixema")
-              ? navigate("favorites")
-              : navigate("/pixema/favorites");
-          }}
-        >
-          Favorites
-        </Button>
-        <Button
-          onClick={handleModalChange}
-          variant="contained"
-          startIcon={<SettingsIcon />}
-          style={linksStyle}
-          sx={{ ...linksStyle, color: "#80858B" }}
-        >
-          Settings
-        </Button>
+        {isLogged && (
+          <>
+            <Button
+              variant="contained"
+              startIcon={<BookmarkIcon />}
+              style={linksStyle}
+              sx={{ ...linksStyle, color: "#80858B" }}
+              onClick={() => {
+                location.pathname.includes("pixema")
+                  ? navigate("favorites")
+                  : navigate("/pixema/favorites");
+              }}
+            >
+              Favorites
+            </Button>
+            <Button
+              onClick={handleModalChange}
+              variant="contained"
+              startIcon={<SettingsIcon />}
+              style={linksStyle}
+              sx={{ ...linksStyle, color: "#80858B" }}
+            >
+              Settings
+            </Button>
+          </>
+        )}
       </article>
       <article className="container__copywrite">
         <span>© All Rights Reserved</span>

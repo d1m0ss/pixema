@@ -7,12 +7,12 @@ export const HomePage: FC = () => {
   const { titleMovies, loading, error } = useAppSelector(
     (state) => state.movies
   );
-  
+
   return (
     <>
       {loading && !titleMovies && <h2>Loading...</h2>}
       {error && <h2>{error}</h2>}
-      {!titleMovies && !loading && <h2>Out of home movies</h2>}
+      {!titleMovies && !error && !loading && <h2>Out of home movies</h2>}
       <MoviesTemlate titleMovies={titleMovies} />
     </>
   );

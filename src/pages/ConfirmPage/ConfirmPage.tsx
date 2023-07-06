@@ -7,7 +7,7 @@ import { useAppSelector } from "../../store/hooks";
 interface IConfirmPage {}
 
 export const ConfirmPage: FC<IConfirmPage> = () => {
-  const { emailValue } = useAppSelector((state) => state.usefuls);
+  const { email } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
   return (
     <Forma
@@ -17,7 +17,7 @@ export const ConfirmPage: FC<IConfirmPage> = () => {
     >
       <span>
         Please activate your account with <br />
-        the activation link in the email <b>{emailValue}</b> <br /> please check your
+        the activation link in the email <b>{email}</b> <br /> please check your
         email
       </span>
     </Forma>

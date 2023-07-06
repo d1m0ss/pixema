@@ -4,9 +4,9 @@ import { Forma } from "../../components/Forma/Forma";
 import { useNavigate } from "react-router-dom";
 import { postNewUser } from "../../api/postNewUser";
 import { useAppDispatch } from "../../store/hooks";
-import { setEMAILValue } from "../../store/useful/actions";
 
 import "./SIgnUpPage.scss";
+import { setUserEmailAction } from "../../store/user/actions";
 
 interface IError {
   username: string;
@@ -95,7 +95,7 @@ export const SIgnUpPage: FC = () => {
         postNewUser({ email, password, username })
           .then(() => {
             navigate("/authorisation/confirm");
-            dispatch(setEMAILValue(email));
+            dispatch(setUserEmailAction(email));
           })
           .catch((error) =>
             setErrors((prev) => ({ ...prev, ...error.response.data }))

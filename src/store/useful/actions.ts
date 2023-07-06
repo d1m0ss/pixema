@@ -6,7 +6,6 @@ import {
   SET_FAVORITE_MOVIES_ID,
   REMOVE_FAVORITE_MOVIES_ID,
   SET_MODAL_SHARE_STATE,
-  SET_EMAIL_VALUE,
 } from "./actionTypes";
 import {
   ISetSearchValue,
@@ -16,15 +15,10 @@ import {
   ISetFavoriteMoviesId,
   IRemoveFavoriteMoviesId,
   ISetModalShareState,
-  ISetEmailValue,
 } from "./interfaces";
 
 export const setSearchValue = (value: string): ISetSearchValue => {
   return { type: SET_SEARCH_VALUE, payload: { value } };
-};
-
-export const setEMAILValue = (value: string): ISetEmailValue => {
-  return { type: SET_EMAIL_VALUE, payload: { value } };
 };
 
 export const setModalState = (): ISetModalState => {

@@ -9,16 +9,23 @@ import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { setLogoutAction } from "../../store/auth/actions";
 
 export const UserInfo = () => {
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.user);
+  const { authStatus } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
-  const isLogged = !true;
+  const isLogged = authStatus;
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -29,7 +36,11 @@ export const UserInfo = () => {
   };
 
   const logOut = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh__token");
+
     setAnchorEl(null);
+    dispatch(setLogoutAction());
   };
 
   return (
@@ -62,7 +73,7 @@ export const UserInfo = () => {
                   letterSpacing: "1px",
                 }}
               >
-                UN
+                {!!user ? `${user.username[0]}${user.username[1]}` : null}
               </Avatar>
             ) : (
               <PersonOutlineIcon
@@ -73,15 +84,10 @@ export const UserInfo = () => {
             )}
           </IconButton>
         </Tooltip>
-        {isLogged && (
-          <>
-            <Typography sx={{ mr: 1, font: 'normal 600 16px/24px "Exo 2"' }}>
-              User
-            </Typography>
-            <Typography sx={{ mr: 1, font: 'normal 600 16px/24px "Exo 2"' }}>
-              Name
-            </Typography>
-          </>
+        {isLogged && user && (
+          <Typography sx={{ mr: 1, font: 'normal 600 16px/24px "Exo 2"' }}>
+            {user.username}
+          </Typography>
         )}
       </Box>
       <Menu

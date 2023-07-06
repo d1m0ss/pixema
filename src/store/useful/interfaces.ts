@@ -6,12 +6,10 @@ import {
   SET_FAVORITE_MOVIES_ID,
   REMOVE_FAVORITE_MOVIES_ID,
   SET_MODAL_SHARE_STATE,
-  SET_EMAIL_VALUE,
 } from "./actionTypes";
 
 export interface ISearchState {
   searchValue: string;
-  emailValue: string;
   modalState: boolean;
   modalShareState: boolean;
   pagesCount: number;
@@ -20,13 +18,6 @@ export interface ISearchState {
 
 export interface ISetSearchValue {
   type: typeof SET_SEARCH_VALUE;
-  payload: {
-    value: string;
-  };
-}
-
-export interface ISetEmailValue {
-  type: typeof SET_EMAIL_VALUE;
   payload: {
     value: string;
   };
@@ -60,7 +51,6 @@ export interface IRemoveFavoriteMoviesId {
 
 export type ActionTypes =
   | ISetSearchValue
-  | ISetEmailValue
   | ISetModalState
   | ISetModalShareState
   | IIncreasPages
