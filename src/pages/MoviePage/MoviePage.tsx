@@ -37,6 +37,7 @@ export const MoviePage: FC<IMoviePage> = () => {
   const { favoriteMoviesIds, modalShareState } = useAppSelector(
     (state) => state.usefuls
   );
+  const { authStatus } = useAppSelector((state) => state.auth);
   const { movieId } = useParams();
 
   const movie = singleMovie
@@ -108,7 +109,9 @@ export const MoviePage: FC<IMoviePage> = () => {
                   <IconButton
                     aria-label="bookmark"
                     onClick={handleBookmarkToggle}
+                    disabled={!authStatus}
                     sx={{
+                      "&.Mui-disabled": { backgroundColor: "#323537" },
                       background: "#323537",
                       borderRadius: "0",
                       width: "50%",

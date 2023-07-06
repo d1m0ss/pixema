@@ -9,7 +9,6 @@ import {
 } from "./actionTypes";
 import { ISetEmail, ISetUsername, ISetUserId, UserType, IFetchDataRequestAction, IFetchDataSuccessAction, IFetchDataErrorAction, IUserResponse } from "./interfaces";
 import { RootState } from "../store";
-import axios from "axios";
 import { getUserInfo } from "../../api/getUserInfo";
 
 const fetchDatatRequestAction = (): IFetchDataRequestAction => ({

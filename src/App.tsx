@@ -27,15 +27,14 @@ export const App = () => {
   const { authStatus } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
-    getUserInfo()
-      .then((data) => {
-        console.log(data);
-        dispatch(setUserInfo(data));
-        dispatch(setLoggedAction());
-      })
-      .catch(() => {
-        console.log("error");
-      });
+    if (localStorage.getItem("access_token")) {
+      getUserInfo()
+        .then((data) => {
+          dispatch(setUserInfo(data));
+          dispatch(setLoggedAction());
+        })
+        .catch(() => {});
+    }
   }, [authStatus]);
 
   useEffect(() => {

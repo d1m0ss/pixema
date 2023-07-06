@@ -73,7 +73,9 @@ export const UserInfo = () => {
                   letterSpacing: "1px",
                 }}
               >
-                {!!user ? `${user.username[0]}${user.username[1]}` : null}
+                {!!user
+                  ? `${user.username.split(" ").map((name) => name[0])}`
+                  : null}
               </Avatar>
             ) : (
               <PersonOutlineIcon
