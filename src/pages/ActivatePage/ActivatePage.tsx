@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import "./ActivatePage.scss";
 import { Forma } from "../../components/Forma/Forma";
 import { useNavigate, useParams } from "react-router-dom";
-import { postActivate } from "../../api/postActivate";
+import { postActivate } from "../../api/auth/postActivate";
 
 interface IActivatePage {}
 

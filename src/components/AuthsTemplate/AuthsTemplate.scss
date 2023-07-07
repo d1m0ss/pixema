@@ -30,15 +30,15 @@
   &__back {
     position: absolute;
     gap: 40px;
-    width: 130%;
+    width: 200%;
     height: 150%;
     display: flex;
     flex-wrap: wrap;
     margin: auto;
-    bottom: 100px;
-    right: 0;
+    bottom: 200px;
+    right: 0px;
     top: 0;
-    left: -400px;
+    left: -300px;
     transform: rotate(-15deg);
     opacity: 0.5;
   }

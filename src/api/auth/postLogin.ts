@@ -1,5 +1,5 @@
 import axios from "axios";
-import { urls } from "./urls";
+import { urls } from "../urls";
 
 interface IPostLogin {
   email: string;
@@ -7,4 +7,4 @@ interface IPostLogin {
 }
 
 export const postLogin = async (data: IPostLogin) =>
-  (await axios.post(urls.AUTH_JWT, data)).data;
+  (await axios.post(urls.AUTH_JWT_CREATE, data)).data;

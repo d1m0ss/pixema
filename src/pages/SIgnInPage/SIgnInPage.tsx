@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { Input } from "../../components/Input/Input";
 import { Forma } from "../../components/Forma/Forma";
-import { postLogin } from "../../api/postLogin";
+import { postLogin } from "../../api/auth/postLogin";
 import { useNavigate } from "react-router-dom";
 import "./SIgnInPage.scss";
 import { useAppDispatch } from "../../store/hooks";
