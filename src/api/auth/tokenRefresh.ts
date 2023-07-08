@@ -1,6 +1,5 @@
 import axios from "axios";
 import { urls } from "../urls";
-import { authHeader } from "./authHeader";
 
 interface IRefreshAccessToken {
   refresh: string;

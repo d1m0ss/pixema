@@ -9,7 +9,7 @@ import {
 } from "./actionTypes";
 import { ISetEmail, ISetUsername, ISetUserId, UserType, IFetchDataRequestAction, IFetchDataSuccessAction, IFetchDataErrorAction, IUserResponse } from "./interfaces";
 import { RootState } from "../store";
-import { getUserInfo } from "../../api/getUserInfo";
+import { getUserInfo } from "../../api/getUSerInfo";
 
 const fetchDatatRequestAction = (): IFetchDataRequestAction => ({
   type: FETCH_DATA_REQUEST,

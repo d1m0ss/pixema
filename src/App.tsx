@@ -11,7 +11,7 @@ import { Router } from "./routes/Router";
 import { IMovie } from "./store/movies/interfaces";
 import {} from "./store/movies/actions";
 import { setFavoriteMoviesId } from "./store/useful/actions";
-import { getUserInfo } from "./api/getUserInfo";
+import { getUserInfo } from "./api/getUSerInfo";
 import {
   setUserEmailAction,
   setUserIdAction,
@@ -19,12 +19,22 @@ import {
   setUsernameAction,
 } from "./store/user/actions";
 import { setLoggedAction } from "./store/auth/actions";
+import { tokenVerify } from "./api/auth/tokenVerify";
+import { tokenRefresh } from "./api/auth/tokenRefresh";
 
 export const App = () => {
   const dispatch = useAppDispatch();
   const { favoriteMoviesIds } = useAppSelector((state) => state.usefuls);
   const { favoriteMovie } = useAppSelector((state) => state.movies);
   const { authStatus } = useAppSelector((state) => state.auth);
+  
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    token &&
+      tokenVerify({ token }).then(() => {
+        dispatch(setLoggedAction());
+      }).catch(()=>{});
+  }, [dispatch]);
 
   useEffect(() => {
     if (localStorage.getItem("access_token")) {
@@ -33,16 +43,17 @@ export const App = () => {
           dispatch(setUserInfo(data));
           dispatch(setLoggedAction());
         })
-        .catch(() => {});
+        .catch(() => {console.log('err');
+        });
     }
   }, [authStatus]);
 
   useEffect(() => {
     titleMoviesMock.forEach((movieID) => {
-      dispatch(fetchMovie(`&i=${movieID}`, "Title"));
+      // dispatch(fetchMovie(`&i=${movieID}`, "Title"));
     });
     trendMoviesMock.forEach((movieID) => {
-      dispatch(fetchMovie(`&i=${movieID}`, "Trend"));
+      // dispatch(fetchMovie(`&i=${movieID}`, "Trend"));
     });
   }, []);
 
@@ -54,6 +65,8 @@ export const App = () => {
         dispatch(fetchDatatSuccessFavoriteAction(item));
       });
   }, []);
+
+
 
   useEffect(() => {
     favoriteMovie &&

@@ -7,6 +7,7 @@ export const urls = {
   AUTH_USER: `${TMS_URL}/auth/users/`,
   AUTH_USER_ACTIVATION: `${TMS_URL}/auth/users/activation/`,
   AUTH_JWT_CREATE: `${TMS_URL}/auth/jwt/create/`,
-  AUTH_JWT_REFRESH: `${TMS_URL}/auth/jwt/create/`,
+  AUTH_JWT_REFRESH: `${TMS_URL}/auth/jwt/refresh/`,
+  AUTH_JWT_VERIFY: `${TMS_URL}/auth/jwt/verify/`,
   GET_USER_INFO: `${TMS_URL}/auth/users/me/`,
 };

@@ -35,10 +35,15 @@ export const UserInfo = () => {
     navigate("/authentication/sign-in");
   };
 
+  const settings = () => {
+    setAnchorEl(null);
+    localStorage.setItem("access_token", "asd");
+    navigate("/authentication/sign-in");
+  };
+
   const logOut = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh__token");
-
     setAnchorEl(null);
     dispatch(setLogoutAction());
   };
@@ -135,7 +140,7 @@ export const UserInfo = () => {
       >
         {isLogged && (
           <>
-            <MenuItem onClick={handleClose}>Edit profile</MenuItem>
+            <MenuItem onClick={settings}>Edit profile</MenuItem>
             <Divider />
           </>
         )}
