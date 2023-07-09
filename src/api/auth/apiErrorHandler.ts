@@ -2,8 +2,6 @@ import axios, { AxiosError } from "axios";
 import { tokenRefresh } from "./tokenRefresh";
 
 export const apiErrorHandler = async (err: AxiosError) => {
-  console.log(err.response?.status);
-  
   if (err.response?.status === 401) {
     const refreshToken = localStorage.getItem("refresh__token");    
     if (refreshToken) {

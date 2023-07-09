@@ -43,7 +43,7 @@ export const Forma: FC<IForma> = ({
                     textTransform: "capitalize",
                     color: "#80858B",
                   }}
-                  onClick={() => navigate("/authorisation/reset-password")}
+                  onClick={() => navigate("/authentication/reset-password")}
                 >
                   Forgot password?
                 </Button>
@@ -81,10 +81,14 @@ export const Forma: FC<IForma> = ({
                   </Link>
                 </span>
               ) : (
+                type !== "New password" &&
                 type !== "Reset password" && (
                   <span className="forma__check">
                     Already have an account?{" "}
-                    <Link to={"/authentication/sign-in"} className="forma__link">
+                    <Link
+                      to={"/authentication/sign-in"}
+                      className="forma__link"
+                    >
                       {" "}
                       Sign In
                     </Link>

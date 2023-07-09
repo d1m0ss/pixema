@@ -104,9 +104,6 @@ export const SIgnUpPage: FC = () => {
     },
   };
 
-  console.log(errors);
-  console.log(!Object.values(errors).every((error) => !error));
-
   useEffect(() => {
     password === confirmPass && password
       ? setIsPasswordsSame(true)

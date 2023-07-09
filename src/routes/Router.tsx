@@ -9,11 +9,12 @@ import { PageTemlate } from "../components/PageTemlate/PageTemlate";
 import { AuthsTemplate } from "../components/AuthsTemplate/AuthsTemplate";
 import { SIgnInPage } from "../pages/SIgnInPage/SIgnInPage";
 import { SIgnUpPage } from "../pages/SIgnUpPage/SIgnUpPage";
-import { ResetPage } from "../pages/ResetPage/ResetPage";
 import { ConfirmPage } from "../pages/ConfirmPage/ConfirmPage";
 import { useAppSelector } from "../store/hooks";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { ActivatePage } from "../pages/ActivatePage/ActivatePage";
+import { ResetPassPage } from "../pages/ResetPassPage/ResetPassPage";
+import { ResetPassPageConfirm } from "../pages/ResetPassPageConfirm/ResetPassPageConfirm";
 
 export const Router: FC = () => {
   const { email } = useAppSelector((state) => state.user);
@@ -77,7 +78,8 @@ export const Router: FC = () => {
         <Route path="authentication" element={<AuthsTemplate />}>
           <Route path="activate/:uid/:token" element={<ActivatePage />} />
           <Route path="sign-in" element={<SIgnInPage />} />
-          <Route path="reset-password" element={<ResetPage />} />
+          <Route path="reset-password" element={<ResetPassPage />} />
+          <Route path="password/reset/confirm/:uid/:token" element={<ResetPassPageConfirm />} />
         </Route>
       </Route>
 
