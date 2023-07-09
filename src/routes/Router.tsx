@@ -15,6 +15,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import { ActivatePage } from "../pages/ActivatePage/ActivatePage";
 import { ResetPassPage } from "../pages/ResetPassPage/ResetPassPage";
 import { ResetPassPageConfirm } from "../pages/ResetPassPageConfirm/ResetPassPageConfirm";
+import { SettingsPage } from "../pages/SettingsPage/SettingsPage";
 
 export const Router: FC = () => {
   const { email } = useAppSelector((state) => state.user);
@@ -42,11 +43,6 @@ export const Router: FC = () => {
           <Route path=":movieId" element={<MoviePage />} />
         </Route>
 
-        <Route path="search" element={<Outlet />}>
-          <Route path="" element={<SearchPage />} />
-          <Route path=":movieId" element={<MoviePage />} />
-        </Route>
-
         <Route path="trends" element={<Outlet />}>
           <Route path="" element={<TrendsPage />} />
           <Route path=":movieId" element={<MoviePage />} />
@@ -59,6 +55,11 @@ export const Router: FC = () => {
             <Route path="" element={<FavoritesPage />} />
             <Route path=":movieId" element={<MoviePage />} />
           </Route>
+        </Route>
+
+        <Route path="settings" element={<Outlet />}>
+          <Route path="" element={<SettingsPage />} />
+          <Route path=":movieId" element={<MoviePage />} />
         </Route>
       </Route>
 
@@ -79,7 +80,10 @@ export const Router: FC = () => {
           <Route path="activate/:uid/:token" element={<ActivatePage />} />
           <Route path="sign-in" element={<SIgnInPage />} />
           <Route path="reset-password" element={<ResetPassPage />} />
-          <Route path="password/reset/confirm/:uid/:token" element={<ResetPassPageConfirm />} />
+          <Route
+            path="password/reset/confirm/:uid/:token"
+            element={<ResetPassPageConfirm />}
+          />
         </Route>
       </Route>
 

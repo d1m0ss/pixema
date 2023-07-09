@@ -17,9 +17,6 @@ export const Aside: FC<IAside> = () => {
   const navigate = useNavigate();
   const { authStatus } = useAppSelector((state) => state.auth);
   const location = useLocation();
-  const handleModalChange = () => {
-    dispatch(setModalState());
-  };
 
   const isLogged = authStatus;
 
@@ -80,7 +77,11 @@ export const Aside: FC<IAside> = () => {
               Favorites
             </Button>
             <Button
-              onClick={handleModalChange}
+              onClick={() => {
+                location.pathname.includes("pixema")
+                  ? navigate("settings")
+                  : navigate("/pixema/home");
+              }}
               variant="contained"
               startIcon={<SettingsIcon />}
               style={linksStyle}
