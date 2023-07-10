@@ -20,21 +20,30 @@ import {
 } from "./store/user/actions";
 import { setLoggedAction } from "./store/auth/actions";
 import { tokenVerify } from "./api/auth/tokenVerify";
-import { tokenRefresh } from "./api/auth/tokenRefresh";
+import { setDarkTheme, setLightTheme } from "./store/theme/actions";
 
 export const App = () => {
   const dispatch = useAppDispatch();
   const { favoriteMoviesIds } = useAppSelector((state) => state.usefuls);
   const { favoriteMovie } = useAppSelector((state) => state.movies);
   const { authStatus } = useAppSelector((state) => state.auth);
-  
+  const { theme } = useAppSelector((state) => state.theme);
+
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     token &&
-      tokenVerify({ token }).then(() => {
-        dispatch(setLoggedAction());
-      }).catch(()=>{});
+      tokenVerify({ token })
+        .then(() => {
+          dispatch(setLoggedAction());
+        })
+        .catch(() => {});
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!localStorage.getItem("theme")) {
+      localStorage.setItem("theme", theme);
+    }
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem("access_token")) {
@@ -43,7 +52,8 @@ export const App = () => {
           dispatch(setUserInfo(data));
           dispatch(setLoggedAction());
         })
-        .catch(() => {console.log('err');
+        .catch(() => {
+          console.log("err");
         });
     }
   }, [authStatus]);
@@ -65,8 +75,6 @@ export const App = () => {
         dispatch(fetchDatatSuccessFavoriteAction(item));
       });
   }, []);
-
-
 
   useEffect(() => {
     favoriteMovie &&

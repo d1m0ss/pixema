@@ -37,8 +37,7 @@ export const UserInfo = () => {
 
   const settings = () => {
     setAnchorEl(null);
-    localStorage.setItem("access_token", "asd");
-    navigate("/authentication/sign-in");
+    navigate("/pixema/settings");
   };
 
   const logOut = () => {

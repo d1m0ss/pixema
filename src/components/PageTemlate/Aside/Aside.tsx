@@ -21,7 +21,6 @@ export const Aside: FC<IAside> = () => {
   const isLogged = authStatus;
 
   const linksStyle = {
-    // color: "#80858B",
     justifyContent: "start",
     background: "transparent",
     "&:hover": { color: "#7B61FF" },

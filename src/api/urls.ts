@@ -11,5 +11,6 @@ export const urls = {
   AUTH_JWT_VERIFY: `${TMS_URL}/auth/jwt/verify/`,
   AUTH_RESET_PASSWORD: `${TMS_URL}/auth/users/reset_password/`,
   AUTH_RESET_PASSWORD_CONFIRM: `${TMS_URL}/auth/users/reset_password_confirm/`,
+  AUTH_SET_PASSWORD: `${TMS_URL}/auth/users/set_password/`,
   GET_USER_INFO: `${TMS_URL}/auth/users/me/`,
 };

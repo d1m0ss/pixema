@@ -3,12 +3,14 @@ import { moviesReducer } from "./movies/reducer";
 import { searchReducer } from "./useful/reducer";
 import { authReduser } from "./auth/reducer";
 import { userReduser } from "./user/reducer";
+import { themeReducer } from "./theme/reducer";
 
 const rootReducer = combineReducers({
   movies: moviesReducer,
   usefuls: searchReducer,
   auth: authReduser,
   user: userReduser,
+  theme: themeReducer,
 });
 export const store = configureStore({
   reducer: rootReducer,

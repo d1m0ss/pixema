@@ -52,10 +52,11 @@
     background-color: $dark;
     padding: 40px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     cursor: pointer;
   }
-  &__buttons-wrapp{
+  &__buttons-wrapp {
     margin-top: 8px;
     column-gap: 40px;
     padding-left: 40px;
@@ -64,4 +65,14 @@
     left: auto;
     margin-left: 50%;
   }
+}
+
+.pass__loading {
+  height: 278px;
+  border-radius: 10px;
+  background-color: $dark;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
