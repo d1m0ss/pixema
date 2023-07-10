@@ -1,7 +1,7 @@
 import {
-  FETCH_DATA_ERROR,
-  FETCH_DATA_REQUEST,
-  FETCH_DATA_SUCCESS,
+  FETCH_USER_ERROR,
+  FETCH_USER_REQUEST,
+  FETCH_USER_SUCCESS,
   SET_USER_EMAIL,
   SET_USER_ID,
   SET_USERNAME,
@@ -36,18 +36,18 @@ export interface ISetUsername extends IUserSet {
 }
 
 export interface IFetchDataRequestAction {
-  type: typeof FETCH_DATA_REQUEST;
+  type: typeof FETCH_USER_REQUEST;
 }
 
 export interface IFetchDataSuccessAction {
-  type: typeof FETCH_DATA_SUCCESS;
+  type: typeof FETCH_USER_SUCCESS;
   payload: {
     data: IUserResponse | null;
   };
 }
 
 export interface IFetchDataErrorAction {
-  type: typeof FETCH_DATA_ERROR;
+  type: typeof FETCH_USER_ERROR;
   payload: {
     error: string;
   };

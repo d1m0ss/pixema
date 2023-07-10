@@ -3,24 +3,24 @@ import {
   SET_USER_EMAIL,
   SET_USER_ID,
   SET_USERNAME,
-  FETCH_DATA_ERROR,
-  FETCH_DATA_REQUEST,
-  FETCH_DATA_SUCCESS,
+  FETCH_USER_ERROR,
+  FETCH_USER_REQUEST,
+  FETCH_USER_SUCCESS,
 } from "./actionTypes";
 import { ISetEmail, ISetUsername, ISetUserId, UserType, IFetchDataRequestAction, IFetchDataSuccessAction, IFetchDataErrorAction, IUserResponse } from "./interfaces";
 import { RootState } from "../store";
 import { getUserInfo } from "../../api/getUSerInfo";
 
-const fetchDatatRequestAction = (): IFetchDataRequestAction => ({
-  type: FETCH_DATA_REQUEST,
+const fetchuserRequestAction = (): IFetchDataRequestAction => ({
+  type: FETCH_USER_REQUEST,
 });
 
-const fetchDatatSuccessAction = (data: IUserResponse): IFetchDataSuccessAction => ({
-  type: FETCH_DATA_SUCCESS,
+const fetchuserSuccessAction = (data: IUserResponse): IFetchDataSuccessAction => ({
+  type: FETCH_USER_SUCCESS,
   payload: { data },
 });
-const fetchDatatErrorAction = (error: string): IFetchDataErrorAction => ({
-  type: FETCH_DATA_ERROR,
+const fetchuserErrorAction = (error: string): IFetchDataErrorAction => ({
+  type: FETCH_USER_ERROR,
   payload: { error },
 });
 
@@ -43,9 +43,9 @@ export const setUserInfo =
   (params: string,) =>
   async (dispatch: ThunkDispatch<RootState, unknown, UserType>) => {
     try {
-      dispatch(fetchDatatRequestAction());
-      dispatch(fetchDatatSuccessAction(await getUserInfo()));
+      dispatch(fetchuserRequestAction());
+      dispatch(fetchuserSuccessAction(await getUserInfo()));
     } catch {
-      dispatch(fetchDatatErrorAction("Some server error"));
+      dispatch(fetchuserErrorAction("Some server error"));
     }
   };

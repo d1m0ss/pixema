@@ -1,7 +1,7 @@
 import {
-  FETCH_DATA_ERROR,
-  FETCH_DATA_REQUEST,
-  FETCH_DATA_SUCCESS,
+  FETCH_USER_ERROR,
+  FETCH_USER_REQUEST,
+  FETCH_USER_SUCCESS,
   SET_USER_EMAIL,
   SET_USER_ID,
   SET_USERNAME,
@@ -22,11 +22,11 @@ export const userReduser = (
   action: UserType
 ): IUserState => {
   switch (action.type) {
-    case FETCH_DATA_REQUEST:
+    case FETCH_USER_REQUEST:
       return { ...state, isLoading: true };
-    case FETCH_DATA_SUCCESS:
+    case FETCH_USER_SUCCESS:
       return { ...state, isLoading: false, user: action.payload.data };
-    case FETCH_DATA_ERROR:
+    case FETCH_USER_ERROR:
       return { ...state, isLoading: false, error: action.payload.error };
     case SET_USER_EMAIL:
       return { ...state, email: action.payload.data };
