@@ -48,6 +48,11 @@ export const Router: FC = () => {
           <Route path=":movieId" element={<MoviePage />} />
         </Route>
 
+        <Route path="search" element={<Outlet />}>
+          <Route path="" element={<SearchPage />} />
+          <Route path=":movieId" element={<MoviePage />} />
+        </Route>
+        
         <Route
           element={<ProtectedRoute access={authStatus} to="/pixema/home" />}
         >
@@ -56,13 +61,12 @@ export const Router: FC = () => {
             <Route path=":movieId" element={<MoviePage />} />
           </Route>
         </Route>
-        
+
         <Route
           element={<ProtectedRoute access={authStatus} to="/pixema/home" />}
         >
           <Route path="settings" element={<Outlet />}>
             <Route path="" element={<SettingsPage />} />
-            <Route path=":movieId" element={<MoviePage />} />
           </Route>
         </Route>
       </Route>

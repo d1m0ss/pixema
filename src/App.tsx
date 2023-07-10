@@ -12,15 +12,11 @@ import { IMovie } from "./store/movies/interfaces";
 import {} from "./store/movies/actions";
 import { setFavoriteMoviesId } from "./store/useful/actions";
 import { getUserInfo } from "./api/getUSerInfo";
-import {
-  setUserEmailAction,
-  setUserIdAction,
-  setUserInfo,
-  setUsernameAction,
-} from "./store/user/actions";
+import { setUserInfo } from "./store/user/actions";
 import { setLoggedAction } from "./store/auth/actions";
 import { tokenVerify } from "./api/auth/tokenVerify";
 import { setDarkTheme, setLightTheme } from "./store/theme/actions";
+import { CircularProgress } from "@mui/material";
 
 export const App = () => {
   const dispatch = useAppDispatch();
@@ -43,6 +39,9 @@ export const App = () => {
     if (!localStorage.getItem("theme")) {
       localStorage.setItem("theme", theme);
     }
+    localStorage.getItem("theme") === "dark"
+      ? dispatch(setDarkTheme())
+      : dispatch(setLightTheme());
   }, []);
 
   useEffect(() => {

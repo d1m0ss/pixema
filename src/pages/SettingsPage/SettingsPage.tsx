@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import "./SettingsPage.scss";
 import { Alert, Button, CircularProgress } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
@@ -94,7 +94,9 @@ export const SettingsPage: FC<ISettingsPage> = () => {
     confirmPassChange: (currPass: string) => {
       setConfirmPassword(currPass);
     },
-    switchChange: () => {},
+    switchChange: () => {
+      theme === "dark" ? dispatch(setLightTheme()) : dispatch(setDarkTheme());
+    },
     submit: () => {
       const passesValue = "".concat(
         new_password,
@@ -158,6 +160,12 @@ export const SettingsPage: FC<ISettingsPage> = () => {
       return false;
     }
   };
+
+  useEffect(() => {
+    theme === "dark"
+      ? localStorage.setItem("theme", "dark")
+      : localStorage.setItem("theme", "light");
+  }, [theme]);
 
   return (
     <section className="settings-page">
@@ -271,7 +279,7 @@ export const SettingsPage: FC<ISettingsPage> = () => {
             </div>
             <Switch
               sx={customStyles.swithcStyle}
-              defaultChecked={true}
+              defaultChecked={theme === "dark"}
               onClick={handle.switchChange}
             />
           </label>

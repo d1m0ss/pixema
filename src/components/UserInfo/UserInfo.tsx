@@ -11,6 +11,7 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setLogoutAction } from "../../store/auth/actions";
+import { CircularProgress } from "@mui/material";
 
 export const UserInfo = () => {
   const dispatch = useAppDispatch();
@@ -79,7 +80,7 @@ export const UserInfo = () => {
               >
                 {!!user
                   ? `${user.username.split(" ").map((name) => name[0])}`
-                  : null}
+                  : <CircularProgress color="primary" />}
               </Avatar>
             ) : (
               <PersonOutlineIcon
