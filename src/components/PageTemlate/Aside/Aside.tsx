@@ -5,10 +5,10 @@ import WhatshotIcon from "@mui/icons-material/Whatshot";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Button, IconButton } from "@mui/material";
-import { PixemaLogo } from "../../../assets/icon/icons";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setModalState } from "../../../store/useful/actions";
 import { useLocation, useNavigate } from "react-router-dom";
+import { PixemaLogo } from "../../../assets/icon/pixemaLogo";
 
 interface IAside {}
 

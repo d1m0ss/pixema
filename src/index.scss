@@ -79,3 +79,61 @@ $S1-2Mobile: normal 700 16px/24px "Exo 2";
 $S1-3Mobile: normal 600 16px/24px "Exo 2";
 $S1-4Mobile: normal 500 16px/24px "Exo 2";
 $BodyMobile: normal 400 16px/24px "Exo 2";
+
+#root .light {
+  background-color: transparent;
+  color: $black;
+  transition: all 0.3s;
+  & h3 + button {
+    border: 1px solid grey;
+    background-color: transparent;
+  }
+  & .filter__wrapper {
+    padding: 0;
+    background-color: $white;
+    & .filter__settings {
+      padding: 40px;
+    }
+  }
+  & .auths-template__back {
+    opacity: 1;
+  }
+  & form > article {
+    & > article,
+    & > label {
+      background-color: $light;
+    }
+  }
+  & * {
+    border-color: transparent;
+  }
+  & span {
+    box-shadow: none;
+  }
+  & fieldset {
+    border: 1px solid #000000;
+  }
+  & label,
+  & article,
+  & div {
+    background-color: transparent;
+  }
+  & .forma__field {
+    border: none;
+  }
+  & .forma {
+    background-color: $secondary2;
+  }
+  & td {
+    color: #000000;
+  }
+  & div {
+    & * {
+      color: black;
+    }
+  }
+}
+
+#root .dark {
+  transition: all 0.3s;
+}

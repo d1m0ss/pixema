@@ -16,6 +16,7 @@ import { ActivatePage } from "../pages/ActivatePage/ActivatePage";
 import { ResetPassPage } from "../pages/ResetPassPage/ResetPassPage";
 import { ResetPassPageConfirm } from "../pages/ResetPassPageConfirm/ResetPassPageConfirm";
 import { SettingsPage } from "../pages/SettingsPage/SettingsPage";
+import { EmailChecPage } from "../pages/EmailChecPage/EmailChecPage";
 
 export const Router: FC = () => {
   const { email } = useAppSelector((state) => state.user);
@@ -52,7 +53,7 @@ export const Router: FC = () => {
           <Route path="" element={<SearchPage />} />
           <Route path=":movieId" element={<MoviePage />} />
         </Route>
-        
+
         <Route
           element={<ProtectedRoute access={authStatus} to="/pixema/home" />}
         >
@@ -75,18 +76,23 @@ export const Router: FC = () => {
       >
         <Route path="authorisation" element={<AuthsTemplate />}>
           <Route path="sign-up" element={<SIgnUpPage />} />
-          <Route path="activate/:uid/:token" element={<ActivatePage />} />
           <Route
             element={<ProtectedRoute access={!!email} to="/pixema/home" />}
           >
             <Route path="confirm" element={<ConfirmPage />} />
+            <Route path="activate/:uid/:token" element={<ActivatePage />} />
+            <Route
+              path="password/reset/confirm/:uid/:token"
+              element={<ResetPassPageConfirm />}
+            />
           </Route>
         </Route>
 
         <Route path="authentication" element={<AuthsTemplate />}>
-          <Route path="activate/:uid/:token" element={<ActivatePage />} />
           <Route path="sign-in" element={<SIgnInPage />} />
+          <Route path="check-email" element={<EmailChecPage />} />
           <Route path="reset-password" element={<ResetPassPage />} />
+          <Route path="activate/:uid/:token" element={<ActivatePage />} />
           <Route
             path="password/reset/confirm/:uid/:token"
             element={<ResetPassPageConfirm />}

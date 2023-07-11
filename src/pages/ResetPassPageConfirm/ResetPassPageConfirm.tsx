@@ -50,7 +50,7 @@ export const ResetPassPageConfirm: FC = () => {
       }
     },
     success: () => {
-      navigate("/pixema/home");
+      navigate("/authentication/sign-in");
     },
   };
 

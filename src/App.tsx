@@ -59,10 +59,10 @@ export const App = () => {
 
   useEffect(() => {
     titleMoviesMock.forEach((movieID) => {
-      // dispatch(fetchMovie(`&i=${movieID}`, "Title"));
+      dispatch(fetchMovie(`&i=${movieID}`, "Title"));
     });
     trendMoviesMock.forEach((movieID) => {
-      // dispatch(fetchMovie(`&i=${movieID}`, "Trend"));
+      dispatch(fetchMovie(`&i=${movieID}`, "Trend"));
     });
   }, []);
 

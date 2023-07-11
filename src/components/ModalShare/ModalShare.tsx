@@ -57,7 +57,12 @@ export const ModalShare: FC<IModalShare> = () => {
       ></article>
       <article className="share__modal">
         <Button
-          sx={{ color: "white", margin: "0", padding: "0" }}
+          sx={{
+            color: "white",
+            margin: "0",
+            padding: "0",
+            textTransform: "capitalize",
+          }}
           onClick={() => navigator.clipboard.writeText(window.location.href)}
         >
           <div className="share__path">

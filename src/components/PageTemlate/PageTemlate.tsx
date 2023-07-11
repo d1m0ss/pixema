@@ -13,9 +13,10 @@ interface IPageTemlate {
 
 export const PageTemlate: FC<IPageTemlate> = ({ children }) => {
   const { modalState } = useAppSelector((state) => state.usefuls);
+  const { theme } = useAppSelector((state) => state.theme);
 
   return (
-    <section className="page-template">
+    <section className={`page-template ${theme}`}>
       <Aside />
       <article className="page-template__content">
         <Header />

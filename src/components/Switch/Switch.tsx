@@ -3,9 +3,6 @@ import { styled } from "@mui/material/styles";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch, { SwitchProps } from "@mui/material/Switch";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-
 
 const IOSSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -58,13 +55,8 @@ const IOSSwitch = styled((props: SwitchProps) => (
   },
 }));
 
-
-
 export const CustomizedSwitches = () => {
   return (
-      <FormControlLabel
-        control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-        label="iOS style"
-      />
+    <FormControlLabel control={<IOSSwitch sx={{ m: 1 }} />} label="iOS style" />
   );
 };

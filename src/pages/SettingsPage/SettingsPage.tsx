@@ -68,7 +68,7 @@ export const SettingsPage: FC<ISettingsPage> = () => {
       },
       "& .MuiSwitch-track": {
         borderRadius: 26 / 2,
-        backgroundColor: "#E9E9EA",
+        backgroundColor: "#323537",
         opacity: 1,
       },
     },
@@ -274,8 +274,17 @@ export const SettingsPage: FC<ISettingsPage> = () => {
           <h3 className="settings-page__color-mod-title">Color mode</h3>
           <label form="" className="settings-page__color-mod-change">
             <div className="settings-page__color-mod-text">
-              <h3>Dark</h3>
-              <span>Use dark thema</span>
+              {theme === "dark" ? (
+                <>
+                  <h3>Dark</h3>
+                  <span>Use dark thema</span>
+                </>
+              ) : (
+                <>
+                  <h3>Light</h3>
+                  <span>Use light thema</span>
+                </>
+              )}
             </div>
             <Switch
               sx={customStyles.swithcStyle}
@@ -307,7 +316,7 @@ export const SettingsPage: FC<ISettingsPage> = () => {
             type="submit"
             disabled={isLoading}
           >
-            {isLoading ? <CircularProgress color="inherit" /> : "Save"}
+            {isLoading ? <CircularProgress color="info" /> : "Save"}
           </Button>
         </article>
       </form>
