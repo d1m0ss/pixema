@@ -38,7 +38,7 @@ const fetchDatatSuccessAction = (data: any): IFetchDataSuccessAction => ({
   payload: { data },
 });
 
-const fetchDatatSuccessTitleAction = (
+export const fetchDatatSuccessTitleAction = (
   data: any
 ): IFetchDataSuccessTitleAction => ({
   type: FETCH_DATA_SUCCESS_TITLE,
@@ -59,7 +59,7 @@ const fetchDatatSuccessSingleAction = (
   payload: { data },
 });
 
-const fetchDatatSuccessTrendAction = (
+export const fetchDatatSuccessTrendAction = (
   data: any
 ): IFetchDataSuccessTrendAction => ({
   type: FETCH_DATA_SUCCESS_TREND,

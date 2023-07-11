@@ -46,10 +46,11 @@ export const ResetPassPage: FC = () => {
     },
     submit: () => {
       if (isFormValid()) {
-        // setIsLoading(true);
+        setIsLoading(true);
         resetPassword({ email })
           .then(() => {
             dispatch(setUserEmailAction(email));
+            sessionStorage.setItem("userEmail", email);
             navigate("/authentication/check-email");
           })
           .catch((error) => {

@@ -19,7 +19,7 @@ import { SettingsPage } from "../pages/SettingsPage/SettingsPage";
 import { EmailChecPage } from "../pages/EmailChecPage/EmailChecPage";
 
 export const Router: FC = () => {
-  const { email } = useAppSelector((state) => state.user);
+  const { email, isLoading } = useAppSelector((state) => state.user);
   const { authStatus } = useAppSelector((state) => state.auth);
 
   return (
@@ -71,6 +71,7 @@ export const Router: FC = () => {
           </Route>
         </Route>
       </Route>
+
       <Route
         element={<ProtectedRoute access={!authStatus} to="/pixema/home" />}
       >
@@ -90,13 +91,17 @@ export const Router: FC = () => {
 
         <Route path="authentication" element={<AuthsTemplate />}>
           <Route path="sign-in" element={<SIgnInPage />} />
-          <Route path="check-email" element={<EmailChecPage />} />
           <Route path="reset-password" element={<ResetPassPage />} />
           <Route path="activate/:uid/:token" element={<ActivatePage />} />
           <Route
             path="password/reset/confirm/:uid/:token"
             element={<ResetPassPageConfirm />}
-          />
+          />{" "}
+          <Route
+            element={<ProtectedRoute access={!!email} to="/pixema/home" />}
+          >
+            <Route path="check-email" element={<EmailChecPage />} />
+          </Route>
         </Route>
       </Route>
 
