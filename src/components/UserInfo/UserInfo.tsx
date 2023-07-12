@@ -139,10 +139,10 @@ export const UserInfo = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         {isLogged && (
-          <>
+          <div>
             <MenuItem onClick={settings}>Edit profile</MenuItem>
             <Divider />
-          </>
+          </div>
         )}
         {isLogged ? (
           <MenuItem onClick={logOut}>Log Out</MenuItem>

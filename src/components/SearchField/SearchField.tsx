@@ -9,11 +9,13 @@ import { setModalState, setSearchValue } from "../../store/useful/actions";
 import IconButton from "@mui/material/IconButton";
 
 interface ISearchField {
+  value?: string;
   onChangeValue?: (value: string) => void;
   onInputClick?: (value: any) => void;
 }
 
 export const SearchField: React.FC<ISearchField> = ({
+  value,
   onChangeValue = () => {},
   onInputClick = () => {},
 }) => {
@@ -27,11 +29,11 @@ export const SearchField: React.FC<ISearchField> = ({
         id="outlined-basic"
         label="Search"
         variant="outlined"
+        value={value}
         onChange={(e) => {
           onChangeValue(e.target.value);
         }}
-        onClick={(e:any) => onInputClick(e.target.value)}
-        // style={{ background: "#323537" }}
+        onClick={(e: any) => onInputClick(e.target.value)}
         sx={{
           background: "#323537",
           borderRadius: 2,

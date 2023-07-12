@@ -12,7 +12,7 @@ export const Score: FC<IScore> = ({ children }) => {
         className="score__value"
         style={{
           backgroundColor: `${
-            children !== "N/A" ? (+children >= 6 ? "#00A340" : "#F45D2D") : "#9e9e9e60"
+            children !== "N/A" ? (+children >= 7 ? "#00A340" : "#F45D2D") : "#9e9e9e60"
           }`,
         }}
       >

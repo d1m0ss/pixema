@@ -20,6 +20,7 @@ import { ModalShare } from "../../components/ModalShare/ModalShare";
 import { Score } from "../../components/Score/Score";
 import { IMDbLogo } from "../../assets/icon/icons";
 import { ActionAreaCard } from "../../components/Card/Card";
+import { Loader } from "../../components/Loader/Loader";
 
 interface IMoviePage {}
 
@@ -83,9 +84,9 @@ export const MoviePage: FC<IMoviePage> = () => {
     <>
       <section className="movie">
         {loading && !movie ? (
-          <h2>Loading...</h2>
+          <Loader />
         ) : (
-          movie && movieId !== movie.imdbID && <h2>Loading...</h2>
+          movie && movieId !== movie.imdbID && <Loader />
         )}
         {error && !movie && <h2>{error}</h2>}
         {(!loading || movie) && movie && movie.imdbID === movieId && (

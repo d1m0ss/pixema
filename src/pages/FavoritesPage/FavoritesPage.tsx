@@ -3,6 +3,7 @@ import { MoviesTemlate } from "../../components/MoviesTemlate/MoviesTemlate";
 import { useAppSelector } from "../../store/hooks";
 import "./FavoritesPage.scss";
 import { EmptyFav } from "../../assets/icon/icons";
+import { Loader } from "../../components/Loader/Loader";
 
 export const FavoritesPage: FC = () => {
   const { favoriteMovie, loading, error } = useAppSelector(
@@ -10,7 +11,7 @@ export const FavoritesPage: FC = () => {
   );
   return (
     <>
-      {loading && !favoriteMovie && <h2>Loading...</h2>}
+      {loading && !favoriteMovie && <Loader />}
       {error && !favoriteMovie && <h2>{error}</h2>}
       {!loading && !favoriteMovie && !error && (
         <section className="empty-fav">
