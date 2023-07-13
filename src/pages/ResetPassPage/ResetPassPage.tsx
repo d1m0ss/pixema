@@ -1,12 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import { FC, useState } from "react";
+
+import { setUserEmailAction } from "../../store/user/actions";
+import { useAppDispatch } from "../../store/hooks";
+
+import { resetPassword } from "../../api/auth/resetPassword";
 import { Input } from "../../components/Input/Input";
 import { Forma } from "../../components/Forma/Forma";
-import "./ResetPassPage.scss";
-import { resetPassword } from "../../api/auth/resetPassword";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../store/hooks";
-import { setUserEmailAction } from "../../store/user/actions";
 import { CircularProgress } from "@mui/material";
+
+import "./ResetPassPage.scss";
 
 interface IError {
   email: string;
@@ -15,6 +18,7 @@ interface IError {
 export const ResetPassPage: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<IError>({ email: "" });
@@ -66,14 +70,12 @@ export const ResetPassPage: FC = () => {
   return (
     <>
       {isLoading ? (
-        <>
-          <Forma type="New password" name="Loading" isDisabled>
-            <h4>Sending a request</h4>
-            <article className="loading">
-              <CircularProgress color="info" />
-            </article>
-          </Forma>
-        </>
+        <Forma type="New password" name="Loading" isDisabled>
+          <h4>Sending a request</h4>
+          <article className="loading">
+            <CircularProgress color="info" />
+          </article>
+        </Forma>
       ) : (
         <Forma
           name="Reset"

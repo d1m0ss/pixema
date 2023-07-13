@@ -1,9 +1,10 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+
 import { moviesReducer } from "./movies/reducer";
 import { searchReducer } from "./useful/reducer";
+import { themeReducer } from "./theme/reducer";
 import { authReduser } from "./auth/reducer";
 import { userReduser } from "./user/reducer";
-import { themeReducer } from "./theme/reducer";
 
 const rootReducer = combineReducers({
   movies: moviesReducer,

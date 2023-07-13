@@ -1,8 +1,11 @@
 import { FC } from "react";
-import { MoviesTemlate } from "../../components/MoviesTemlate/MoviesTemlate";
+
 import { useAppSelector } from "../../store/hooks";
-import "./HomePage.scss";
+
+import { MoviesTemlate } from "../../components/MoviesTemlate/MoviesTemlate";
 import { Loader } from "../../components/Loader/Loader";
+
+import "./HomePage.scss";
 
 export const HomePage: FC = () => {
   const { titleMovies, loading, error } = useAppSelector(

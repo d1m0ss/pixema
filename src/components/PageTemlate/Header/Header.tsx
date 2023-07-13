@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { useAppDispatch } from "../../../store/hooks";
+import { useNavigate } from "react-router-dom";
+
 import {
   refreshPagesCount,
   setSearchValue,
@@ -8,10 +9,11 @@ import {
   fetchDatatRefreshAction,
   fetchMovie,
 } from "../../../store/movies/actions";
+import { useAppDispatch } from "../../../store/hooks";
+
 import { SearchField } from "../../SearchField/SearchField";
 import { UserInfo } from "../../UserInfo/UserInfo";
 import "./Header.scss";
-import { useNavigate } from "react-router-dom";
 
 export const Header: FC = () => {
   const dispatch = useAppDispatch();
@@ -19,34 +21,35 @@ export const Header: FC = () => {
 
   let timeout: any = null;
 
-  const hendleSearchChange = (value: string) => {
-    clearTimeout(timeout);
-    if (value) {
-      timeout = setTimeout(() => {
+  const handle ={ 
+    searchChange: (value: string) => {
+      clearTimeout(timeout);
+      if (value) {
+        timeout = setTimeout(() => {
+          dispatch(fetchDatatRefreshAction());
+          navigate("/pixema/search");
+          dispatch(setSearchValue(value));
+          dispatch(fetchMovie(`&s=${value}`, "Search"));
+          dispatch(refreshPagesCount());
+        }, 800);
+      } else {
+        navigate("/pixema");
+        dispatch(setSearchValue(""));
         dispatch(fetchDatatRefreshAction());
-        navigate("/pixema/search");
-        dispatch(setSearchValue(value));
-        dispatch(fetchMovie(`&s=${value}`, "Search"));
         dispatch(refreshPagesCount());
-      }, 800);
-    } else {
-      navigate("/pixema");
-      dispatch(setSearchValue(""));
-      dispatch(fetchDatatRefreshAction());
-      dispatch(refreshPagesCount());
-    }
-  };
-
-  const handleClick = (value: string) => {
-    value && navigate("search");
-  };
+      }
+    },
+  click: (value: string) => {
+      value && navigate("search");
+    },
+  }
 
   return (
     <section className="header">
       <div className="header__search-wrapper">
         <SearchField
-          onChangeValue={hendleSearchChange}
-          onInputClick={handleClick}
+          onChangeValue={handle.searchChange}
+          onInputClick={handle.click}
         />
       </div>
       <div className="header__ui-wrapper">

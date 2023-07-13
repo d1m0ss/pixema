@@ -1,14 +1,13 @@
-import { FC, useEffect, useState } from "react";
-import "./ActivatePage.scss";
-import { Forma } from "../../components/Forma/Forma";
 import { useNavigate, useParams } from "react-router-dom";
+import { FC, useEffect, useState } from "react";
+
 import { postActivate } from "../../api/auth/postActivate";
+import { Forma } from "../../components/Forma/Forma";
 
-interface IActivatePage {}
 
-export const ActivatePage: FC<IActivatePage> = () => {
-  const navigate = useNavigate();
+export const ActivatePage: FC = () => {
   const { uid, token } = useParams();
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
   const [isActivate, setIsActivate] = useState(false);
@@ -36,7 +35,9 @@ export const ActivatePage: FC<IActivatePage> = () => {
           <h4>Your registration is now completed</h4>
         </Forma>
       )}
+
       {isLoading && <h2>Loading...</h2>}
+      
       {isError && (
         <Forma
           name="Try Again"

@@ -63,4 +63,7 @@
     display: flex;
     column-gap: 40px;
   }
+  & span {
+    color: $white;
+  }
 }

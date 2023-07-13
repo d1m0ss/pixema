@@ -1,14 +1,15 @@
 import { FC } from "react";
-import "./ConfirmPage.scss";
-import { Forma } from "../../components/Forma/Forma";
 import { useNavigate } from "react-router-dom";
+
 import { useAppSelector } from "../../store/hooks";
 
-interface IConfirmPage {}
+import { Forma } from "../../components/Forma/Forma";
 
-export const ConfirmPage: FC<IConfirmPage> = () => {
-  const { email } = useAppSelector((state) => state.user);
+export const ConfirmPage: FC = () => {
   const navigate = useNavigate();
+
+  const { email } = useAppSelector((state) => state.user);
+
   return (
     <Forma
       name="Confirm Registration"

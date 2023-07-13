@@ -1,8 +1,10 @@
 import { FC, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
+import { resetPasswordConfirm } from "../../api/auth/resetPasswordConfirm";
 import { Input } from "../../components/Input/Input";
 import { Forma } from "../../components/Forma/Forma";
-import { useNavigate, useParams } from "react-router-dom";
-import { resetPasswordConfirm } from "../../api/auth/resetPasswordConfirm";
+
 import "./ResetPassPageConfirm.scss";
 
 interface IError {

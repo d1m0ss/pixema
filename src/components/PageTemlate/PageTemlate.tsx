@@ -1,11 +1,14 @@
-import { FC, ReactNode } from "react";
-import { Header } from "./Header/Header";
-import { Container } from "./Container/Container";
-import { Aside } from "./Aside/Aside";
-import { useAppSelector } from "../../store/hooks";
-import { Filter } from "./Filter/Filter";
-import "./PageTemlate.scss";
 import { Outlet } from "react-router-dom";
+import { FC, ReactNode } from "react";
+
+import { useAppSelector } from "../../store/hooks";
+
+import { Container } from "./Container/Container";
+import { Header } from "./Header/Header";
+import { Filter } from "./Filter/Filter";
+import { Aside } from "./Aside/Aside";
+
+import "./PageTemlate.scss";
 
 interface IPageTemlate {
   children?: ReactNode;

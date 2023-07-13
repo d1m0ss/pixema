@@ -1,9 +1,12 @@
-import { FC, ReactNode } from "react";
-import "./AuthsTemplate.scss";
 import { Outlet, useNavigate } from "react-router-dom";
+import { FC, ReactNode } from "react";
+
 import { useAppSelector } from "../../store/hooks";
-import { IconButton } from "@mui/material";
+
 import { PixemaLogo } from "../../assets/icon/pixemaLogo";
+import { IconButton } from "@mui/material";
+
+import "./AuthsTemplate.scss";
 
 interface IAuthsTemplate {
   children?: ReactNode;
@@ -13,6 +16,7 @@ export const AuthsTemplate: FC<IAuthsTemplate> = ({ children }) => {
   const { titleMovies, trendMovies } = useAppSelector((state) => state.movies);
   const { theme } = useAppSelector((state) => state.theme);
   const navigate = useNavigate();
+
   return (
     <section className={`auths-template ${theme}`}>
       <article className="auths-template__back">

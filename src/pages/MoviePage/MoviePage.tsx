@@ -1,12 +1,7 @@
 import { FC, useEffect, useState } from "react";
-import "./MoviePage.scss";
 import { useNavigate, useParams } from "react-router-dom";
+
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { Table } from "./Table/Table";
-import ShareIcon from "@mui/icons-material/Share";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
-import { ButtonGroup, IconButton } from "@mui/material";
 import {
   fetchDatatRemoveFavoriteMovieAction,
   fetchMovie,
@@ -16,11 +11,20 @@ import {
   setFavoriteMoviesId,
   setModalShareState,
 } from "../../store/useful/actions";
+
 import { ModalShare } from "../../components/ModalShare/ModalShare";
-import { Score } from "../../components/Score/Score";
-import { IMDbLogo } from "../../assets/icon/icons";
 import { ActionAreaCard } from "../../components/Card/Card";
 import { Loader } from "../../components/Loader/Loader";
+import { ButtonGroup, IconButton } from "@mui/material";
+import { Score } from "../../components/Score/Score";
+import { Table } from "./Table/Table";
+
+import { BookmarkBorder } from "@mui/icons-material";
+import { IMDbLogo } from "../../assets/icon/icons";
+import { Bookmark } from "@mui/icons-material";
+import { Share } from "@mui/icons-material";
+
+import "./MoviePage.scss";
 
 interface IMoviePage {}
 
@@ -35,11 +39,14 @@ export const MoviePage: FC<IMoviePage> = () => {
     titleMovies,
     trendMovies,
   } = useAppSelector((state) => state.movies);
+  const { movieId } = useParams();
+
   const { favoriteMoviesIds, modalShareState } = useAppSelector(
     (state) => state.usefuls
   );
+  const [isBookmark, setIsBookmark] = useState(false);
+
   const { authStatus } = useAppSelector((state) => state.auth);
-  const { movieId } = useParams();
 
   const movie = singleMovie
     ? singleMovie
@@ -48,22 +55,22 @@ export const MoviePage: FC<IMoviePage> = () => {
         favoriteMoviesIds.includes(movie.imdbID)
       )[0];
 
-  const [isBookmark, setIsBookmark] = useState(false);
-
-  const handleBookmarkToggle = () => {
-    if (movie && !favoriteMoviesIds.includes(movie.imdbID)) {
-      dispatch(setFavoriteMoviesId(movie.imdbID));
-      setIsBookmark(true);
-    } else {
-      movie && dispatch(removeFavoriteMoviesId(movie.imdbID));
-      setIsBookmark(false);
+  const handle = {
+    bookmarkToggle: () => {
+      if (movie && !favoriteMoviesIds.includes(movie.imdbID)) {
+        dispatch(setFavoriteMoviesId(movie.imdbID));
+        setIsBookmark(true);
+      } else {
+        movie && dispatch(removeFavoriteMoviesId(movie.imdbID));
+        setIsBookmark(false);
+      }
+  
+      if (isBookmark && movie) {
+        dispatch(fetchDatatRemoveFavoriteMovieAction(movie.imdbID));
+        setIsBookmark(false);
+      }
     }
-
-    if (isBookmark && movie) {
-      dispatch(fetchDatatRemoveFavoriteMovieAction(movie.imdbID));
-      setIsBookmark(false);
-    }
-  };
+  }
 
   useEffect(() => {
     movie &&
@@ -109,7 +116,7 @@ export const MoviePage: FC<IMoviePage> = () => {
                 >
                   <IconButton
                     aria-label="bookmark"
-                    onClick={handleBookmarkToggle}
+                    onClick={handle.bookmarkToggle}
                     disabled={!authStatus}
                     sx={{
                       "&.Mui-disabled": { backgroundColor: "#323537" },
@@ -120,7 +127,7 @@ export const MoviePage: FC<IMoviePage> = () => {
                       color: "#AFB2B6",
                     }}
                   >
-                    {isBookmark ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+                    {isBookmark ? <Bookmark /> : <BookmarkBorder />}
                   </IconButton>
                   <IconButton
                     aria-label="share"
@@ -133,7 +140,7 @@ export const MoviePage: FC<IMoviePage> = () => {
                     }}
                     onClick={() => dispatch(setModalShareState())}
                   >
-                    <ShareIcon />
+                    <Share />
                   </IconButton>
                 </ButtonGroup>
               </div>

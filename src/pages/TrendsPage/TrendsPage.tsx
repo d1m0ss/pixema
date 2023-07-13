@@ -1,6 +1,8 @@
 import { FC } from "react";
-import { MoviesTemlate } from "../../components/MoviesTemlate/MoviesTemlate";
+
 import { useAppSelector } from "../../store/hooks";
+
+import { MoviesTemlate } from "../../components/MoviesTemlate/MoviesTemlate";
 
 export const TrendsPage: FC = () => {
   const { trendMovies, loading, error } = useAppSelector(

@@ -1,27 +1,33 @@
-import "./App.scss";
-
 import { useEffect } from "react";
-import { titleMoviesMock, trendMoviesMock } from "./mock";
+
 import {
   fetchDatatSuccessFavoriteAction,
   fetchDatatSuccessTitleAction,
   fetchDatatSuccessTrendAction,
   fetchMovie,
 } from "./store/movies/actions";
-import { useAppDispatch, useAppSelector } from "./store/hooks";
-import { Router } from "./routes/Router";
-import { IMovie } from "./store/movies/interfaces";
-import {} from "./store/movies/actions";
-import { setFavoriteMoviesId } from "./store/useful/actions";
-import { getUserInfo } from "./api/getUSerInfo";
 import { setUserEmailAction, setUserInfo } from "./store/user/actions";
-import { setLoggedAction } from "./store/auth/actions";
-import { tokenVerify } from "./api/auth/tokenVerify";
 import { setDarkTheme, setLightTheme } from "./store/theme/actions";
-import { CircularProgress } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
+import { setFavoriteMoviesId } from "./store/useful/actions";
+
+
+import { tokenVerify } from "./api/auth/tokenVerify";
+
+import { setLoggedAction } from "./store/auth/actions";
+
+import { getUserInfo } from "./api/getUSerInfo";
+import { Router } from "./routes/Router";
+
+import { IMovie } from "./store/movies/interfaces";
+
+import { titleMoviesMock, trendMoviesMock } from "./mock";
+
+import "./App.scss";
 
 export const App = () => {
   const dispatch = useAppDispatch();
+
   const { favoriteMoviesIds } = useAppSelector((state) => state.usefuls);
   const { favoriteMovie, titleMovies, trendMovies } = useAppSelector(
     (state) => state.movies

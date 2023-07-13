@@ -1,12 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import { FC, useState } from "react";
+
+import { setLoggedAction } from "../../store/auth/actions";
+import { useAppDispatch } from "../../store/hooks";
+
 import { Input } from "../../components/Input/Input";
 import { Forma } from "../../components/Forma/Forma";
 import { postLogin } from "../../api/auth/postLogin";
-import { useNavigate } from "react-router-dom";
-import "./SIgnInPage.scss";
-import { useAppDispatch } from "../../store/hooks";
-import { setLoggedAction } from "../../store/auth/actions";
 import { CircularProgress } from "@mui/material";
+
+import "./SIgnInPage.scss";
 
 interface IErrors {
   email: string;

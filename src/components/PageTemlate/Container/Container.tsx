@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
+
 import "./Container.scss";
-import { Header } from "../Header/Header";
 
 interface IContainer {
   children?: ReactNode;

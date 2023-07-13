@@ -1,12 +1,13 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import InputAdornment from "@mui/material/InputAdornment";
-import TextField from "@mui/material/TextField";
-import SortIcon from "@mui/icons-material/Sort";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { fetchMovie } from "../../store/movies/actions";
-import { setModalState, setSearchValue } from "../../store/useful/actions";
-import IconButton from "@mui/material/IconButton";
+
+import { setModalState } from "../../store/useful/actions";
+import { useAppDispatch } from "../../store/hooks";
+
+import { InputAdornment } from "@mui/material";
+import { Sort } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
+import { TextField } from "@mui/material";
+import { Box } from "@mui/material";
 
 interface ISearchField {
   value?: string;
@@ -20,9 +21,13 @@ export const SearchField: React.FC<ISearchField> = ({
   onInputClick = () => {},
 }) => {
   const dispatch = useAppDispatch();
-  const handleNodalChange = () => {
-    dispatch(setModalState());
+
+  const handle = {
+    modalChange: () => {
+      dispatch(setModalState());
+    },
   };
+
   return (
     <Box sx={{ "& > :not(style)": { m: 1, width: "100%" } }}>
       <TextField
@@ -43,10 +48,8 @@ export const SearchField: React.FC<ISearchField> = ({
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton onClick={handleNodalChange}>
-                <SortIcon
-                  style={{ rotate: "180deg", transform: "scale(1, -1)" }}
-                />
+              <IconButton onClick={handle.modalChange}>
+                <Sort style={{ rotate: "180deg", transform: "scale(1, -1)" }} />
               </IconButton>
             </InputAdornment>
           ),

@@ -1,14 +1,19 @@
 import { FC } from "react";
-import { MoviesTemlate } from "../../components/MoviesTemlate/MoviesTemlate";
+
 import { useAppSelector } from "../../store/hooks";
-import "./FavoritesPage.scss";
+
 import { EmptyFav } from "../../assets/icon/icons";
+
+import { MoviesTemlate } from "../../components/MoviesTemlate/MoviesTemlate";
 import { Loader } from "../../components/Loader/Loader";
+
+import "./FavoritesPage.scss";
 
 export const FavoritesPage: FC = () => {
   const { favoriteMovie, loading, error } = useAppSelector(
     (state) => state.movies
   );
+  
   return (
     <>
       {loading && !favoriteMovie && <Loader />}

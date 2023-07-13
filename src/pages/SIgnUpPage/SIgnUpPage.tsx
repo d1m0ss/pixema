@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from "react";
-import { Input } from "../../components/Input/Input";
-import { Forma } from "../../components/Forma/Forma";
 import { useNavigate } from "react-router-dom";
-import { postNewUser } from "../../api/postNewUser";
+
+import { setUserEmailAction } from "../../store/user/actions";
 import { useAppDispatch } from "../../store/hooks";
 
-import "./SIgnUpPage.scss";
-import { setUserEmailAction } from "../../store/user/actions";
+import { Input } from "../../components/Input/Input";
+import { Forma } from "../../components/Forma/Forma";
+import { postNewUser } from "../../api/postNewUser";
 
 interface IError {
   username: string;

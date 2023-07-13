@@ -1,9 +1,8 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
+import { Autocomplete } from "@mui/material";
+import { TextField } from "@mui/material";
+import { Box } from "@mui/material";
 
-export default function CountrySelect() {
+export const CountrySelect = () => {
   return (
     <Autocomplete
       id="country-select-demo"
@@ -45,7 +44,7 @@ export default function CountrySelect() {
       )}
     />
   );
-}
+};
 
 interface CountryType {
   code: string;

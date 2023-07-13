@@ -1,25 +1,27 @@
 import { FC } from "react";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
-import { MoviePage } from "../pages/MoviePage/MoviePage";
-import { HomePage } from "../pages/HomePage/HomePage";
-import { SearchPage } from "../pages/SearchPage/SearcPage";
-import { TrendsPage } from "../pages/TrendsPage/TrendsPage";
-import { FavoritesPage } from "../pages/FavoritesPage/FavoritesPage";
-import { PageTemlate } from "../components/PageTemlate/PageTemlate";
-import { AuthsTemplate } from "../components/AuthsTemplate/AuthsTemplate";
-import { SIgnInPage } from "../pages/SIgnInPage/SIgnInPage";
-import { SIgnUpPage } from "../pages/SIgnUpPage/SIgnUpPage";
-import { ConfirmPage } from "../pages/ConfirmPage/ConfirmPage";
+
 import { useAppSelector } from "../store/hooks";
 import { ProtectedRoute } from "./ProtectedRoute";
-import { ActivatePage } from "../pages/ActivatePage/ActivatePage";
-import { ResetPassPage } from "../pages/ResetPassPage/ResetPassPage";
+
 import { ResetPassPageConfirm } from "../pages/ResetPassPageConfirm/ResetPassPageConfirm";
-import { SettingsPage } from "../pages/SettingsPage/SettingsPage";
+import { AuthsTemplate } from "../components/AuthsTemplate/AuthsTemplate";
+import { FavoritesPage } from "../pages/FavoritesPage/FavoritesPage";
+import { ResetPassPage } from "../pages/ResetPassPage/ResetPassPage";
 import { EmailChecPage } from "../pages/EmailChecPage/EmailChecPage";
+import { PageTemlate } from "../components/PageTemlate/PageTemlate";
+import { SettingsPage } from "../pages/SettingsPage/SettingsPage";
+import { ActivatePage } from "../pages/ActivatePage/ActivatePage";
+import { ConfirmPage } from "../pages/ConfirmPage/ConfirmPage";
+import { TrendsPage } from "../pages/TrendsPage/TrendsPage";
+import { SIgnUpPage } from "../pages/SIgnUpPage/SIgnUpPage";
+import { SIgnInPage } from "../pages/SIgnInPage/SIgnInPage";
+import { SearchPage } from "../pages/SearchPage/SearcPage";
+import { MoviePage } from "../pages/MoviePage/MoviePage";
+import { HomePage } from "../pages/HomePage/HomePage";
 
 export const Router: FC = () => {
-  const { email, isLoading } = useAppSelector((state) => state.user);
+  const { email } = useAppSelector((state) => state.user);
   const { authStatus } = useAppSelector((state) => state.auth);
 
   return (

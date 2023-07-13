@@ -1,15 +1,15 @@
 import { FC } from "react";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useNavigate } from "react-router-dom";
 
 import {
-  fetchDatatRequestAction,
   fetchMovie,
+  fetchDatatRequestAction,
 } from "../../store/movies/actions";
 import { increasPagesCount } from "../../store/useful/actions";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { IMovie, ISearchMovie } from "../../store/movies/interfaces";
 
 import { ActionAreaCard } from "../Card/Card";
-import { useNavigate } from "react-router-dom";
 
 import "./MoviesTemlate.scss";
 
@@ -28,17 +28,18 @@ export const MoviesTemlate: FC<IMoviesTemlate> = ({
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    dispatch(fetchDatatRequestAction());
-    if (!error) {
-      const nextPage = pagesCount + 1;
-      dispatch(fetchMovie(`&s=${searchValue}&page=${nextPage}`, "Search"));
-      dispatch(increasPagesCount());
-    }
-  };
-
-  const textClick = (id: string) => {
-    navigate(`${id}`);
+  const handle = {
+    click: () => {
+      dispatch(fetchDatatRequestAction());
+      if (!error) {
+        const nextPage = pagesCount + 1;
+        dispatch(fetchMovie(`&s=${searchValue}&page=${nextPage}`, "Search"));
+        dispatch(increasPagesCount());
+      }
+    },
+    textClick: (id: string) => {
+      navigate(`${id}`);
+    },
   };
 
   return (
@@ -50,7 +51,7 @@ export const MoviesTemlate: FC<IMoviesTemlate> = ({
             "Title" in item && (
               <ActionAreaCard
                 isClickable
-                onHandleClick={() => textClick(item.imdbID)}
+                onHandleClick={() => handle.textClick(item.imdbID)}
                 key={i}
                 title={item.Title}
                 image={item.Poster}
@@ -62,17 +63,18 @@ export const MoviesTemlate: FC<IMoviesTemlate> = ({
                     ? `${+item.Metascore / 10}`
                     : "N/A"
                 }
-                typographyClick={() => textClick(item.imdbID)}
+                typographyClick={() => handle.textClick(item.imdbID)}
               />
             )
         )}
+
       {searchedMovies &&
         Array.isArray(searchedMovies) &&
         searchedMovies.map(({ Search }) =>
           Search.map(({ Title, Poster, Year, imdbID }, i) => (
             <ActionAreaCard
               isClickable
-              onHandleClick={() => textClick(imdbID)}
+              onHandleClick={() => handle.textClick(imdbID)}
               key={i}
               title={Title}
               image={
@@ -81,7 +83,7 @@ export const MoviesTemlate: FC<IMoviesTemlate> = ({
                   : "https://www.csaff.org/wp-content/uploads/csaff-no-poster.jpg"
               }
               genre={Year}
-              typographyClick={() => textClick(imdbID)}
+              typographyClick={() => handle.textClick(imdbID)}
             />
           ))
         )}
@@ -99,7 +101,7 @@ export const MoviesTemlate: FC<IMoviesTemlate> = ({
         pagesCount <= +searchedMovies[0].totalResults / 10 && (
           <ActionAreaCard
             isClickable
-            onHandleClick={handleClick}
+            onHandleClick={handle.click}
             image="https://t4.ftcdn.net/jpg/04/31/62/85/360_F_431628534_Q6y86rAXcFiv7Ol5Tsul25aa8Nnt6gsN.jpg"
             title={`To nex 10 movies. Page: ${pagesCount} from ${Math.ceil(
               +searchedMovies[0].totalResults / 10
@@ -108,6 +110,7 @@ export const MoviesTemlate: FC<IMoviesTemlate> = ({
           />
         )
       )}
+      
     </article>
   );
 };

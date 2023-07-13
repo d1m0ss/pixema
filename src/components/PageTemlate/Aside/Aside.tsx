@@ -1,29 +1,25 @@
-import "./Aside.scss";
-import { FC } from "react";
-import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
-import SettingsIcon from "@mui/icons-material/Settings";
-import { Button, IconButton } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { setModalState } from "../../../store/useful/actions";
 import { useLocation, useNavigate } from "react-router-dom";
+import { FC } from "react";
+
+import { useAppSelector } from "../../../store/hooks";
+
 import { PixemaLogo } from "../../../assets/icon/pixemaLogo";
+import { Button, IconButton } from "@mui/material";
+import { Whatshot } from "@mui/icons-material";
+import { Bookmark } from "@mui/icons-material";
+import { Settings } from "@mui/icons-material";
+import { Home } from "@mui/icons-material";
 
-interface IAside {}
-
-export const Aside: FC<IAside> = () => {
-  const dispatch = useAppDispatch();
+export const Aside: FC = () => {
   const navigate = useNavigate();
-  const { authStatus } = useAppSelector((state) => state.auth);
   const location = useLocation();
 
-  const isLogged = authStatus;
+  const { authStatus } = useAppSelector((state) => state.auth);
 
   const linksStyle = {
     justifyContent: "start",
     background: "transparent",
-    "&:hover": { color: "#7B61FF" },
+    "&:hover": { color: "#7B61FF", backgroundColor: "transparent" },
   };
 
   return (
@@ -36,8 +32,7 @@ export const Aside: FC<IAside> = () => {
       <article className="container__buttons-group">
         <Button
           variant="contained"
-          startIcon={<HomeIcon />}
-          style={linksStyle}
+          startIcon={<Home />}
           sx={{ ...linksStyle, color: "#80858B" }}
           onClick={() => {
             location.pathname.includes("pixema")
@@ -49,9 +44,12 @@ export const Aside: FC<IAside> = () => {
         </Button>
         <Button
           variant="contained"
-          startIcon={<WhatshotIcon />}
-          style={linksStyle}
-          sx={{ ...linksStyle, color: "#80858B" }}
+          startIcon={<Whatshot />}
+          sx={{
+            ...linksStyle,
+            color: "#80858B",
+            "&:hove": { backgroundColor: "transparent" },
+          }}
           onClick={() => {
             location.pathname.includes("pixema")
               ? navigate("trends")
@@ -60,12 +58,11 @@ export const Aside: FC<IAside> = () => {
         >
           Trends
         </Button>
-        {isLogged && (
+        {authStatus && (
           <>
             <Button
               variant="contained"
-              startIcon={<BookmarkIcon />}
-              style={linksStyle}
+              startIcon={<Bookmark />}
               sx={{ ...linksStyle, color: "#80858B" }}
               onClick={() => {
                 location.pathname.includes("pixema")
@@ -76,15 +73,14 @@ export const Aside: FC<IAside> = () => {
               Favorites
             </Button>
             <Button
+              variant="contained"
+              startIcon={<Settings />}
+              sx={{ ...linksStyle, color: "#80858B" }}
               onClick={() => {
                 location.pathname.includes("pixema")
                   ? navigate("settings")
                   : navigate("/pixema/home");
               }}
-              variant="contained"
-              startIcon={<SettingsIcon />}
-              style={linksStyle}
-              sx={{ ...linksStyle, color: "#80858B" }}
             >
               Settings
             </Button>

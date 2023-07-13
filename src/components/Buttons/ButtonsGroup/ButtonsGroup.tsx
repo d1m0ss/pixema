@@ -1,7 +1,6 @@
-import * as React from "react";
-import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
-import Box from "@mui/material/Box";
+import { ButtonGroup } from "@mui/material";
+import { Button } from "@mui/material";
+import { Box } from "@mui/material";
 
 export const SButtonGroup = () => {
   return (

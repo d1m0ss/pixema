@@ -1,11 +1,14 @@
 import { FC, useEffect, useState } from "react";
-import "./SettingsPage.scss";
-import { Alert, Button, CircularProgress } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { Input } from "../../components/Input/Input";
-import Switch from "@mui/material/Switch";
-import { setPassword } from "../../api/auth/setPassword";
+
 import { setDarkTheme, setLightTheme } from "../../store/theme/actions";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+
+import { Alert, Button, CircularProgress } from "@mui/material";
+import { setPassword } from "../../api/auth/setPassword";
+import { Input } from "../../components/Input/Input";
+import { Switch } from "@mui/material";
+
+import "./SettingsPage.scss";
 
 interface ISettingsPage {}
 interface IError {
@@ -16,8 +19,10 @@ interface IError {
 
 export const SettingsPage: FC<ISettingsPage> = () => {
   const dispatch = useAppDispatch();
+
   const { user } = useAppSelector((state) => state.user);
   const { theme } = useAppSelector((state) => state.theme);
+  
   const [new_password, setNewPassword] = useState("");
   const [confirm_password, setConfirmPassword] = useState("");
   const [current_password, setCorrentPassword] = useState("");

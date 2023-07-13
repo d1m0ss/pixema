@@ -35,10 +35,6 @@
     border-radius: 10px;
     overflow: hidden;
   }
-  &__footer-details {
-  }
-  &__header-title {
-  }
   &__imdb-score {
     display: flex;
     align-items: center;
@@ -51,10 +47,6 @@
     padding: 2px 8px;
     border-radius: 6px;
     background-color: $graphite;
-  }
-  &__info-part {
-  }
-  &__posre-part {
   }
   &__rec {
     margin-top: 56px;

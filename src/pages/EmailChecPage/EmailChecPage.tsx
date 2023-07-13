@@ -1,11 +1,9 @@
 import { FC } from "react";
-import "./EmailChecPage.scss";
-import { Forma } from "../../components/Forma/Forma";
 import { useNavigate } from "react-router-dom";
 
-interface IEmailChecPage {}
+import { Forma } from "../../components/Forma/Forma";
 
-export const EmailChecPage: FC<IEmailChecPage> = () => {
+export const EmailChecPage: FC = () => {
   const navigate = useNavigate();
 
   const handle = {

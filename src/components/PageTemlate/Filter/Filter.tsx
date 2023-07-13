@@ -1,20 +1,24 @@
-import "./Filter.scss";
-
-import CountrySelect from "../../Selects/CountrySelect";
-
 import { FC } from "react";
+
 import { useAppDispatch } from "../../../store/hooks";
 import { setModalState } from "../../../store/useful/actions";
-import { Input } from "../../Input/Input";
+
+import { CountrySelect } from "../../Selects/CountrySelect";
 import { Selects } from "../../Selects/Selects";
+import { Input } from "../../Input/Input";
 import { Button } from "@mui/material";
+
+import "./Filter.scss";
 
 interface IFilter {}
 
 export const Filter: FC<IFilter> = () => {
   const dispatch = useAppDispatch();
-  const handleModalChange = () => {
-    dispatch(setModalState());
+
+  const handle = {
+    modalChange: () => {
+      dispatch(setModalState());
+    },
   };
 
   const buttonsGroupStyle = {
@@ -34,7 +38,7 @@ export const Filter: FC<IFilter> = () => {
       <section className="filter">
         <article
           className="filter__close-field"
-          onClick={handleModalChange}
+          onClick={handle.modalChange}
         ></article>
         <article className="filter__wrapper">
           <article className="filter__settings">

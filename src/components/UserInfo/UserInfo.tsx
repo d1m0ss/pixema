@@ -1,51 +1,55 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Tooltip from "@mui/material/Tooltip";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { useNavigate } from "react-router-dom";
+import * as React from "react";
+
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setLogoutAction } from "../../store/auth/actions";
+
+import { PersonOutline } from "@mui/icons-material";
 import { CircularProgress } from "@mui/material";
+import { IconButton } from "@mui/material";
+import { Typography } from "@mui/material";
+import { MenuItem } from "@mui/material";
+import { Divider } from "@mui/material";
+import { Tooltip } from "@mui/material";
+import { Avatar } from "@mui/material";
+import { Menu } from "@mui/material";
+import { Box } from "@mui/material";
 
 export const UserInfo = () => {
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.user);
-  const { authStatus } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
-  const isLogged = authStatus;
+
+  const { authStatus } = useAppSelector((state) => state.auth);
+  const { user } = useAppSelector((state) => state.user);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const handle = {
+    click: (event: React.MouseEvent<HTMLElement>) => {
+      setAnchorEl(event.currentTarget);
+    },
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+    close: () => {
+      setAnchorEl(null);
+    },
 
-  const signIn = () => {
-    setAnchorEl(null);
-    navigate("/authentication/sign-in");
-  };
+    signIn: () => {
+      setAnchorEl(null);
+      navigate("/authentication/sign-in");
+    },
 
-  const settings = () => {
-    setAnchorEl(null);
-    navigate("/pixema/settings");
-  };
+    settings: () => {
+      setAnchorEl(null);
+      navigate("/pixema/settings");
+    },
 
-  const logOut = () => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh__token");
-    setAnchorEl(null);
-    dispatch(setLogoutAction());
+    logOut: () => {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh__token");
+      setAnchorEl(null);
+      dispatch(setLogoutAction());
+    },
   };
 
   return (
@@ -53,7 +57,7 @@ export const UserInfo = () => {
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
           <IconButton
-            onClick={handleClick}
+            onClick={handle.click}
             size="small"
             sx={{
               width: 56,
@@ -67,7 +71,7 @@ export const UserInfo = () => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            {isLogged ? (
+            {authStatus ? (
               <Avatar
                 sx={{
                   width: 56,
@@ -78,12 +82,14 @@ export const UserInfo = () => {
                   letterSpacing: "1px",
                 }}
               >
-                {!!user
-                  ? `${user.username.split(" ").map((name) => name[0])}`
-                  : <CircularProgress color="primary" />}
+                {!!user ? (
+                  `${user.username.split(" ").map((name) => name[0])}`
+                ) : (
+                  <CircularProgress color="primary" />
+                )}
               </Avatar>
             ) : (
-              <PersonOutlineIcon
+              <PersonOutline
                 sx={{
                   color: "white",
                 }}
@@ -91,7 +97,7 @@ export const UserInfo = () => {
             )}
           </IconButton>
         </Tooltip>
-        {isLogged && user && (
+        {authStatus && user && (
           <Typography sx={{ mr: 1, font: 'normal 600 16px/24px "Exo 2"' }}>
             {user.username}
           </Typography>
@@ -102,8 +108,8 @@ export const UserInfo = () => {
         id="account-menu"
         open={open}
         sx={{ ml: "115px" }}
-        onClose={handleClose}
-        onClick={handleClose}
+        onClose={handle.close}
+        onClick={handle.close}
         PaperProps={{
           elevation: 0,
           sx: {
@@ -138,16 +144,17 @@ export const UserInfo = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        {isLogged && (
+        {authStatus && (
           <div>
-            <MenuItem onClick={settings}>Edit profile</MenuItem>
+            <MenuItem onClick={handle.settings}>Edit profile</MenuItem>
             <Divider />
           </div>
         )}
-        {isLogged ? (
-          <MenuItem onClick={logOut}>Log Out</MenuItem>
+
+        {authStatus ? (
+          <MenuItem onClick={handle.logOut}>Log Out</MenuItem>
         ) : (
-          <MenuItem onClick={signIn}>Sign In</MenuItem>
+          <MenuItem onClick={handle.signIn}>Sign In</MenuItem>
         )}
       </Menu>
     </React.Fragment>
