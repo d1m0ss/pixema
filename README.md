@@ -8,7 +8,7 @@ This app for searching films
 -Redux\
 -React-router-dom\
 -TypeScript \
--MUI\
+-MUI
 
 ## For what
 
