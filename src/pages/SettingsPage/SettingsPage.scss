@@ -1,0 +1,78 @@
+@import "../../index.scss";
+
+.settings-page {
+  width: 100%;
+  margin-bottom: 64px;
+  &__form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+  }
+  &__profile {
+    padding: 40px;
+    background-color: $dark;
+    border-radius: 10px;
+    width: 100%;
+    column-gap: 40px;
+    display: flex;
+  }
+  &__profile-title,
+  &__password-change-title,
+  &__color-mod-title {
+    font: normal 600 24px/36px "Exo 2";
+    margin-bottom: 16px;
+  }
+  &__name-wrapp,
+  &__email-wrapp {
+    width: 100%;
+  }
+  &__name-lable,
+  &__email-lable {
+    font: normal 600 16px/24px "Exo 2";
+    margin-bottom: 8px;
+  }
+  &__password-change {
+    padding: 40px;
+    background-color: $dark;
+    margin-top: 8px;
+    width: 100%;
+    display: flex;
+    column-gap: 40px;
+    border-radius: 10px;
+  }
+  &__password-enter-confirm-pass {
+    margin-top: 24px;
+  }
+  &__password-change-curr-pass,
+  &__password-enter-new-pass-wrapp {
+    width: 100%;
+  }
+  &__color-mod-change {
+    border-radius: 10px;
+    background-color: $dark;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  &__buttons-wrapp {
+    margin-top: 8px;
+    column-gap: 40px;
+    padding-left: 40px;
+    display: flex;
+    width: 50%;
+    left: auto;
+    margin-left: 50%;
+  }
+}
+
+.pass__loading {
+  height: 278px;
+  border-radius: 10px;
+  background-color: $dark;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

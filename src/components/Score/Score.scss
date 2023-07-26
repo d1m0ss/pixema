@@ -1,0 +1,19 @@
+@import "../../index.scss";
+
+.score {
+  &__value {
+    background-color: green;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font: $S1-3Decktop;
+  }
+  & .green {
+    background-color: #00a340;
+  }
+  & .red {
+    background-color: #f45d2d;
+  }
+  & .grey {
+    background-color: #9e9e9e60;
+  }
+}

@@ -1,0 +1,68 @@
+@import "../../index.scss";
+
+.movie {
+  font-family: "Exo 2";
+  width: 100%;
+  display: flex;
+  column-gap: 42px;
+  margin-bottom: 50px;
+  &__poster-wrapper {
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  &__genre {
+    font: $S1-4Decktop;
+  }
+  &__title {
+    font: $H1Decktop;
+  }
+  &__info {
+    margin-top: 24px;
+    margin-bottom: 40px;
+    align-items: center;
+    display: flex;
+    column-gap: 20px;
+    font: $S1-3Decktop;
+  }
+  &__description {
+    font: $S1-4Decktop;
+    margin-bottom: 40px;
+  }
+  &__buttons-wrapper {
+    width: 100%;
+    height: 56px;
+    margin-top: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  &__imdb-score {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background-color: $graphite;
+  }
+  &__runtime {
+    padding: 2px 8px;
+    border-radius: 6px;
+    background-color: $graphite;
+  }
+  &__rec {
+    margin-top: 56px;
+    &-slider {
+      width: max-content;
+      display: flex;
+      column-gap: 40px;
+      &-wrp {
+        margin-top: 40px;
+        width: 918.4px;
+        overflow: hidden;
+        overflow-x: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@import '../../../index.scss';
+
+.movie {
+  &__table {
+    border-spacing: 20px;
+    -webkit-border-horizontal-spacing: 0px;
+    color: $secondary2;
+  }
+  &__table-cell {
+    padding-right: 50px;
+    &-response{
+        color: $white;
+    }
+  }
+  &__table-row {
+  }
+}

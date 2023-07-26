@@ -1,0 +1,15 @@
+@import "../../index.scss";
+
+.page-template {
+  position: relative;
+  background-color: $black;
+  color: $white;
+  display: flex;
+  height: 100%;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  padding: 40px 62px;
+  &__content {
+    width: 100%;
+  }
+}

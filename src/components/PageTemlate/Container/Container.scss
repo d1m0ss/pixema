@@ -1,0 +1,34 @@
+.container {
+  overflow-y: hidden;
+  height: 100%;
+  padding-bottom: 65px;
+  &__content {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  &__logo-wrapper {
+    height: 72px;
+    display: flex;
+    align-items: center;
+  }
+  &__aside {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+    margin-right: 146px;
+  }
+  &__buttons-group {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    row-gap: 28px;
+  }
+}

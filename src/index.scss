@@ -2,26 +2,138 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Exo 2" !important;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif, "Exo 2";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 #root,
 html,
-body {
+body,
+.app {
   height: 100%;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+// colors
+
+$primary: #7b61ff;
+$primary2: #917cff;
+$secondary: #80858b;
+$secondary2: #afb2b6;
+$black: #000000;
+$dark: #242426;
+$graphite: #323537;
+$error: #ff5154;
+$light: #afb2b6;
+$white: #ffffff;
+$green: #00a340;
+$yellow: #f3a608;
+$orange: #f45d2d;
+
+// fonts decktop
+
+$H1Decktop: normal 600 40px/60px "Exo 2";
+$H2Decktop: normal 600 24px/36px "Exo 2";
+$H3Decktop: normal 600 20px/32px "Exo 2";
+$S1-1Decktop: normal 600 18px/24px "Exo 2";
+$S1-2Decktop: normal 700 16px/32px "Exo 2";
+$S1-3Decktop: normal 600 16px/24px "Exo 2";
+$S1-4Decktop: normal 500 16px/24px "Exo 2";
+$BodyDecktop: normal 400 16px/24px "Exo 2";
+
+// fonts tablet
+
+$H1Tablet: normal 600 32px/48px "Exo 2";
+$H2Tablet: normal 600 24px/36px "Exo 2";
+$H3Tablet: normal 600 20px/32px "Exo 2";
+$S1-1Tablet: normal 600 18px/24px "Exo 2";
+$S1-2Tablet: normal 700 16px/24px "Exo 2";
+$S1-3Tablet: normal 600 16px/24px "Exo 2";
+$S1-4Tablet: normal 500 16px/24px "Exo 2";
+$BodyTablet: normal 400 16px/24px "Exo 2";
+
+// fonts mobile
+
+$H1Mobile: normal 600 28px/42px "Exo 2";
+$H2Mobile: normal 600 20px/36px "Exo 2";
+$H3Mobile: normal 600 18px/28px "Exo 2";
+$S1-1Mobile: normal 600 18px/24px "Exo 2";
+$S1-2Mobile: normal 700 16px/24px "Exo 2";
+$S1-3Mobile: normal 600 16px/24px "Exo 2";
+$S1-4Mobile: normal 500 16px/24px "Exo 2";
+$BodyMobile: normal 400 16px/24px "Exo 2";
+
+#root .light {
+  background-color: transparent;
+  color: $black;
+  transition: all 0.3s;
+  & h3 + button {
+    border: 1px solid grey;
+    background-color: transparent;
+  }
+  & .filter__wrapper {
+    padding: 0;
+    background-color: $white;
+    & .filter__settings {
+      padding: 40px;
+    }
+  }
+  & .auths-template__back {
+    opacity: 1;
+  }
+  & form > article {
+    & > article,
+    & > label {
+      background-color: $light;
+    }
+  }
+  & * {
+    border-color: transparent;
+  }
+  & span {
+    box-shadow: none;
+  }
+  & fieldset {
+    border: 1px solid #000000;
+  }
+  & label,
+  & article,
+  & div {
+    background-color: transparent;
+  }
+  & .forma__field {
+    border: none;
+  }
+  & .forma {
+    background-color: $secondary2;
+  }
+  & td {
+    color: #000000;
+  }
+  & div {
+    & * {
+      color: black;
+    }
+  }
+}
+
+#root .dark {
+  transition: all 0.3s;
 }
